@@ -6,7 +6,7 @@ Cellular Automata
 
 
 ##Names:
-Michael Smith
+Michael Smith_2
 Pranava Raparla
 David Zhang
 
