@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -28,7 +29,7 @@ public class Main extends Application {
 	 * Creates and displays the game's main scene. Runs the game loop.
 	 */
 	private void playGame(Stage stage) {
-		Scene scene = myGame.init(stage, 750, 750);
+		Scene scene = myGame.init(stage, STAGE_WIDTH, STAGE_HEIGHT);
 		populateStage(stage, scene);
 		runGameLoop();
 	}
@@ -54,6 +55,27 @@ public class Main extends Application {
 		stage.setTitle("Cookie Fall!");
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	/**
+	 * Creates a button.
+	 * 
+	 * @param content
+	 *            : What the button says.
+	 * @param x_Coord
+	 *            : The x position of the button on the application.
+	 * @param y_Coord
+	 *            : The y position of the button on the application.
+	 * @return: Returns the newly created button.
+	 */
+	private Button createButton(Pane root, String content, int x_Coord, int y_Coord) {
+		Button btn = new Button();
+		btn.setLayoutX(x_Coord);
+		btn.setLayoutY(y_Coord);
+		btn.setText(content);
+		btn.setStyle("-fx-background-color: #CC9900;");
+		root.getChildren().add(btn);
+		return btn;
 	}
 
 	public static void main(String[] args) {
