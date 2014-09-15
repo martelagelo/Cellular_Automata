@@ -14,9 +14,6 @@ import javafx.scene.layout.Pane;
 
 
 public class Main extends Application {
-
-	public static final Integer STAGE_WIDTH = 1100;
-	public static final Integer STAGE_HEIGHT = 700;
 	
 	private ApplicationLoop myGame;
 
@@ -24,7 +21,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Pane root = new Pane();
 		myGame = new ApplicationLoop();
-		Scene scene = new Scene(root,STAGE_WIDTH,STAGE_HEIGHT);
+		Scene scene = new Scene(root,ApplicationConstants.STAGE_WIDTH,ApplicationConstants.STAGE_HEIGHT);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
 		Button btnStart = createButton("Start Simulation", 50, 500, root);
@@ -40,7 +37,7 @@ public class Main extends Application {
 	 * Creates and displays the game's main scene. Runs the game loop.
 	 */
 	private void playGame(Stage stage) {
-		Scene scene = myGame.init(stage, STAGE_WIDTH, STAGE_HEIGHT);
+		Scene scene = myGame.init(stage, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT);
 		populateStage(stage, scene);
 		runGameLoop();
 	}

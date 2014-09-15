@@ -22,13 +22,8 @@ import javafx.util.Duration;
 
 public class ApplicationLoop {
 
-	private static final Integer STAGE_WIDTH = 1100;
-	private static final Integer STAGE_HEIGHT = 700;
-	private static final Integer CELL_WIDTH = 20;
-	private static final Integer NUM_OF_ROWS = STAGE_HEIGHT/CELL_WIDTH - 1;
-	private static final Integer NUM_OF_COLUMNS = STAGE_WIDTH/CELL_WIDTH - 1;
-
 	private GridPane gridpane;
+	private Grid grid = new Grid();
 
 	/**
 	 * Function to do each game frame.
@@ -54,11 +49,12 @@ public class ApplicationLoop {
 	public Scene init(Stage s, Integer width, Integer height) {
 		Group root = new Group();
 		gridpane = new GridPane();
+		
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
 		gridpane.setPadding(new Insets(5));
 
-		for(int i = 0; i < NUM_OF_COLUMNS; i++) {
-			for(int j = 0; j < NUM_OF_ROWS; j++) {
+		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
 				gridpane.add(rect, i, j,1,1);
 			}
@@ -74,23 +70,17 @@ public class ApplicationLoop {
 	 * Create the game's frame
 	 */
 	public KeyFrame start() {
-		return new KeyFrame(Duration.millis(1000 / 60), oneFrame);
+		return new KeyFrame(Duration.millis(1000 / 1), oneFrame);
 	}
 
 	private void updateGameLoop() {
-		for(int i = 0; i < NUM_OF_COLUMNS; i++) {
-			for(int j = 0; j < NUM_OF_ROWS; j++) {
-				Rectangle rect = generateCell(Color.BROWN);
-				gridpane.add(rect, i, j, 1, 1);
-				
-			}
-		}
+		grid.updateGrid(gridpane);
 	}
 
 	private Rectangle generateCell(Paint color){
 		Rectangle rect = new Rectangle();
-		rect.setWidth(CELL_WIDTH);
-		rect.setHeight(CELL_WIDTH);
+		rect.setWidth(ApplicationConstants.CELL_WIDTH);
+		rect.setHeight(ApplicationConstants.CELL_WIDTH);
 		rect.setFill(color);;
 		return rect;
 	}
