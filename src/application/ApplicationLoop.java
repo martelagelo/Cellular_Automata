@@ -6,15 +6,29 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ApplicationLoop {
+
+	private static final Integer STAGE_WIDTH = 1100;
+	private static final Integer STAGE_HEIGHT = 700;
+	private static final Integer CELL_WIDTH = 20;
+	private static final Integer NUM_OF_ROWS = STAGE_HEIGHT/CELL_WIDTH - 1;
+	private static final Integer NUM_OF_COLUMNS = STAGE_WIDTH/CELL_WIDTH - 1;
+
+	private GridPane gridpane;
 
 	/**
 	 * Function to do each game frame.
@@ -38,12 +52,24 @@ public class ApplicationLoop {
 	 * @return: Returns the scene in which the game occurs.
 	 */
 	public Scene init(Stage s, Integer width, Integer height) {
-		GridPane root = new GridPane();
+		Group root = new Group();
+		gridpane = new GridPane();
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
+		gridpane.setPadding(new Insets(5));
+
+		for(int i = 0; i < NUM_OF_COLUMNS; i++) {
+			for(int j = 0; j < NUM_OF_ROWS; j++) {
+				Rectangle rect = generateCell(Color.WHITE);
+				gridpane.add(rect, i, j,1,1);
+			}
+		}
+		gridpane.setGridLinesVisible(true);
+
+		root.getChildren().add(gridpane);
 
 		return myScene;
 	}
-	
+
 	/**
 	 * Create the game's frame
 	 */
@@ -52,7 +78,21 @@ public class ApplicationLoop {
 	}
 
 	private void updateGameLoop() {
-		
+		for(int i = 0; i < NUM_OF_COLUMNS; i++) {
+			for(int j = 0; j < NUM_OF_ROWS; j++) {
+				Rectangle rect = generateCell(Color.BROWN);
+				gridpane.add(rect, i, j, 1, 1);
+				
+			}
+		}
+	}
+
+	private Rectangle generateCell(Paint color){
+		Rectangle rect = new Rectangle();
+		rect.setWidth(CELL_WIDTH);
+		rect.setHeight(CELL_WIDTH);
+		rect.setFill(color);;
+		return rect;
 	}
 
 }

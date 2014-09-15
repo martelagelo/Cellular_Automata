@@ -3,6 +3,9 @@ package application;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,8 +23,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		Pane root = new Pane();
+		myGame = new ApplicationLoop();
 		Scene scene = new Scene(root,STAGE_WIDTH,STAGE_HEIGHT);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
+		Button btnStart = createButton("Start Simulation", 50, 500, root);
+		activateStartButton(btnStart, primaryStage);
+		
+		Button btnExit = createButton("Exit Application", 50, 550, root);
+		activateExitAppButton(btnExit);
+		
 		populateStage(primaryStage, scene);
 	}
 
@@ -52,7 +63,7 @@ public class Main extends Application {
 	 *            : The application's current scene.
 	 */
 	private void populateStage(Stage stage, Scene scene) {
-		stage.setTitle("Cookie Fall!");
+		stage.setTitle("Cell Automata");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -68,7 +79,7 @@ public class Main extends Application {
 	 *            : The y position of the button on the application.
 	 * @return: Returns the newly created button.
 	 */
-	private Button createButton(Pane root, String content, int x_Coord, int y_Coord) {
+	private Button createButton(String content, int x_Coord, int y_Coord, Pane root) {
 		Button btn = new Button();
 		btn.setLayoutX(x_Coord);
 		btn.setLayoutY(y_Coord);
@@ -76,6 +87,37 @@ public class Main extends Application {
 		btn.setStyle("-fx-background-color: #CC9900;");
 		root.getChildren().add(btn);
 		return btn;
+	}
+	
+	/**
+	 * Creates an event handler that launches the game on button click.
+	 * 
+	 * @param btn
+	 *            : The button that is clicked to launch the event.
+	 */
+	public void activateStartButton(Button btn, Stage stage) {
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				playGame(stage);
+				System.out.println("Start Button Pressed");
+			}
+		});
+	}
+	
+	/**
+	 * Creates an event handler than exits the application on button click.
+	 * 
+	 * @param btn
+	 *            : The button that is clicked to launch the event.
+	 */
+	public void activateExitAppButton(Button btn) {
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Platform.exit();
+			}
+		});
 	}
 
 	public static void main(String[] args) {
