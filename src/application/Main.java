@@ -3,6 +3,9 @@ package application;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,17 +14,25 @@ import javafx.scene.layout.Pane;
 
 
 public class Main extends Application {
-
-	public static final Integer STAGE_WIDTH = 1100;
-	public static final Integer STAGE_HEIGHT = 700;
 	
 	private ApplicationLoop myGame;
 
 	@Override
 	public void start(Stage primaryStage) {
 		Pane root = new Pane();
-		Scene scene = new Scene(root,STAGE_WIDTH,STAGE_HEIGHT);
+		myGame = new ApplicationLoop();
+		Scene scene = new Scene(root,ApplicationConstants.STAGE_WIDTH,ApplicationConstants.STAGE_HEIGHT);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
+		Button btnStart = createButton("Start Simulation", 50, 500, root);
+		activateStartButton(btnStart, primaryStage);
+		
+		Button btnExit = createButton("Exit Application", 50, 550, root);
+		activateExitAppButton(btnExit);
+		
+		Button btnImportXML = createButton("Import an XML File", 50, 600, root);
+		activateImportXMLButton(btnImportXML);
+		
 		populateStage(primaryStage, scene);
 	}
 
@@ -29,7 +40,7 @@ public class Main extends Application {
 	 * Creates and displays the game's main scene. Runs the game loop.
 	 */
 	private void playGame(Stage stage) {
-		Scene scene = myGame.init(stage, STAGE_WIDTH, STAGE_HEIGHT);
+		Scene scene = myGame.init(stage, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT);
 		populateStage(stage, scene);
 		runGameLoop();
 	}
@@ -52,7 +63,7 @@ public class Main extends Application {
 	 *            : The application's current scene.
 	 */
 	private void populateStage(Stage stage, Scene scene) {
-		stage.setTitle("Cookie Fall!");
+		stage.setTitle("Cell Automata");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -68,7 +79,7 @@ public class Main extends Application {
 	 *            : The y position of the button on the application.
 	 * @return: Returns the newly created button.
 	 */
-	private Button createButton(Pane root, String content, int x_Coord, int y_Coord) {
+	private Button createButton(String content, int x_Coord, int y_Coord, Pane root) {
 		Button btn = new Button();
 		btn.setLayoutX(x_Coord);
 		btn.setLayoutY(y_Coord);
@@ -76,6 +87,46 @@ public class Main extends Application {
 		btn.setStyle("-fx-background-color: #CC9900;");
 		root.getChildren().add(btn);
 		return btn;
+	}
+	
+	/**
+	 * Creates an event handler that launches the game on button click.
+	 * 
+	 * @param btn
+	 *            : The button that is clicked to launch the event.
+	 */
+	public void activateStartButton(Button btn, Stage stage) {
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				playGame(stage);
+				System.out.println("Start Button Pressed");
+			}
+		});
+	}
+	
+	/**
+	 * Creates an event handler than exits the application on button click.
+	 * 
+	 * @param btn
+	 *            : The button that is clicked to launch the event.
+	 */
+	public void activateExitAppButton(Button btn) {
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Platform.exit();
+			}
+		});
+	}
+	
+	public void activateImportXMLButton(Button btn) {
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				//TODO
+			}
+		});
 	}
 
 	public static void main(String[] args) {
