@@ -30,6 +30,9 @@ public class Main extends Application {
 		Button btnExit = createButton("Exit Application", 50, 550, root);
 		activateExitAppButton(btnExit);
 		
+		Button btnImportXML = createButton("Import an XML File", 50, 600, root);
+		activateImportXMLButton(btnImportXML);
+		
 		populateStage(primaryStage, scene);
 	}
 
@@ -113,6 +116,15 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				Platform.exit();
+			}
+		});
+	}
+	
+	public void activateImportXMLButton(Button btn) {
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				//TODO
 			}
 		});
 	}
