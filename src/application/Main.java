@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
 
 
 public class Main extends Application {
-	
+
 	private ApplicationLoop myGame;
 	private Stage primaryStage;
 	private Timeline animation;
@@ -31,19 +31,7 @@ public class Main extends Application {
 		myGame = new ApplicationLoop();
 		Scene scene = new Scene(root,ApplicationConstants.STAGE_WIDTH,ApplicationConstants.STAGE_HEIGHT);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		
-		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
-		Label programmerNames = createLabel("Michael Deng\nPranava Raparla\nDavid Zhang", 2, 470, 200, root);
-		
-		Button btnStart = createButton("Start Simulation", 50, 500, root);
-		activateStartButton(btnStart, primaryStage);
-		
-		Button btnExit = createButton("Exit Application", 50, 550, root);
-		activateExitAppButton(btnExit);
-		
-		Button btnImportXML = createButton("Import an XML File", 50, 600, root);
-		activateImportXMLButton(btnImportXML);
-		
+		populateStartPageModules(root);
 		populateStage(primaryStage, scene);
 	}
 
@@ -53,29 +41,10 @@ public class Main extends Application {
 	private void playGame(Stage stage) {
 		Scene scene = myGame.init(stage, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT);
 		Group root = myGame.getRoot();
-		
-		Button btnStop = createButton("Exit Application", 50, 400, root);
-		activateExitAppButton(btnStop);
-		
-		Button btnPauseApp = createButton("Pause Application", 50, 450, root);
-		activatePauseAnimationButton(btnPauseApp);
-		
-		Button btnResumeApp = createButton("Resume Application", 50, 500, root);
-		activateResumeAnimationButton(btnResumeApp);
-		
-		Button btnStepThroughFrames = createButton("Step through frames", 50, 550, root);
-		activateStepThroughFrame(btnStepThroughFrames);
-		
-		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 600, root);
-		Slider slider = createSlider(0, 100, 50, 630, root);
-		
-		Button btnSwitchFile = createButton("Change the Scenario", 50, 680, root);
-		activateReturntoStart(btnSwitchFile);
-		
+		populateGridPageModules(root);
 		populateStage(stage, scene);
-		
 		runGameLoop(ApplicationConstants.DEFAULT_FRAME_RATE);
-		
+
 	}
 
 	/**
@@ -90,24 +59,16 @@ public class Main extends Application {
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-		
+
 	}
-	
+
 	private void activateErrorPage(){
 		Group root = new Group();
 		Scene scene = new Scene(root,ApplicationConstants.STAGE_WIDTH,ApplicationConstants.STAGE_HEIGHT);
-		
-		Label label = createLabel("There is an error in format in your XML File", 3, 130, 100, root);
-		
-		Button btnReturnToStart = createButton("Return to the start screen", 50, 500, root);
-		activateReturntoStart(btnReturnToStart);
-		
-		Button btnExit = createButton("Exit Application", 50, 550, root);
-		activateExitAppButton(btnExit);
-		
+		populateErrorPageModules(root);
 		populateStage(primaryStage, scene);
 	}
-	
+
 	/**
 	 * Populates and shows the stage.
 	 * 
@@ -120,6 +81,30 @@ public class Main extends Application {
 		stage.show();
 	}
 	
+	private void populateStartPageModules(Group root) {
+		createTitleLabel(root);
+		createNameLabel(root);
+		createStartGameButton(root);
+		createExitButton(root);
+		createImportXMLButton(root);
+	}
+	
+	private void populateGridPageModules(Group root) {
+		createExitButton(root);
+		createPauseButton(root);
+		createResumeButton(root);
+		createStepThroughButton(root);
+		createSliderLabel(root);
+		createSlider(root);
+		createReturnToStartButton(root);
+	}
+	
+	private void populateErrorPageModules(Group root) {
+		createErrorMessage(root);
+		createExitButton(root);
+		createReturnToStartButton(root);
+	}
+
 	/**
 	 * Creates a button.
 	 * 
@@ -140,7 +125,7 @@ public class Main extends Application {
 		root.getChildren().add(btn);
 		return btn;
 	}
-	
+
 	private Slider createSlider(int minValue, int maxValue,  int x_Coord, int y_Coord, Group root){
 		Slider slider = new Slider();
 		slider.setMin(minValue);
@@ -155,7 +140,7 @@ public class Main extends Application {
 		setSliderEventListener(slider);
 		return slider;
 	}
-	
+
 	private Label createLabel(String content, int font_size, int x_Coord, int y_Coord,  Group root) {
 		Label label = new Label();
 		label.setText(content);
@@ -167,7 +152,62 @@ public class Main extends Application {
 		root.getChildren().add(label);
 		return label;
 	}
+
+	private void createStartGameButton(Group root){
+		Button btnStart = createButton("Start Simulation", 50, 450, root);
+		activateStartButton(btnStart, primaryStage);
+	}
 	
+	private void createExitButton(Group root) {
+		Button btnExit = createButton("Exit Application", 50, 500, root);
+		activateExitAppButton(btnExit);
+	}
+	
+	private void createImportXMLButton(Group root) {
+		Button btnImportXML = createButton("Import an XML File", 50, 550, root);
+		activateImportXMLButton(btnImportXML);
+	}
+	
+	private void createReturnToStartButton(Group root) {
+		Button btnReturnToStart = createButton("Return to the start screen", 50, 450, root);
+		activateReturntoStart(btnReturnToStart);
+	}
+	
+	private void createPauseButton(Group root) {
+		Button btnPauseApp = createButton("Pause Application", 50, 550, root);
+		activatePauseAnimationButton(btnPauseApp);
+	}
+	
+	private void createResumeButton(Group root) {
+		Button btnResumeApp = createButton("Resume Application", 50, 600, root);
+		activateResumeAnimationButton(btnResumeApp);
+	}
+	
+	private void createStepThroughButton(Group root) {
+		Button btnStepThroughFrames = createButton("Step through frames", 50, 650, root);
+		activateStepThroughFrame(btnStepThroughFrames);
+	}
+	
+	private void createSliderLabel(Group root) {
+		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 700, root);
+	}
+	
+	private void createSlider(Group root) {
+		Slider slider = createSlider(0, 100, 50, 730, root);
+	} 
+	
+	private void createErrorMessage(Group root) {
+		Label label = createLabel("There is an error in format in your XML File", 3, 130, 100, root);
+	}
+	
+	private void createNameLabel(Group root) {
+		Label programmerNames = createLabel("Michael Deng\nPranava Raparla\nDavid Zhang", 2, 470, 200, root);
+	}
+	
+	private void createTitleLabel(Group root) {
+		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
+	}
+
 	/**
 	 * Creates an event handler that launches the game on button click.
 	 * 
@@ -184,7 +224,7 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+
 	/**
 	 * Creates an event handler than exits the application on button click.
 	 * 
@@ -199,7 +239,11 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+
+	/**
+	 * 
+	 * @param btn
+	 */
 	public void activateImportXMLButton(Button btn) {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -209,7 +253,11 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+
+	/**
+	 * 
+	 * @param slider
+	 */
 	private void setSliderEventListener(Slider slider) {
 		slider.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
@@ -218,7 +266,11 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+
+	/**
+	 * 
+	 * @param btn
+	 */
 	private void activatePauseAnimationButton(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -227,7 +279,11 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+
+	/**
+	 * 
+	 * @param btn
+	 */
 	private void activateResumeAnimationButton(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -236,7 +292,11 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+
+	/**
+	 * 
+	 * @param btn
+	 */
 	private void activateReturntoStart(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -245,7 +305,11 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+
+	/**
+	 * 
+	 * @param btn
+	 */
 	private void activateStepThroughFrame(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -255,6 +319,10 @@ public class Main extends Application {
 		});
 	}
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
