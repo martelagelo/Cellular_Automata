@@ -9,4 +9,10 @@ public abstract class Cell {
 	Paint currentState;
 	Paint updatedState;
 	Cell[][] Matrix;
+	
+	void update(){
+		currentState = updatedState;
+		updatedState = null;
+	}
+	
 }
