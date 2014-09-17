@@ -56,20 +56,10 @@ public class ApplicationLoop {
 	 */
 	public Scene init(Stage s, Integer width, Integer height) {
 		root = new Group();
-		gridpane = new GridPane();
 		
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
-		gridpane.setPadding(new Insets(5));
-
-		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				Rectangle rect = generateCell(Color.WHITE);
-				gridpane.add(rect, i, j,1,1);
-			}
-		}
-		gridpane.setGridLinesVisible(true);
 		
-		root.getChildren().add(gridpane);
+		gridpane = initializeGridPane(root);
 				
 		return myScene;
 	}
@@ -78,13 +68,30 @@ public class ApplicationLoop {
 	 * Create the game's frame
 	 */
 	public KeyFrame start(Double frameRate) {
-		return new KeyFrame(Duration.millis(4000 / frameRate), oneFrame);
+		return new KeyFrame(Duration.millis(8000 / frameRate), oneFrame);
 	}
 
 	private void updateGameLoop() {
 		//grid.updateGrid(gridpane);
 		System.out.println("Yo\n");
 		System.out.println("Mom");
+	}
+	
+	private GridPane initializeGridPane(Group root){
+		GridPane gp = new GridPane();
+		gp.setPadding(new Insets(5));
+
+		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
+				Rectangle rect = generateCell(Color.WHITE);
+				gp.add(rect, i, j,1,1);
+			}
+		}
+		gp.setGridLinesVisible(true);
+		
+		root.getChildren().add(gp);
+		
+		return gp;
 	}
 
 	private Rectangle generateCell(Paint color){

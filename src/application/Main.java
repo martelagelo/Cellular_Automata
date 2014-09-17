@@ -21,14 +21,19 @@ import javafx.scene.paint.Color;
 public class Main extends Application {
 	
 	private ApplicationLoop myGame;
+	private Stage primaryStage;
 	private Timeline animation;
 
 	@Override
 	public void start(Stage primaryStage) {
+		this.primaryStage = primaryStage;
 		Group root = new Group();
 		myGame = new ApplicationLoop();
 		Scene scene = new Scene(root,ApplicationConstants.STAGE_WIDTH,ApplicationConstants.STAGE_HEIGHT);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
+		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
+		Label programmerNames = createLabel("Michael Deng\nPranava Raparla\nDavid Zhang", 2, 470, 200, root);
 		
 		Button btnStart = createButton("Start Simulation", 50, 500, root);
 		activateStartButton(btnStart, primaryStage);
@@ -49,27 +54,31 @@ public class Main extends Application {
 		Scene scene = myGame.init(stage, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT);
 		Group root = myGame.getRoot();
 		
-		Button btnStop = createButton("Exit Application", 50, 450, root);
+		Button btnStop = createButton("Exit Application", 50, 400, root);
 		activateExitAppButton(btnStop);
 		
-		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 600, root);
-		Slider slider = createSlider(0, 100, 50, 630, root);
+		Button btnPauseApp = createButton("Pause Application", 50, 450, root);
+		activatePauseAnimationButton(btnPauseApp);
+		
+		Button btnResumeApp = createButton("Resume Application", 50, 500, root);
+		activateResumeAnimationButton(btnResumeApp);
+		
+		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 550, root);
+		Slider slider = createSlider(0, 100, 50, 580, root);
+		
+		Button btnSwitchFile = createButton("Change the Scenario", 50, 630, root);
+		activateReturntoStart(btnSwitchFile);
 		
 		populateStage(stage, scene);
 		
 		runGameLoop(ApplicationConstants.DEFAULT_FRAME_RATE);
 		
-		Button btnPauseApp = createButton("Pause Application", 50, 500, root);
-		activatePauseAnimationButton(btnPauseApp);
-		
-		Button btnResumeApp = createButton("Resume Application", 50, 550, root);
-		activateResumeAnimationButton(btnResumeApp);
 	}
 
 	/**
 	 * Runs the game loop and the animation that goes along with the game loop.
 	 */
-	public void runGameLoop(Double speed) {
+	private void runGameLoop(Double speed) {
 		if(animation != null) {
 			animation.pause();
 		}
@@ -78,6 +87,21 @@ public class Main extends Application {
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+	}
+	
+	private void activateErrorPage(){
+		Group root = new Group();
+		Scene scene = new Scene(root,ApplicationConstants.STAGE_WIDTH,ApplicationConstants.STAGE_HEIGHT);
+		
+		Label label = createLabel("There is an error in format in your XML File", 3, 130, 100, root);
+		
+		Button btnReturnToStart = createButton("Return to the start screen", 50, 500, root);
+		activateReturntoStart(btnReturnToStart);
+		
+		Button btnExit = createButton("Exit Application", 50, 550, root);
+		activateExitAppButton(btnExit);
+		
+		populateStage(primaryStage, scene);
 	}
 	
 	/**
@@ -150,8 +174,9 @@ public class Main extends Application {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				playGame(stage);
 				System.out.println("Start Button Pressed");
+				playGame(stage);
+
 			}
 		});
 	}
@@ -176,6 +201,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				//TODO
+				activateErrorPage();
 			}
 		});
 	}
@@ -203,6 +229,15 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				animation.play();
+			}
+		});
+	}
+	
+	private void activateReturntoStart(Button btn){
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event){
+				start(primaryStage);
 			}
 		});
 	}
