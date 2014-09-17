@@ -71,7 +71,7 @@ public class ApplicationLoop {
 		return new KeyFrame(Duration.millis(8000 / frameRate), oneFrame);
 	}
 
-	private void updateGameLoop() {
+	public void updateGameLoop() {
 		//grid.updateGrid(gridpane);
 		System.out.println("Yo\n");
 		System.out.println("Mom");

@@ -63,10 +63,13 @@ public class Main extends Application {
 		Button btnResumeApp = createButton("Resume Application", 50, 500, root);
 		activateResumeAnimationButton(btnResumeApp);
 		
-		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 550, root);
-		Slider slider = createSlider(0, 100, 50, 580, root);
+		Button btnStepThroughFrames = createButton("Step through frames", 50, 550, root);
+		activateStepThroughFrame(btnStepThroughFrames);
 		
-		Button btnSwitchFile = createButton("Change the Scenario", 50, 630, root);
+		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 600, root);
+		Slider slider = createSlider(0, 100, 50, 630, root);
+		
+		Button btnSwitchFile = createButton("Change the Scenario", 50, 680, root);
 		activateReturntoStart(btnSwitchFile);
 		
 		populateStage(stage, scene);
@@ -87,6 +90,7 @@ public class Main extends Application {
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+		
 	}
 	
 	private void activateErrorPage(){
@@ -238,6 +242,15 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				start(primaryStage);
+			}
+		});
+	}
+	
+	private void activateStepThroughFrame(Button btn){
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event){
+				myGame.updateGameLoop();
 			}
 		});
 	}
