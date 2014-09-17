@@ -8,45 +8,45 @@ import javafx.scene.shape.Rectangle;
 
 public class Grid {
 	
-	GameOfLifeCell cell = new GameOfLifeCell();
 	GameOfLifeCell[][] cellMatrix = new GameOfLifeCell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	
-//	int i = 0;
-//	
-//	void updateGrid(GridPane gridpane){
-//		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-//			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-//				if (this.i == 0) {
-//					Rectangle rect = generateCell(Color.BROWN);
-//					gridpane.add(rect, i, j, 1, 1);
-//				}
-//				else {
-//					Rectangle rect = generateCell(Color.WHITE);
-//					gridpane.add(rect, i, j, 1, 1);
-//				}
-//			}
-//		}
-//		if (this.i==0){
-//			this.i = 1;
-//		}
-//		else {
-//			this.i = 0;
-//		}
-//	}
-	
 	void updateGrid(GridPane gridpane){
+		initializeAndPopulateMatrix();
+		updateCellMatrix();
+		repopulateGridPane(gridpane);
+	}
+	
+	private void initializeAndPopulateMatrix(){
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				//cell.updateCell(i, j, gridpane);
+				cellMatrix[i][j] = new GameOfLifeCell();
+				cellMatrix[i][j].currentState = Color.WHITE; //Some value that will be inputed from the XML file.
 			}
 		}
 	}
 	
-	private Rectangle generateCell(Paint color){
+	private void updateCellMatrix(){
+		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
+				cellMatrix[i][j].updateCell(i, j, cellMatrix);
+			}
+		}
+	}
+	
+	private void repopulateGridPane(GridPane gridpane){
+		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
+				Rectangle rect = generateCell(cellMatrix[i][j]);
+				gridpane.add(rect, i, j, 1, 1);
+			}	
+		}
+	}
+	
+	private Rectangle generateCell(GameOfLifeCell cell){
 		Rectangle rect = new Rectangle();
 		rect.setWidth(ApplicationConstants.CELL_WIDTH);
 		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-		rect.setFill(color);;
+		rect.setFill(cell.updatedState);;
 		return rect;
 	}
 }
