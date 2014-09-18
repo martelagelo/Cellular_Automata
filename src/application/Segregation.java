@@ -10,13 +10,13 @@ public class Segregation extends Cell {
 	private double threshold;
 
 
-		public Segregation(){
-			//same = 0;
-			//different = 0;
-			threshold = 0.5;
-			xPos = 0;
-			//currentState = Color.WHITE;
-		}
+	public Segregation(){
+		//same = 0;
+		//different = 0;
+		threshold = 0.5;
+		xPos = 0;
+		//currentState = Color.WHITE;
+	}
 
 	private void setThreshold(double num){
 		threshold = num;
@@ -29,42 +29,43 @@ public class Segregation extends Cell {
 				if(i >= 0 && j >= 0 && i < ApplicationConstants.NUM_OF_COLUMNS && j < ApplicationConstants.NUM_OF_ROWS){
 					if(Matrix[i][j].currentState==Matrix[xPos][yPos].currentState){
 						same++;
-						//System.out.println("YESSSSSSSSS");
 					} else {
-//					if(Matrix[i][j].currentState!=Matrix[xPos][yPos].currentState){
 						different++;							
-						//System.out.println("Hello World");
 					}
 				}							
 			}
 		}
 		same--;
-		//System.out.println(same + "    " + different);
 		Double d = (same/(same+different));
-		System.out.println(d);
 		return d;
 	}
 
 
 	private void cellMover(double percentage){
-		System.out.println(percentage);
-		if(percentage < threshold){
-			System.out.println("MOVE DAT ASS!");
+		if (Matrix[xPos][yPos].currentState == Color.WHITE && Matrix[xPos][yPos].updatedState == null) {
+			Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;
+		} else if (Matrix[xPos][yPos].currentState == Color.WHITE && Matrix[xPos][yPos].updatedState != null) {
+		} else if (percentage < threshold){
+			Boolean positionFound = false;
+			outerloop:
 			for(int b = yPos; b < ApplicationConstants.NUM_OF_ROWS; b++){
 				for(int a = 0; a < ApplicationConstants.NUM_OF_COLUMNS; a++){
-					if(b == yPos && a <= xPos) // check if in part of row before current cell
+					if(b == yPos && a <= xPos) {// check if in part of row before current cell
 						continue; // continue to next iteration if true
-
-					if (Matrix[a][b].currentState==Color.WHITE && Matrix[a][b].updatedState == null){
+					} else if (Matrix[a][b].currentState==Color.WHITE && Matrix[a][b].updatedState == null){
 						Matrix[a][b].updatedState = Matrix[xPos][yPos].currentState;
 						Matrix[xPos][yPos].updatedState = Color.WHITE;
-
-
-					}
+						positionFound = true;
+						break outerloop;
+					} 
 				}
 			}
+			if(!positionFound) {
+				Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;
+			}
+		} else {
+			Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;	
 		}
-		Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;		
 	}
 
 
@@ -91,9 +92,7 @@ public class Segregation extends Cell {
 		super.Matrix = cellMatrix;
 		super.xPos = i;
 		super.yPos = j;
-		System.out.println(xPos + "  " + yPos);
-		Double d = percentageCalc();
-		cellMover(d);
+		cellMover(percentageCalc());
 	}
 
 
