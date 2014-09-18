@@ -25,6 +25,4 @@ public abstract class Cell {
 		yPos = y;
 	}
 	
-	abstract void setCurrentState(String s);
-	
 }
