@@ -105,7 +105,7 @@ public class ApplicationLoop {
 	private Paint generateRandomColor() {
 		Random rand = new Random();
 		int i = rand.nextInt(100);
-		if (i < 2) {
+		if (i < 10) {
 			return Color.RED;
 		} else{
 			return Color.GREEN;
