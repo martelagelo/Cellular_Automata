@@ -1,0 +1,54 @@
+<!-- XML version declaration -->
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<!-- Set Simulation Type -->
+<Segregation title="Segregation" author="Team 09">
+	<!-- Set my grid size -->
+	<!-- <size xmax="3" ymax="3"></size> -->
+	<!-- Set my grid and its initial state -->
+	<Cell>
+		<xPos>0</xPos>
+		<yPos>0</yPos>
+		<state>white</state>
+	</Cell>
+	<Cell>
+		<xPos>1</xPos>
+		<yPos>0</yPos>
+		<state>red</state>
+	</Cell>
+	<Cell>
+		<xPos>2</xPos>
+		<yPos>0</yPos>
+		<state>blue</state>
+	</Cell>
+	<Cell>
+		<xPos>0</xPos>
+		<yPos>1</yPos>
+		<state>red</state>
+	</Cell>
+	<Cell>
+		<xPos>1</xPos>
+		<yPos>1</yPos>
+		<state>blue</state>
+	</Cell>
+	<Cell>
+		<xPos>1</xPos>
+		<yPos>2</yPos>
+		<state>red</state>
+	</Cell>
+	<Cell>
+		<xPos>0</xPos>
+		<yPos>2</yPos>
+		<state>white</state>
+	</Cell>
+	<Cell>
+		<xPos>1</xPos>
+		<yPos>2</yPos>
+		<state>blue</state>
+	</Cell>
+	<Cell>
+		<xPos>2</xPos>
+		<yPos>2</yPos>
+		<state>blue</state>
+	</Cell>
+	<!-- Closing my segregation -->
+</Segregation>
