@@ -30,7 +30,7 @@ public class Grid {
 	 * @param initialColor
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new GameOfLife();
+		cellMatrix[i][j] = new GameOfLifeCell();
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 	}
 

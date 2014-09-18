@@ -41,9 +41,9 @@ public class CellXMLReader
 		for(int i=0; i<nodeList.getLength();i++) {
 			Node node = nodeList.item(i);
 			if(node instanceof Element) {
-				Cell cell = new Segregation();
-				if(node instanceof Segregation) {
-					cell = new Segregation();
+				Cell cell = new SegregationCell();
+				if(node instanceof SegregationCell) {
+					cell = new SegregationCell();
 				}
 				NodeList childNodes = node.getChildNodes();
 				for(int j=0; j<childNodes.getLength(); j++) {
