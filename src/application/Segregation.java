@@ -10,12 +10,14 @@ public class Segregation extends Cell {
 	private int threshold;
 
 	
-	public void Segregation(){
-		
-		
+	public Segregation(){
+		same = 0;
+		different = 0;
+		threshold = 0;
+		xPos = 0;
+		currentState = Color.WHITE;
 	}
-
-
+	
 	void segregateThisCell(){		
 		cellMover(percentageCalc());
 	}
@@ -72,8 +74,17 @@ public class Segregation extends Cell {
 
 	@Override
 	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-		
+		switch(s.toUpperCase()) {
+		case "WHITE":
+			currentState = Color.WHITE;
+			break;
+		case "RED":
+			currentState = Color.RED;
+			break;
+		case "BLUE":
+			currentState = Color.BLUE;
+			break;
+		}
 	}
 
 

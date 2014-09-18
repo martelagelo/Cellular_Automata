@@ -3,54 +3,54 @@
 <!-- Set Simulation Type -->
 <Segregation title="Segregation" author="Team 09">
 	<!-- Set my grid size -->
-	<size xmax="3" ymax="3"></size>
+	<!-- <size xmax="3" ymax="3"></size> -->
 	<!-- Set my grid and its initial state -->
 	<AllCells>
-		<Cells id="0">
+		<Cell>
 			<xPos>0</xPos>
 			<yPos>0</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="1">
+			<state>white</state>
+		</Cell>
+		<Cell>
 			<xPos>1</xPos>
 			<yPos>0</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="2">
+			<state>red</state>
+		</Cell>
+		<Cell>
 			<xPos>2</xPos>
 			<yPos>0</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="3">
+			<state>blue</state>
+		</Cell>
+		<Cell>
 			<xPos>0</xPos>
 			<yPos>1</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="4">
+			<state>red</state>
+		</Cell>
+		<Cell>
 			<xPos>1</xPos>
 			<yPos>1</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="5">
+			<state>blue</state>
+		</Cell>
+		<Cell>
 			<xPos>1</xPos>
 			<yPos>2</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="6">
+			<state>red</state>
+		</Cell>
+		<Cell>
 			<xPos>0</xPos>
 			<yPos>2</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="7">
+			<state>white</state>
+		</Cell>
+		<Cell>
 			<xPos>1</xPos>
 			<yPos>2</yPos>
-			<state>1</state>
-		</Cells>
-		<Cells id="8">
+			<state>blue</state>
+		</Cell>
+		<Cell>
 			<xPos>2</xPos>
 			<yPos>2</yPos>
-			<state>1</state>
-		</Cells>
+			<state>blue</state>
+		</Cell>
 	</AllCells>
 	<!-- Closing my segregation -->
 </Segregation>
