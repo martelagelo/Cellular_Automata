@@ -74,7 +74,6 @@ public class ApplicationLoop {
 		grid.updateGrid(gridpane);
 		System.out.println("Yo\n");
 		System.out.println("Mom");
-
 	}
 	
 	private GridPane initializeGridPane(Group root){
@@ -101,16 +100,38 @@ public class ApplicationLoop {
 		rect.setFill(generateRandomColor());
 		return rect;
 	}
-	
+
 	private Paint generateRandomColor() {
 		Random rand = new Random();
 		int i = rand.nextInt(100);
 		if (i < 10) {
 			return Color.BLACK;
-		} else{
+		} else {
 			return Color.WHITE;
 		}
 	}
+
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 40) {
+//			return Color.RED;
+//		} else if (i > 60) {
+//			return Color.BLUE;
+//		} else {
+//			return Color.WHITE;
+//		}
+//	}
+
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 10) {
+//			return Color.RED;
+//		} else{
+//			return Color.GREEN;
+//		}
+//	}
 	
 	public Group getRoot(){
 		return root;
