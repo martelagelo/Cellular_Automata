@@ -23,7 +23,10 @@ public class Main extends Application {
 	private ApplicationLoop myGame;
 	private Stage primaryStage;
 	private Timeline animation;
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -61,7 +64,10 @@ public class Main extends Application {
 		animation.play();
 
 	}
-
+	
+	/**
+	 * 
+	 */
 	private void activateErrorPage(){
 		Group root = new Group();
 		Scene scene = new Scene(root,ApplicationConstants.STAGE_WIDTH,ApplicationConstants.STAGE_HEIGHT);
@@ -81,6 +87,10 @@ public class Main extends Application {
 		stage.show();
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void populateStartPageModules(Group root) {
 		createTitleLabel(root);
 		createNameLabel(root);
@@ -89,6 +99,10 @@ public class Main extends Application {
 		createImportXMLButton(root);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void populateGridPageModules(Group root) {
 		createExitButton(root);
 		createPauseButton(root);
@@ -99,6 +113,10 @@ public class Main extends Application {
 		createReturnToStartButton(root);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void populateErrorPageModules(Group root) {
 		createErrorMessage(root);
 		createExitButton(root);
@@ -125,7 +143,16 @@ public class Main extends Application {
 		root.getChildren().add(btn);
 		return btn;
 	}
-
+	
+	/**
+	 * 
+	 * @param minValue
+	 * @param maxValue
+	 * @param x_Coord
+	 * @param y_Coord
+	 * @param root
+	 * @return
+	 */
 	private Slider createSlider(int minValue, int maxValue,  int x_Coord, int y_Coord, Group root){
 		Slider slider = new Slider();
 		slider.setMin(minValue);
@@ -140,7 +167,16 @@ public class Main extends Application {
 		setSliderEventListener(slider);
 		return slider;
 	}
-
+	
+	/**
+	 * 
+	 * @param content
+	 * @param font_size
+	 * @param x_Coord
+	 * @param y_Coord
+	 * @param root
+	 * @return
+	 */
 	private Label createLabel(String content, int font_size, int x_Coord, int y_Coord,  Group root) {
 		Label label = new Label();
 		label.setText(content);
@@ -152,58 +188,106 @@ public class Main extends Application {
 		root.getChildren().add(label);
 		return label;
 	}
-
+	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createStartGameButton(Group root){
 		Button btnStart = createButton("Start Simulation", 50, 450, root);
 		activateStartButton(btnStart, primaryStage);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createExitButton(Group root) {
 		Button btnExit = createButton("Exit Application", 50, 500, root);
 		activateExitAppButton(btnExit);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createImportXMLButton(Group root) {
 		Button btnImportXML = createButton("Import an XML File", 50, 550, root);
 		activateImportXMLButton(btnImportXML);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createReturnToStartButton(Group root) {
 		Button btnReturnToStart = createButton("Return to the start screen", 50, 450, root);
 		activateReturntoStart(btnReturnToStart);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createPauseButton(Group root) {
 		Button btnPauseApp = createButton("Pause Application", 50, 550, root);
 		activatePauseAnimationButton(btnPauseApp);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createResumeButton(Group root) {
 		Button btnResumeApp = createButton("Resume Application", 50, 600, root);
 		activateResumeAnimationButton(btnResumeApp);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createStepThroughButton(Group root) {
 		Button btnStepThroughFrames = createButton("Step through frames", 50, 650, root);
 		activateStepThroughFrame(btnStepThroughFrames);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createSliderLabel(Group root) {
 		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 700, root);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createSlider(Group root) {
 		Slider slider = createSlider(0, 100, 50, 730, root);
 	} 
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createErrorMessage(Group root) {
 		Label label = createLabel("There is an error in format in your XML File", 3, 130, 100, root);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createNameLabel(Group root) {
 		Label programmerNames = createLabel("Michael Deng\nPranava Raparla\nDavid Zhang", 2, 470, 200, root);
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 */
 	private void createTitleLabel(Group root) {
 		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
 	}
@@ -250,6 +334,7 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				//TODO
 				activateErrorPage();
+				animation.stop();
 			}
 		});
 	}
@@ -302,6 +387,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				start(primaryStage);
+				animation.stop();
 			}
 		});
 	}

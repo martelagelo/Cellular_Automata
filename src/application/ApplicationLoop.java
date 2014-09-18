@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -32,6 +33,7 @@ public class ApplicationLoop {
 	private GridPane gridpane;
 	private Grid grid = new Grid();
 	private Group root;
+	private Random rand = new Random();
 
 	/**
 	 * Function to do each game frame.
@@ -100,6 +102,17 @@ public class ApplicationLoop {
 		rect.setHeight(ApplicationConstants.CELL_WIDTH);
 		rect.setFill(color);
 		return rect;
+	}
+	
+	private void generateRandomNumber(){
+		int i = rand.nextInt(100);
+		if (i < 25) {
+			
+		} else if (i > 75) {
+			
+		} else {
+			
+		}
 	}
 	
 	public Group getRoot(){
