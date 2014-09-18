@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Grid {
 	
-	GameOfLifeCell[][] cellMatrix = new GameOfLifeCell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
+	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	
 	void updateGrid(GridPane gridpane){
 		initializeAndPopulateMatrix();
@@ -19,7 +19,7 @@ public class Grid {
 	private void initializeAndPopulateMatrix(){
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				cellMatrix[i][j] = new GameOfLifeCell();
+				cellMatrix[i][j] = new Segregation();
 				cellMatrix[i][j].currentState = Color.WHITE; //Some value that will be inputed from the XML file.
 			}
 		}
@@ -28,7 +28,7 @@ public class Grid {
 	private void updateCellMatrix(){
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				cellMatrix[i][j].updateCell(i, j, cellMatrix);
+				//cellMatrix[i][j].updateCell(i, j, cellMatrix);
 			}
 		}
 	}
@@ -42,7 +42,7 @@ public class Grid {
 		}
 	}
 	
-	private Rectangle generateCell(GameOfLifeCell cell){
+	private Rectangle generateCell(Cell cell){
 		Rectangle rect = new Rectangle();
 		rect.setWidth(ApplicationConstants.CELL_WIDTH);
 		rect.setHeight(ApplicationConstants.CELL_WIDTH);
