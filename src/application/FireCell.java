@@ -31,7 +31,7 @@ public class FireCell extends Cell {
 
 	private void calculateBurnChance(){
 		if (isNextToFire && super.currentState == Color.GREEN) {
-			burningChance = .50;
+			burningChance = .40;
 		} else {
 			burningChance = 0.0;
 		}
