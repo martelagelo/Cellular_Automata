@@ -29,7 +29,7 @@ public class Grid {
 	 * @param initialColor
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new GameOfLife();
+		cellMatrix[i][j] = new FireCell();
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 	}
 	
@@ -47,7 +47,7 @@ public class Grid {
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				cellMatrix[i][j].currentState = cellMatrix[i][j].updatedState;
-				System.out.println("currentState = " + cellMatrix[i][j].currentState);
+				//System.out.println("currentState = " + cellMatrix[i][j].currentState);
 				Rectangle rect = generateCell(cellMatrix[i][j]);
 				System.out.println(rect.getFill());
 				gridpane.add(rect, i, j, 1, 1);
