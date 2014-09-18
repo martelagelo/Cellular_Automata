@@ -7,7 +7,7 @@ public class Segregation extends Cell {
 
 	private int same;
 	private int different;
-	private int threshold;
+	private double threshold;
 
 
 	public Segregation(){
@@ -17,15 +17,18 @@ public class Segregation extends Cell {
 		xPos = 0;
 		currentState = Color.WHITE;
 	}
-	
+
 	void segregateThisCell(){		
 		cellMover(percentageCalc());
 	}
-	
+
 	private void setThreshold(double num){
 		threshold = num;
 	}
 
+	/*
+	 * Calculates the percentage of same/total neighbours
+	 */
 
 	private double percentageCalc(){
 		for(int x=0; x<ApplicationConstants.NUM_OF_COLUMNS; x++){
@@ -35,26 +38,29 @@ public class Segregation extends Cell {
 
 				for(int i=x-1; i<=x+1; i++){
 					for(int j= y-1; j<=y+1; j++){
+						while(j!=y && i!=x){
 
-						if(Matrix[i][j].currentState==Matrix[x][y].currentState){
-							same++;
-						}	
+							if(Matrix[i][j].currentState==Matrix[x][y].currentState){
+								same++;
+							}	
 
-						if(Matrix[i][j].currentState!=null){
-							if(Matrix[i][j].currentState!=Matrix[x][y].currentState){
-								different++;								
-							}
-
-
-						}							
+							if(Matrix[i][j].currentState!=null){
+								if(Matrix[i][j].currentState!=Matrix[x][y].currentState){
+									different++;								
+								}
+							}							
+						}
 					}
-					same = same -1;
 				}
 			}		
 		}	
 		return same/(same+different);
 	}
 
+	
+	/*
+	 * Updates the state of the cell depending on satisfaction
+	 */
 
 	private void cellMover(double percentage){
 		if(percentage < threshold){
@@ -66,8 +72,6 @@ public class Segregation extends Cell {
 					if (Matrix[a][b].currentState==Color.WHITE && Matrix[a][b].updatedState == null){
 						Matrix[a][b].updatedState = Matrix[xPos][yPos].currentState;
 						Matrix[xPos][yPos].updatedState = Color.WHITE;
-
-
 					}
 				}
 			}
@@ -95,10 +99,6 @@ public class Segregation extends Cell {
 	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
 		// TODO Auto-generated method stub
-
 	}
-
-
-
-	}
+}
 

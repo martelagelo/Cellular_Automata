@@ -19,7 +19,9 @@ public class GameOfLife extends Cell {
 	}
 
 	
-
+/*
+ * Counts number of alive neighbours around the current cell
+ */
 
 	private int aliveCalculator(){
 		for(int i = xPos-1; i<=xPos+1; i++){
@@ -34,6 +36,10 @@ public class GameOfLife extends Cell {
 		}
 		return Alive;
 	}
+	
+	/*
+	 * Updates state of current cell depending on Game of Life rules
+	 */
 	
 	private void lifeUpdate(int count){
 		if(Matrix[xPos][yPos].currentState == Color.BLACK){
