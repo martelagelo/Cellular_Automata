@@ -50,8 +50,4 @@ public class GameOfLife extends Cell {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-
-
 }

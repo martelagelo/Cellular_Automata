@@ -10,6 +10,9 @@ public abstract class Cell {
 	Paint updatedState;
 	Cell[][] Matrix;
 	
+	int turnsEating;
+	int turnsHungry;
+	
 	void update(){
 		currentState = updatedState;
 		updatedState = null;
