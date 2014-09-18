@@ -9,10 +9,10 @@ public class Segregation extends Cell {
 	private int different;
 	private int threshold;
 
-	
+
 	public void Segregation(){
-		
-		
+
+
 	}
 
 
@@ -39,7 +39,7 @@ public class Segregation extends Cell {
 								different++;								
 							}
 
-							
+
 						}							
 					}
 					same = same -1;
@@ -73,9 +73,6 @@ public class Segregation extends Cell {
 	@Override
 	void setCurrentState(String s) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
-
 }
