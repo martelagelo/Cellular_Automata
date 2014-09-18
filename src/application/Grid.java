@@ -12,28 +12,44 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-
+/**
+ * Version 1
+ * Date: 9/14/2014
+ * 
+ * @author Michael Deng
+ * @author Pranava Raparla
+ * @author David Zhang
+ *
+ */
 public class Grid {
 
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	private Group root;
 
+	
+	/**
+	 * Updates the cell matrix and the gridpane
+	 * @param gridpane: The physical grid that displays on the application
+	 */
 	public void updateGrid(GridPane gridpane){
 		updateCellMatrix();
 		repopulateGridPane(gridpane);
 	}
 
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @param initialColor
+	 * Populates the values in the individual cells in the cellMatrix
+	 * @param i: The x position of the cell
+	 * @param j: The y position of the cell
+	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
 		cellMatrix[i][j] = new GameOfLifeCell();
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 	}
-
+	
+	/**
+	 * Updates the states of the cells in the cell matrix
+	 */
 	private void updateCellMatrix(){
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
@@ -41,7 +57,11 @@ public class Grid {
 			}
 		}
 	}
-
+	
+	/**
+	 * Repopulates the gridpane with the updatedCells from the cell Matrix
+	 * @param gridpane: The physical grid that displays on the application
+	 */
 	private void repopulateGridPane(GridPane gridpane){
 		ObservableList<Node> list = gridpane.getChildren();
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
@@ -67,6 +87,10 @@ public class Grid {
 		return rect;
 	}
 
+	/**
+	 * Grabs the root value from the application loop
+	 * @param root: The stack that holds a pages modules
+	 */
 	void setRoot(Group root) {
 		this.root = root;
 	}
