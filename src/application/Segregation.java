@@ -22,7 +22,6 @@ public class Segregation extends Cell {
 		threshold = num;
 	}
 
-
 	private double percentageCalc(){
 		for(int i = xPos-1; i <= xPos+1; i++){
 			for(int j = yPos-1; j <= yPos+1; j++){
@@ -39,7 +38,6 @@ public class Segregation extends Cell {
 		Double d = (same/(same+different));
 		return d;
 	}
-
 
 	private void cellMover(double percentage){
 		if (Matrix[xPos][yPos].currentState == Color.WHITE && Matrix[xPos][yPos].updatedState == null) {
@@ -68,7 +66,6 @@ public class Segregation extends Cell {
 		}
 	}
 
-
 	@Override
 	void setCurrentState(String s) {
 
@@ -94,8 +91,5 @@ public class Segregation extends Cell {
 		super.yPos = j;
 		cellMover(percentageCalc());
 	}
-
-
-
 }
 

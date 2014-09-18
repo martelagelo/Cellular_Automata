@@ -100,7 +100,7 @@ public class ApplicationLoop {
 		rect.setFill(generateRandomColor());
 		return rect;
 	}
-	
+
 	private Paint generateRandomColor() {
 		Random rand = new Random();
 		int i = rand.nextInt(100);
@@ -112,7 +112,19 @@ public class ApplicationLoop {
 			return Color.WHITE;
 		}
 	}
-	
+
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 40) {
+//			return Color.RED;
+//		} else if (i > 60) {
+//			return Color.BLUE;
+//		} else {
+//			return Color.WHITE;
+//		}
+//	}
+
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
 //		int i = rand.nextInt(100);

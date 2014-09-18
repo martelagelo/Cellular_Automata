@@ -8,6 +8,7 @@ public class GameOfLife extends Cell {
 	
 	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
+		Matrix = cellMatrix;
 		for(int x=0; x<ApplicationConstants.NUM_OF_COLUMNS; x++){
 			for(int y=0; y<ApplicationConstants.NUM_OF_ROWS; y++){
 				xPos = x;
@@ -18,20 +19,23 @@ public class GameOfLife extends Cell {
 		}		
 	}
 
-	
-
-
 	private int aliveCalculator(){
 		for(int i = xPos-1; i<=xPos+1; i++){
 			for(int j = yPos-1; j<=yPos+1; j++){
+				//System.out.println(Matrix);
+				if(i<0 || j<0 || i>=Matrix.length || j>=Matrix[0].length) {
+					System.out.println("out of bounds!!");
+					continue;
+				}
 				while( i!= xPos && j!=yPos){					
-
 					if(Matrix[i][j].currentState == Color.BLACK){
 						Alive++;
+						System.out.println("\tAlive Updated Count: ");
 					}					
 				}				
 			}
 		}
+		System.out.println("Alive: " + Alive);
 		return Alive;
 	}
 	
@@ -58,7 +62,6 @@ public class GameOfLife extends Cell {
 			}
 		}
 	}
-
 
 	@Override
 	void setCurrentState(String s) {
