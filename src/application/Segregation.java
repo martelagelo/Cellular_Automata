@@ -1,5 +1,6 @@
 package application;
 
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class Segregation extends Cell {
@@ -55,9 +56,10 @@ public class Segregation extends Cell {
 				for(int a = 0; a<ApplicationConstants.NUM_OF_COLUMNS; a++){
 					if(b==yPos && a<=xPos) // check if in part of row before current cell
 						continue; // continue to next iteration if true
-					if (Matrix[a][b].currentState==WHITE && Matrix[a][b].updatedState == null){
+
+					if (Matrix[a][b].currentState==Color.WHITE && Matrix[a][b].updatedState == null){
 						Matrix[a][b].updatedState = Matrix[xPos][yPos].currentState;
-						Matrix[xPos][yPos].updatedState = WHITE;
+						Matrix[xPos][yPos].updatedState = Color.WHITE;
 
 
 					}
