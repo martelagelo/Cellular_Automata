@@ -15,4 +15,16 @@ public abstract class Cell {
 		updatedState = null;
 	}
 	
+	void SetXPos(int x){
+		xPos = x;
+	}
+	
+	void SetYPos(int y){
+		yPos = y;
+	}
+	
+	abstract void setCurrentState(String s);
+	
+	
+	
 }

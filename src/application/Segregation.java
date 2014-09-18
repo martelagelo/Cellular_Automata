@@ -6,13 +6,16 @@ public class Segregation extends Cell {
 
 	private int same;
 	private int different;
-	private int percentage;
 	private int threshold;
-	private int currentX;
-	private int currentY;
+
+	
+	public void Segregation(){
+		
+		
+	}
 
 
-	void segregateThisCell(){
+	void segregateThisCell(){		
 		cellMover(percentageCalc());
 	}
 
@@ -20,8 +23,8 @@ public class Segregation extends Cell {
 	private double percentageCalc(){
 		for(int x=0; x<ApplicationConstants.NUM_OF_COLUMNS; x++){
 			for(int y=0; y<ApplicationConstants.NUM_OF_ROWS; y++){
-				currentX = x;
-				currentY = y;
+				xPos = x;
+				yPos = y;
 
 				for(int i=x-1; i<=x+1; i++){
 					for(int j= y-1; j<=y+1; j++){
@@ -35,9 +38,10 @@ public class Segregation extends Cell {
 								different++;								
 							}
 
-							same = same -1;
+							
 						}							
 					}
+					same = same -1;
 				}
 			}		
 		}	
@@ -47,20 +51,27 @@ public class Segregation extends Cell {
 
 	private void cellMover(double percentage){
 		if(percentage < threshold){
-			for(int b = currentY; b<ApplicationConstants.NUM_OF_ROWS; b++){
+			for(int b = yPos; b<ApplicationConstants.NUM_OF_ROWS; b++){
 				for(int a = 0; a<ApplicationConstants.NUM_OF_COLUMNS; a++){
-					if(b==currentY && a<=currentX) // check if in part of row before current cell
+					if(b==yPos && a<=xPos) // check if in part of row before current cell
 						continue; // continue to next iteration if true
 					if (Matrix[a][b].currentState==WHITE && Matrix[a][b].updatedState == null){
-						Matrix[a][b].updatedState = Matrix[currentX][currentY].currentState;
-						Matrix[currentX][currentY].updatedState = WHITE;
+						Matrix[a][b].updatedState = Matrix[xPos][yPos].currentState;
+						Matrix[xPos][yPos].updatedState = WHITE;
 
 
 					}
 				}
 			}
 		}
-		Matrix[currentX][currentY].updatedState = Matrix[currentX][currentY].currentState;		
+		Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;		
+	}
+
+
+	@Override
+	void setCurrentState(String s) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
