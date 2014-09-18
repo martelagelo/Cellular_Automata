@@ -16,7 +16,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class CellXMLReader {
+public class CellXMLReader
+{
 	
 	public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 		Document d = getAndLoadXMLFile("src/application/xml/GridSample.xml");
@@ -40,9 +41,9 @@ public class CellXMLReader {
 		for(int i=0; i<nodeList.getLength();i++) {
 			Node node = nodeList.item(i);
 			if(node instanceof Element) {
-				Cell cell = new Segregation();
-				if(node instanceof Segregation) {
-					cell = new Segregation();
+				Cell cell = new SegregationCell();
+				if(node instanceof SegregationCell) {
+					cell = new SegregationCell();
 				}
 				NodeList childNodes = node.getChildNodes();
 				for(int j=0; j<childNodes.getLength(); j++) {

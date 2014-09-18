@@ -58,6 +58,7 @@ public class ApplicationLoop {
 	public Scene init(Stage s, Integer width, Integer height) {
 		root = new Group();
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
+		grid.setRoot(root);
 		gridpane = initializeGridPane(root);
 		return myScene;
 	}
@@ -71,9 +72,8 @@ public class ApplicationLoop {
 
 	public void updateGameLoop() {
 		grid.updateGrid(gridpane);
-
-		//System.out.println("Yo\n");
-		//System.out.println("Mom");
+		System.out.println("Yo\n");
+		System.out.println("Mom");
 	}
 	
 	private GridPane initializeGridPane(Group root){
@@ -88,8 +88,6 @@ public class ApplicationLoop {
 			}
 		}
 		
-		//gp.setGridLinesVisible(true);
-		
 		root.getChildren().add(gp);
 		
 		return gp;
@@ -102,18 +100,38 @@ public class ApplicationLoop {
 		rect.setFill(generateRandomColor());
 		return rect;
 	}
-	
+
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 45) {
+//			return Color.RED;
+//		} else if (i > 55) {
+//			return Color.BLUE;
+//		} else{
+//			return Color.WHITE;
+//		}
+//	}
+
 	private Paint generateRandomColor() {
 		Random rand = new Random();
 		int i = rand.nextInt(100);
 		if (i < 20) {
-			return Color.RED;
-		} else if (i > 50) {
-			return Color.GREEN;
+			return Color.BLACK;
 		} else {
-			return Color.YELLOW;
+			return Color.WHITE;
 		}
 	}
+
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 10) {
+//			return Color.RED;
+//		} else{
+//			return Color.GREEN;
+//		}
+//	}
 	
 	public Group getRoot(){
 		return root;

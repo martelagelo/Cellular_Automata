@@ -8,32 +8,26 @@ public class GameOfLife extends Cell {
 	
 	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
-		for(int x=0; x<ApplicationConstants.NUM_OF_COLUMNS; x++){
-			for(int y=0; y<ApplicationConstants.NUM_OF_ROWS; y++){
-				xPos = x;
-				yPos = y;
-				
-				lifeUpdate(aliveCalculator());					
-			}
-		}		
+		Alive = 0;
+		Matrix = cellMatrix;
+		xPos = i;
+		yPos = j;
+		lifeUpdate(aliveCalculator());					
 	}
 
-	
-/*
- * Counts number of alive neighbours around the current cell
- */
 
 	private int aliveCalculator(){
-		for(int i = xPos-1; i<=xPos+1; i++){
-			for(int j = yPos-1; j<=yPos+1; j++){
-				while( i!= xPos && j!=yPos){					
-
-					if(Matrix[i][j].currentState == Color.BLACK){
+		for(int i = xPos-1; i <= xPos+1; i++){
+			for(int j = yPos-1; j <= yPos+1; j++){
+				//System.out.println(i + "    " + j);
+				if(i >= 0 && j >= 0 && i < ApplicationConstants.NUM_OF_COLUMNS && j < ApplicationConstants.NUM_OF_ROWS && Matrix[i][j].currentState == Color.BLACK) {
 						Alive++;
-					}					
-				}				
+				}		
 			}
 		}
+		if (currentState == Color.BLACK) Alive --;
+		
+		//System.out.println("Alive: " + Alive);
 		return Alive;
 	}
 	
@@ -42,29 +36,14 @@ public class GameOfLife extends Cell {
 	 */
 	
 	private void lifeUpdate(int count){
-		if(Matrix[xPos][yPos].currentState == Color.BLACK){
-			
-			if(count<2){
-				Matrix[xPos][yPos].updatedState = Color.WHITE;
+			if(count == 2){
+				updatedState = currentState;
+			} else if (count == 3) {
+				updatedState = Color.BLACK;
+			} else {
+				updatedState = Color.WHITE;
 			}
-			if(count==2 || count==3){
-				Matrix[xPos][yPos].updatedState = Color.BLACK;
-			}
-			if(count > 3){
-				Matrix[xPos][yPos].updatedState = Color.WHITE;
-			}
-			
-		}
-		
-		if(Matrix[xPos][yPos].currentState == Color.WHITE){
-			if(count==3){
-				Matrix[xPos][yPos].updatedState = Color.BLACK;
-			}else{
-				Matrix[xPos][yPos].updatedState = Color.WHITE;
-			}
-		}
 	}
-
 
 	@Override
 	void setCurrentState(String s) {
