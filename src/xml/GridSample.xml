@@ -1,0 +1,56 @@
+<!-- XML version declaration -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Set Simulation Type -->
+<Segregation title="Segregation" author="Team 09">
+	<!-- Set my grid size -->
+	<size xmax="3" ymax="3"></size>
+	<!-- Set my grid and its initial state -->
+	<AllCells>
+		<Cells id="0">
+			<xPos>0</xPos>
+			<yPos>0</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="1">
+			<xPos>1</xPos>
+			<yPos>0</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="2">
+			<xPos>2</xPos>
+			<yPos>0</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="3">
+			<xPos>0</xPos>
+			<yPos>1</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="4">
+			<xPos>1</xPos>
+			<yPos>1</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="5">
+			<xPos>1</xPos>
+			<yPos>2</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="6">
+			<xPos>0</xPos>
+			<yPos>2</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="7">
+			<xPos>1</xPos>
+			<yPos>2</yPos>
+			<state>1</state>
+		</Cells>
+		<Cells id="8">
+			<xPos>2</xPos>
+			<yPos>2</yPos>
+			<state>1</state>
+		</Cells>
+	</AllCells>
+	<!-- Closing my segregation -->
+</Segregation>
