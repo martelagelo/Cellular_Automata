@@ -17,4 +17,14 @@ public abstract class Cell {
 
 	public abstract void updateCell(int i, int j, Cell[][] cellMatrix);
 	
+	void setXPos(int x){
+		xPos = x;
+	}
+	
+	void setYPos(int y){
+		yPos = y;
+	}
+	
+	abstract void setCurrentState(String s);
+	
 }
