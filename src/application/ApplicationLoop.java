@@ -74,6 +74,7 @@ public class ApplicationLoop {
 		gridpane = grid.updateGrid(gridpane);
 		System.out.println("Yo\n");
 		System.out.println("Mom");
+
 	}
 	
 	private GridPane initializeGridPane(Group root){

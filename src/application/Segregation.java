@@ -9,7 +9,7 @@ public class Segregation extends Cell {
 	private int different;
 	private int threshold;
 
-	
+
 	public Segregation(){
 		same = 0;
 		different = 0;
@@ -20,6 +20,10 @@ public class Segregation extends Cell {
 	
 	void segregateThisCell(){		
 		cellMover(percentageCalc());
+	}
+	
+	private void setThreshold(double num){
+		threshold = num;
 	}
 
 
@@ -41,7 +45,7 @@ public class Segregation extends Cell {
 								different++;								
 							}
 
-							
+
 						}							
 					}
 					same = same -1;
@@ -74,6 +78,7 @@ public class Segregation extends Cell {
 
 	@Override
 	void setCurrentState(String s) {
+
 		switch(s.toUpperCase()) {
 		case "WHITE":
 			currentState = Color.WHITE;
@@ -90,8 +95,10 @@ public class Segregation extends Cell {
 	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
 		// TODO Auto-generated method stub
+
 	}
 
 
 
-}
+	}
+
