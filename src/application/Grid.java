@@ -13,13 +13,13 @@ public class Grid {
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	
 	void updateGrid(GridPane gridpane){
-		//updateCellMatrix();
-		//repopulateGridPane(gridpane);
+		updateCellMatrix();
+		repopulateGridPane(gridpane);
 		
 	}
 	
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new FireCell();
+		cellMatrix[i][j] = new GameOfLife();
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 	}
 	
@@ -44,8 +44,8 @@ public class Grid {
 		Rectangle rect = new Rectangle();
 		rect.setWidth(ApplicationConstants.CELL_WIDTH);
 		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-		//rect.setFill(cell.updatedState);
-		rect.setFill(generateRandomColor());
+		rect.setFill(cell.updatedState);
+		//rect.setFill(generateRandomColor());
 		return rect;
 	}
 	

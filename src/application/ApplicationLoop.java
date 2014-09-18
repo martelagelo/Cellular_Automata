@@ -70,7 +70,7 @@ public class ApplicationLoop {
 	}
 
 	public void updateGameLoop() {
-		//grid.updateGrid(gridpane);
+		grid.updateGrid(gridpane);
 		System.out.println("Yo\n");
 		System.out.println("Mom");
 	}

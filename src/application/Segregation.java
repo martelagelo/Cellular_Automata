@@ -21,6 +21,10 @@ public class Segregation extends Cell {
 	void segregateThisCell(){		
 		cellMover(percentageCalc());
 	}
+	
+	private void setThreshold(double num){
+		threshold = num;
+	}
 
 
 	private double percentageCalc(){
