@@ -12,7 +12,12 @@ import org.xml.sax.SAXException;
 
 public class CellXMLReader {
 	
-	public Document getAndLoadXMLFile(String filename) throws ParserConfigurationException, IOException, SAXException {
+	public static void main(String[] args) {
+		Document d = getAndLoadXMLFile("xml/GridSample.xml");
+		
+	}
+	
+	public static Document getAndLoadXMLFile(String filename) throws ParserConfigurationException, IOException, SAXException {
 		// Get DOM builder from DOM builder factory
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		//Load and parse XML document, which is now stored as a Tree
