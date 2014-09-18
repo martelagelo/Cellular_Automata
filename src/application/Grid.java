@@ -21,6 +21,7 @@ public class Grid {
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
 		cellMatrix[i][j] = new GameOfLife();
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
+		System.out.println(cellMatrix[i][j].currentState);
 	}
 	
 	private void updateCellMatrix(){
