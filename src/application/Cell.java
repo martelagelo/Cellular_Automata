@@ -25,4 +25,12 @@ public abstract class Cell {
 		yPos = y;
 	}
 	
+
+	abstract void setCurrentState(String s);
+	
+	@Override
+	public String toString() {
+		return "Cell: " + "\n\tX: " + xPos + "\n\tY: " + yPos + "\n\tState: " + currentState;
+	}
+
 }

@@ -58,4 +58,10 @@ public class FireCell extends Cell {
 		}
 	}
 
+	@Override
+	void setCurrentState(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
