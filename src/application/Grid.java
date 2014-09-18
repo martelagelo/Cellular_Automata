@@ -2,7 +2,11 @@ package application;
 
 import java.util.Random;
 
+import org.w3c.dom.NodeList;
+
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -13,13 +17,10 @@ public class Grid {
 	
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	private Group root;
-	GridPane gridpane;
 	
-	
-	public GridPane updateGrid(GridPane gridpane){
-		this.gridpane = gridpane;
+	public void updateGrid(GridPane gridpane){
 		updateCellMatrix();
-		return repopulateGridPane();
+		repopulateGridPane(gridpane);
 	}
 	
 	/**
@@ -41,23 +42,15 @@ public class Grid {
 		}
 	}
 	
-	private GridPane repopulateGridPane(){
-		this.root.getChildren().remove(gridpane);
-		gridpane = new GridPane();
+	private void repopulateGridPane(GridPane gridpane){
+		ObservableList<Node> list = gridpane.getChildren();
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				cellMatrix[i][j].currentState = cellMatrix[i][j].updatedState;
-				//System.out.println("currentState = " + cellMatrix[i][j].currentState);
-				Rectangle rect = generateCell(cellMatrix[i][j]);
-				System.out.println(rect.getFill());
-				gridpane.add(rect, i, j, 1, 1);
+				Rectangle r = (Rectangle) list.get(i*ApplicationConstants.NUM_OF_ROWS + j);
+				r.setFill(cellMatrix[i][j].currentState);
 			}	
-		}
-		this.root.getChildren().add(gridpane);
-		gridpane.toBack();
-		
-		return gridpane;
-		
+		}	
 	}
 	
 	/**
