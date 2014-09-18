@@ -14,5 +14,7 @@ public abstract class Cell {
 		currentState = updatedState;
 		updatedState = null;
 	}
+
+	public abstract void updateCell(int i, int j, Cell[][] cellMatrix);
 	
 }

@@ -33,7 +33,6 @@ public class ApplicationLoop {
 	private GridPane gridpane;
 	private Grid grid = new Grid();
 	private Group root;
-	private Random rand = new Random();
 
 	/**
 	 * Function to do each game frame.
@@ -58,11 +57,8 @@ public class ApplicationLoop {
 	 */
 	public Scene init(Stage s, Integer width, Integer height) {
 		root = new Group();
-		
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
-		
 		gridpane = initializeGridPane(root);
-				
 		return myScene;
 	}
 
@@ -86,10 +82,12 @@ public class ApplicationLoop {
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
+				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
 		}
-		gp.setGridLinesVisible(true);
+		
+		//gp.setGridLinesVisible(true);
 		
 		root.getChildren().add(gp);
 		
@@ -100,18 +98,19 @@ public class ApplicationLoop {
 		Rectangle rect = new Rectangle();
 		rect.setWidth(ApplicationConstants.CELL_WIDTH);
 		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-		rect.setFill(color);
+		rect.setFill(generateRandomColor());
 		return rect;
 	}
 	
-	private void generateRandomNumber(){
+	private Paint generateRandomColor() {
+		Random rand = new Random();
 		int i = rand.nextInt(100);
-		if (i < 25) {
-			
-		} else if (i > 75) {
-			
+		if (i < 20) {
+			return Color.RED;
+		} else if (i > 50) {
+			return Color.GREEN;
 		} else {
-			
+			return Color.YELLOW;
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Random;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -11,24 +13,20 @@ public class Grid {
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	
 	void updateGrid(GridPane gridpane){
-		initializeAndPopulateMatrix();
-		updateCellMatrix();
-		repopulateGridPane(gridpane);
+		//updateCellMatrix();
+		//repopulateGridPane(gridpane);
+		
 	}
 	
-	private void initializeAndPopulateMatrix(){
-		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				cellMatrix[i][j] = new Segregation();
-				cellMatrix[i][j].currentState = Color.WHITE; //Some value that will be inputed from the XML file.
-			}
-		}
+	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
+		cellMatrix[i][j] = new FireCell();
+		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 	}
 	
 	private void updateCellMatrix(){
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				//cellMatrix[i][j].updateCell(i, j, cellMatrix);
+				cellMatrix[i][j].updateCell(i, j, cellMatrix);
 			}
 		}
 	}
@@ -46,7 +44,20 @@ public class Grid {
 		Rectangle rect = new Rectangle();
 		rect.setWidth(ApplicationConstants.CELL_WIDTH);
 		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-		rect.setFill(cell.updatedState);;
+		//rect.setFill(cell.updatedState);
+		rect.setFill(generateRandomColor());
 		return rect;
+	}
+	
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 25) {
+			return Color.RED;
+		} else if (i > 75) {
+			return Color.BLUE;
+		} else {
+			return Color.WHITE;
+		}
 	}
 }
