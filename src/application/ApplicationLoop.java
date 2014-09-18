@@ -106,9 +106,9 @@ public class ApplicationLoop {
 		Random rand = new Random();
 		int i = rand.nextInt(100);
 		if (i < 10) {
-			return Color.RED;
+			return Color.BLACK;
 		} else{
-			return Color.GREEN;
+			return Color.WHITE;
 		}
 	}
 	
