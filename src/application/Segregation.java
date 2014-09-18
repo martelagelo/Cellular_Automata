@@ -87,6 +87,11 @@ public class Segregation extends Cell {
 		}
 	}
 
+	@Override
+	public void updateCell(int i, int j, Cell[][] cellMatrix) {
+		// TODO Auto-generated method stub
+	}
+
 
 
 }

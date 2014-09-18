@@ -14,6 +14,7 @@ public class CellXMLReader {
 	
 	public static void main(String[] args) {
 		Document d = getAndLoadXMLFile("xml/GridSample.xml");
+		NodeList nl = getNodeListFromDocument(d);
 		
 	}
 	
@@ -25,7 +26,7 @@ public class CellXMLReader {
 		return document;
 	}
 	
-	public NodeList getNodeListFromDocument(Document document) {
+	public static NodeList getNodeListFromDocument(Document document) {
 		List<Cell> cellList = new ArrayList<>();
 		
 		NodeList nodeList = document.getDocumentElement().getChildNodes();
