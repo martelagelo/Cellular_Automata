@@ -10,8 +10,10 @@ public abstract class Cell {
 	Paint updatedState;
 	Cell[][] Matrix;
 	
+	//For now, 3 is the limit for both.
 	int turnsEating;
 	int turnsHungry;
+	
 	
 	void update(){
 		currentState = updatedState;
