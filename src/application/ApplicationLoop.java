@@ -28,6 +28,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Version 1
+ * Date: 9/14/2014
+ * 
+ * @author Michael Deng
+ * @author Pranava Raparla
+ * @author David Zhang
+ *
+ */
 public class ApplicationLoop {
 
 	private GridPane gridpane;
@@ -35,7 +44,7 @@ public class ApplicationLoop {
 	private Group root;
 
 	/**
-	 * Function to do each game frame.
+	 * Function to do each game frame
 	 */
 	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override
@@ -45,15 +54,15 @@ public class ApplicationLoop {
 	};
 
 	/**
-	 * Creates the group and the scene for the main game play.
+	 * Creates the group and the scene for the main game play
 	 * 
 	 * @param s
-	 *            : The application stage.
+	 *            : The application stage
 	 * @param width
-	 *            : The pixel width of the application.
+	 *            : The pixel width of the application
 	 * @param height
-	 *            : The pixel height of the application.
-	 * @return: Returns the scene in which the game occurs.
+	 *            : The pixel height of the application
+	 * @return: Returns the scene in which the game occurs
 	 */
 	public Scene init(Stage s, Integer width, Integer height) {
 		root = new Group();
@@ -69,13 +78,21 @@ public class ApplicationLoop {
 	public KeyFrame start(Double frameRate) {
 		return new KeyFrame(Duration.millis(8000 / frameRate), oneFrame);
 	}
-
+	
+	/**
+	 * Updates the grid
+	 */
 	public void updateGameLoop() {
 		grid.updateGrid(gridpane);
 		System.out.println("Yo\n");
 		System.out.println("Mom");
 	}
 	
+	/**
+	 * Creates what the initial GridPane and cellMatrix look like
+	 * @param root: The stack all the modules of the page go on
+	 * @return: The newly created GirdPane
+	 */
 	private GridPane initializeGridPane(Group root){
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(5));
@@ -93,6 +110,11 @@ public class ApplicationLoop {
 		return gp;
 	}
 
+	/**
+	 * Generates a cell in the object form of a rectangle
+	 * @param color: The color of the cell
+	 * @return: The newly created rectangle for the grid pane
+	 */
 	private Rectangle generateCell(Paint color){
 		Rectangle rect = new Rectangle();
 		rect.setWidth(ApplicationConstants.CELL_WIDTH);
@@ -133,6 +155,10 @@ public class ApplicationLoop {
 //		}
 //	}
 	
+	/**
+	 * Gets the root of the current scene
+	 * @return: The root of the main game's scene
+	 */
 	public Group getRoot(){
 		return root;
 	}
