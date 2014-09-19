@@ -17,8 +17,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class CellXMLReader
-{
-	
+{	
 	public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 		Document d = getAndLoadXMLFile("src/application/xml/GridSample.xml");
 		NodeList nl = getNodeListFromDocument(d);
@@ -34,23 +33,31 @@ public class CellXMLReader
 	}
 	
 	public static NodeList getNodeListFromDocument(Document document) {
+		// Initialize list variables for parsing elements
 		List<Cell> cellList = new ArrayList<>();
 		
 		NodeList nodeList = document.getDocumentElement().getChildNodes();
 		
+		//System.out.println(nodeList);
+		
+		// Loop through Node List to get elements
+		
 		for(int i=0; i<nodeList.getLength();i++) {
 			Node node = nodeList.item(i);
+			//System.out.println(node);
+			
+			// Check to see what type of Cell model is present
+			
 			if(node instanceof Element) {
-				Cell cell = new SegregationCell();
-				if(node instanceof SegregationCell) {
-					cell = new SegregationCell();
-				}
+				Cell cell = checkModelTypeAndInitializeCell(node.getParentNode().getNodeName());
+				
 				NodeList childNodes = node.getChildNodes();
 				for(int j=0; j<childNodes.getLength(); j++) {
 					Node cNode = childNodes.item(j);
-					//Identifying child tag of cell encountered
+					// Identify child tag of cell encountered
 					if(cNode instanceof Element) {
 						String content = cNode.getLastChild().getTextContent().trim();
+						System.out.println(cNode + " text: " + content);
 						switch(cNode.getNodeName()) {
 							case "xPos":
 								cell.setXPos(Integer.parseInt(content));
@@ -66,11 +73,32 @@ public class CellXMLReader
 				}
 				cellList.add(cell);
 			}
-			for(Cell cell: cellList) {
-				System.out.println(cell);
-			}
 		}
-		
+		for(Cell cell: cellList) {
+			System.out.println(cell);
+		}
 		return nodeList;
+	}
+	
+	public static Cell checkModelTypeAndInitializeCell(String ModelType) {
+		Cell cell = new GameOfLifeCell();
+		switch (ModelType) {
+		case "GameOfLifeCell":
+			cell = new GameOfLifeCell();
+			break;
+		case "SegregationCell":
+			cell = new SegregationCell();
+			break;
+		case "FireCell":
+			cell = new FireCell();
+			break;
+		case "WaTorCell":
+			cell = new WaTorCell();
+			break;
+		default:
+			cell = new GameOfLifeCell();
+			break;
+		}
+		return cell;
 	}
 }
