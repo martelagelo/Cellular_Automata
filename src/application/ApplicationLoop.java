@@ -70,8 +70,8 @@ public class ApplicationLoop {
 		root = new Group();
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
 		grid.setRoot(root);
-		gridpane = initializeGridPane(root);
 		cellXMLReader = cxr;
+		gridpane = initializeGridPane(root);
 		return myScene;
 	}
 

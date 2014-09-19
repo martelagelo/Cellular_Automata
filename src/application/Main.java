@@ -302,8 +302,10 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Start Button Pressed");
-				playGame(stage);
-
+				if(cellXMLReader != null)
+					playGame(stage);
+				else
+					System.out.println("Please import an XML File first!");
 			}
 		});
 	}
