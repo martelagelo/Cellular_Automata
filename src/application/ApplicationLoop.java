@@ -103,17 +103,21 @@ public class ApplicationLoop {
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
-				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
-				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				//Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				//grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
 		}
 		
+		/*
 		// TODO: Splitting up the population is inefficient for large numbers of input cells > fix it
 		
 		// Set up the XML Reader for grid population
 		try {cellXMLReader.loadAndParseXMLFile("src/application/xml/GridSample.xml");}
-		catch (Exception exc) {/*go to error page*/}
+		catch (Exception exc){
+		//go to error page
+		 }
 		cellXMLReader.populateCellListFromDocument();
 
 		// loop through the list of cells obtained from the XML reader and populate grid
@@ -122,7 +126,7 @@ public class ApplicationLoop {
 			grid.initializeAndPopulateMatrix(cell);
 			gp.add(rect, cell.xPos, cell.yPos,1,1);
 		}
-		
+		*/
 		root.getChildren().add(gp);
 		return gp;
 	}
