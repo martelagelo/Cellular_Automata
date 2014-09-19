@@ -1,7 +1,7 @@
-<cellsAndDetails>
+<CellSociety>
 	<ApplicationDetails>
-		<Rows>9</Rows>
-		<Cols>11</Cols>
+		<Rows>10</Rows>
+		<Cols>10</Cols>
 		<ModelType>Segregation</ModelType>
 	</ApplicationDetails>
 	<cell>
@@ -121,4 +121,4 @@
 		<yPos>3</yPos>
 		<state>RED</state>
 	</cell>
-</cellsAndDetails>
+</CellSociety>
