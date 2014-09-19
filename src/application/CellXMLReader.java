@@ -17,8 +17,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class CellXMLReader
-{
-	
+{	
 	public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 		Document d = getAndLoadXMLFile("src/application/xml/GridSample.xml");
 		NodeList nl = getNodeListFromDocument(d);
@@ -34,43 +33,73 @@ public class CellXMLReader
 	}
 	
 	public static NodeList getNodeListFromDocument(Document document) {
+		// Initialize list variables for parsing elements
 		List<Cell> cellList = new ArrayList<>();
-		
 		NodeList nodeList = document.getDocumentElement().getChildNodes();
 		
+		// Loop through Node List to get elements
 		for(int i=0; i<nodeList.getLength();i++) {
 			Node node = nodeList.item(i);
+			
 			if(node instanceof Element) {
-				Cell cell = new SegregationCell();
-				if(node instanceof SegregationCell) {
-					cell = new SegregationCell();
-				}
+				Cell cell = checkModelTypeAndInitializeCell(node.getParentNode().getNodeName());
 				NodeList childNodes = node.getChildNodes();
+				
 				for(int j=0; j<childNodes.getLength(); j++) {
 					Node cNode = childNodes.item(j);
-					//Identifying child tag of cell encountered
-					if(cNode instanceof Element) {
-						String content = cNode.getLastChild().getTextContent().trim();
-						switch(cNode.getNodeName()) {
-							case "xPos":
-								cell.setXPos(Integer.parseInt(content));
-								break;
-							case "yPos":
-								cell.setYPos(Integer.parseInt(content));
-								break;
-							case "state":
-								cell.setCurrentState(content);
-								break;
-						}
-					}
+					// Identify child tag of cell encountered
+					if(cNode instanceof Element)
+						loadAttributeIntoCell(cNode.getLastChild().getTextContent().trim(), cell);
 				}
 				cellList.add(cell);
 			}
-			for(Cell cell: cellList) {
-				System.out.println(cell);
-			}
 		}
-		
+		printCellList(cellList);
 		return nodeList;
+	}
+	
+	public static Cell checkModelTypeAndInitializeCell(String ModelType) {
+		Cell cell = new GameOfLifeCell();
+		switch (ModelType) {
+		case "GameOfLifeCell":
+			cell = new GameOfLifeCell();
+			break;
+		case "SegregationCell":
+			cell = new SegregationCell();
+			break;
+		case "FireCell":
+			cell = new FireCell();
+			break;
+		case "WaTorCell":
+			cell = new WaTorCell();
+			break;
+		default:
+			cell = new GameOfLifeCell();
+			break;
+		}
+		return cell;
+	}
+	
+	public static void loadAttributeIntoCell(String attribute, Cell cell) {
+		switch(attribute) {
+			// Standard attributes for all cells
+			case "xPos":
+				cell.setXPos(Integer.parseInt(attribute));
+				break;
+			case "yPos":
+				cell.setYPos(Integer.parseInt(attribute));
+				break;
+			case "state":
+				cell.setCurrentState(attribute);
+				break;
+			// Segregation threshold
+			case "threshold":
+				((SegregationCell) cell).setThreshold(Integer.parseInt(attribute));
+		}
+	}
+	
+	public static void printCellList(List<Cell> cellList) {
+		for(Cell cell: cellList)
+			System.out.println(cell);
 	}
 }

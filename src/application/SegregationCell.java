@@ -7,8 +7,7 @@ public class SegregationCell extends Cell {
 
 	private double same = 0;
 	private double different = 0;
-	private double threshold;
-
+	public double threshold;
 
 	public SegregationCell(){
 		//same = 0;
@@ -17,8 +16,9 @@ public class SegregationCell extends Cell {
 		xPos = 0;
 		//currentState = Color.WHITE;
 	}
-
-	private void setThreshold(double num){
+	
+	// Called upon creation in XML reader
+	public void setThreshold(double num){
 		threshold = num;
 	}
 
