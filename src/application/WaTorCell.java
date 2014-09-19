@@ -17,8 +17,8 @@ public class WaTorCell extends Cell{
 	private List<Integer> moveFishX = new ArrayList<Integer>();
 	private List<Integer> moveFishY = new ArrayList<Integer>();
 	
-	private int fishThreshold;
-	private int sharkThreshold;
+	private int fishThreshold = 3;
+	private int sharkThreshold = 3;
 	
 	//FISHES ARE GREEN
 	//SHARKS ARE ORANGE
@@ -31,8 +31,6 @@ public class WaTorCell extends Cell{
 		super.xPos = i;
 		super.yPos = j;	
 		super.Matrix = cellMatrix;
-		fishThreshold = 3;
-		sharkThreshold = 3;
 		
 		sharkEatUpdate();
 		sharkDieUpdate();
