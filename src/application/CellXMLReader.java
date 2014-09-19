@@ -18,31 +18,50 @@ import org.xml.sax.SAXException;
 
 public class CellXMLReader
 {	
-	public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-		Document d = getAndLoadXMLFile("src/application/xml/GridSample.xml");
-		NodeList nl = getNodeListFromDocument(d);
+	public Document myDocument;
+	public NodeList myNodeList;
+	public List<Cell> myCellList;
+	public String myModelType;
+	public String myFilename = "src/application/xml/GridSample.xml";
+	
+	public CellXMLReader() {
+		myCellList = new ArrayList<Cell>();
 	}
 	
-	public static Document getAndLoadXMLFile(String filename) throws ParserConfigurationException, IOException, SAXException {
+	public Document getDocument() {
+		return myDocument;
+	}
+	
+	public List<Cell> getCellList() {
+		return myCellList;
+	}
+	
+	public void loadAndParseXMLFile(String filename) throws ParserConfigurationException, IOException, SAXException {
 		// Get DOM builder from DOM builder factory
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		// Load and parse XML document, which is now stored as a Tree
+		// TODO: switch myFilename for filename once functional
 		Document doc = (Document) db.parse(new File(filename));
-		return doc;
+		myDocument = doc;
 	}
 	
-	public static NodeList getNodeListFromDocument(Document document) {
+	public void populateCellListFromDocument() {
+		// Do not run method if myDocument has not been populated
+		if(myDocument == null)
+			return;
+		
 		// Initialize list variables for parsing elements
-		List<Cell> cellList = new ArrayList<>();
-		NodeList nodeList = document.getDocumentElement().getChildNodes();
+		myNodeList = myDocument.getDocumentElement().getChildNodes();
+		
+		myModelType = myNodeList.item(0).getParentNode().getNodeName();
 		
 		// Loop through Node List to get elements
-		for(int i=0; i<nodeList.getLength();i++) {
-			Node node = nodeList.item(i);
+		for(int i=0; i<myNodeList.getLength();i++) {
+			Node node = myNodeList.item(i);
 			
 			if(node instanceof Element) {
-				Cell cell = checkModelTypeAndInitializeCell(node.getParentNode().getNodeName());
+				Cell cell = checkModelTypeAndInitializeCell();
 				NodeList childNodes = node.getChildNodes();
 				
 				for(int j=0; j<childNodes.getLength(); j++) {
@@ -51,16 +70,15 @@ public class CellXMLReader
 					if(cNode instanceof Element)
 						loadAttributeIntoCell(cNode.getLastChild().getTextContent().trim(), cell);
 				}
-				cellList.add(cell);
+				myCellList.add(cell);
 			}
 		}
-		printCellList(cellList);
-		return nodeList;
+		printCellList(myCellList);
 	}
 	
-	public static Cell checkModelTypeAndInitializeCell(String ModelType) {
+	public Cell checkModelTypeAndInitializeCell() {
 		Cell cell = new GameOfLifeCell();
-		switch (ModelType) {
+		switch (myModelType) {
 		case "GameOfLifeCell":
 			cell = new GameOfLifeCell();
 			break;
@@ -80,7 +98,7 @@ public class CellXMLReader
 		return cell;
 	}
 	
-	public static void loadAttributeIntoCell(String attribute, Cell cell) {
+	public void loadAttributeIntoCell(String attribute, Cell cell) {
 		switch(attribute) {
 			// Standard attributes for all cells
 			case "xPos":
@@ -98,7 +116,7 @@ public class CellXMLReader
 		}
 	}
 	
-	public static void printCellList(List<Cell> cellList) {
+	public void printCellList(List<Cell> cellList) {
 		for(Cell cell: cellList)
 			System.out.println(cell);
 	}

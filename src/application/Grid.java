@@ -48,6 +48,26 @@ public class Grid {
 	}
 	
 	/**
+	 * Populates the values in the individual cells in the cellMatrix
+	 * @param i: The x position of the cell
+	 * @param j: The y position of the cell
+	 * @param initialColor: The initial color of the cell
+	 */
+	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor, Cell cell){
+		cellMatrix[i][j] = cell;
+		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
+	}
+
+	/**
+	 * Populates the values in the individual cell of the cellMatrix
+	 * @param cell: The cell to populate the CellMatrix cell
+	 */
+	public void initializeAndPopulateMatrix(Cell cell){
+		cellMatrix[cell.xPos][cell.yPos] = cell;
+	}
+	
+	
+	/**
 	 * Updates the states of the cells in the cell matrix
 	 */
 	private void updateCellMatrix(){

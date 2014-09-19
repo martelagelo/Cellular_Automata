@@ -42,6 +42,7 @@ public class ApplicationLoop {
 	private GridPane gridpane;
 	private Grid grid = new Grid();
 	private Group root;
+	private CellXMLReader cellXMLReader;
 
 	/**
 	 * Function to do each game frame
@@ -69,6 +70,7 @@ public class ApplicationLoop {
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
 		grid.setRoot(root);
 		gridpane = initializeGridPane(root);
+		cellXMLReader = new CellXMLReader();
 		return myScene;
 	}
 
@@ -84,8 +86,7 @@ public class ApplicationLoop {
 	 */
 	public void updateGameLoop() {
 		grid.updateGrid(gridpane);
-		System.out.println("Yo\n");
-		System.out.println("Mom");
+		System.out.println("Yo\n\nMom");
 	}
 	
 	/**
@@ -94,15 +95,26 @@ public class ApplicationLoop {
 	 * @return: The newly created GirdPane
 	 */
 	private GridPane initializeGridPane(Group root){
+		try {cellXMLReader.loadAndParseXMLFile("src/application/xml/GridSample.xml");}
+			catch (Exception exc) {/*go to error page*/}
+		cellXMLReader.populateCellListFromDocument();
+		
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(5));
 
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
-				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
+				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
 				gp.add(rect, i, j,1,1);
 			}
+		}
+		
+		for(Cell cell: cellXMLReader.getCellList()) {
+			Rectangle rect = generateCell(cell.currentState);
+			grid.initializeAndPopulateMatrix(cell);
+			gp.add(rect, i, j,1,1);
 		}
 		
 		root.getChildren().add(gp);
