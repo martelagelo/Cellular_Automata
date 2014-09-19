@@ -148,10 +148,10 @@ public class ApplicationLoop {
 	private Paint generateRandomColor() {
 		Random rand = new Random();
 		int i = rand.nextInt(100);
-		if (i < 2) {
+		if (i < 20) {
 			return Color.GREEN;
-//		} else if (i > 80){
-//			return Color.ORANGE;
+	//	} else if (i > 92){
+	//		return Color.ORANGE;
 		} else {
 			return Color.BLUE;
 		}
