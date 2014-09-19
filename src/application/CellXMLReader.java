@@ -22,7 +22,6 @@ public class CellXMLReader
 	public NodeList myNodeList;
 	public List<Cell> myCellList;
 	public String myModelType;
-	public String myFilename = "src/application/xml/GridSample.xml";
 	
 	public CellXMLReader() {
 		myCellList = new ArrayList<Cell>();
@@ -50,27 +49,25 @@ public class CellXMLReader
 		// Do not run method if myDocument has not been populated
 		if(myDocument == null)
 			return;
-		
+				
 		// Initialize list variables for parsing elements
-		myNodeList = myDocument.getDocumentElement().getChildNodes();
-		
-		myModelType = myNodeList.item(0).getParentNode().getNodeName();
-		
-		// Loop through Node List to get elements
+		myNodeList = myDocument.getElementsByTagName("cell");
+
+        NodeList applicationDetails = myDocument.getElementsByTagName("ApplicationDetails");
+        Element modelParameters = (Element) applicationDetails.item(0);
+		myModelType = modelParameters.getElementsByTagName("ModelType").item(0).getTextContent();
+		//ApplicationConstants.NUM_OF_ROWS = Integer.parseInt(modelParameters.getElementsByTagName("Rows").item(0).getTextContent());
+		//ApplicationConstants.NUM_OF_COLUMNS = Integer.parseInt(modelParameters.getElementsByTagName("Cols").item(0).getTextContent());
+		System.out.println("Model: " + myModelType + "\tRows: " + ApplicationConstants.NUM_OF_ROWS + "\tCols: " + ApplicationConstants.NUM_OF_COLUMNS);
+				
+		// Loop through Node List to get nodes (cells)
 		for(int i=0; i<myNodeList.getLength();i++) {
 			Node node = myNodeList.item(i);
-			
-			if(node instanceof Element) {
+			if(node.getNodeType() == Node.ELEMENT_NODE) { // better than testing if instanceof element
 				Cell cell = checkModelTypeAndInitializeCell();
-				NodeList childNodes = node.getChildNodes();
-				
-				for(int j=0; j<childNodes.getLength(); j++) {
-					Node cNode = childNodes.item(j);
-					// Identify child tag of cell encountered
-					if(cNode instanceof Element)
-						loadAttributeIntoCell(cNode.getLastChild().getTextContent().trim(), cell);
-				}
+	    		loadAttributesIntoCell(cell, node);
 				myCellList.add(cell);
+				System.out.println(cell);
 			}
 		}
 		printCellList(myCellList);
@@ -78,17 +75,17 @@ public class CellXMLReader
 	
 	public Cell checkModelTypeAndInitializeCell() {
 		Cell cell = new GameOfLifeCell();
-		switch (myModelType) {
-		case "GameOfLifeCell":
+		switch (myModelType.toLowerCase()) {
+		case "gameoflife":
 			cell = new GameOfLifeCell();
 			break;
-		case "SegregationCell":
+		case "segregation":
 			cell = new SegregationCell();
 			break;
-		case "FireCell":
+		case "fire":
 			cell = new FireCell();
 			break;
-		case "WaTorCell":
+		case "wator":
 			cell = new WaTorCell();
 			break;
 		default:
@@ -98,26 +95,28 @@ public class CellXMLReader
 		return cell;
 	}
 	
-	public void loadAttributeIntoCell(String attribute, Cell cell) {
-		switch(attribute) {
-			// Standard attributes for all cells
-			case "xPos":
-				cell.setXPos(Integer.parseInt(attribute));
-				break;
-			case "yPos":
-				cell.setYPos(Integer.parseInt(attribute));
-				break;
-			case "state":
-				cell.setCurrentState(attribute);
-				break;
-			// Segregation threshold
-			case "threshold":
-				((SegregationCell) cell).setThreshold(Integer.parseInt(attribute));
-		}
+	public void loadAttributesIntoCell(Cell cell, Node node) {
+		//System.out.println("New Cell:: ");
+		Element element = (Element) node;
+		cell.setXPos(Integer.parseInt(element.getElementsByTagName("xPos").item(0).getTextContent()));
+		//System.out.println("\txPos: " + cell.xPos);
+		cell.setYPos(Integer.parseInt(element.getElementsByTagName("yPos").item(0).getTextContent()));
+		//System.out.println("\tyPos: " + cell.yPos);
+		cell.setCurrentState(element.getElementsByTagName("state").item(0).getTextContent());
+		//System.out.println("\t\tstate: " + cell.currentState);
+		// Segregation threshold
+		if(myModelType.equalsIgnoreCase("threshold"))
+			((SegregationCell) cell).setThreshold(Double.parseDouble(element.getElementsByTagName("threshold").item(0).getTextContent()));
 	}
 	
 	public void printCellList(List<Cell> cellList) {
 		for(Cell cell: cellList)
 			System.out.println(cell);
 	}
+	
+	//helper function to pull int from the XML file
+	public int getIntegerFromCellBasedOnTagName(String tagName, Element cell){
+		return Integer.parseInt(cell.getElementsByTagName(tagName).item(0).getTextContent());
+	}  
+
 }

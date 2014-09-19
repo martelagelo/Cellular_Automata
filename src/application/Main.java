@@ -23,6 +23,7 @@ public class Main extends Application {
 	private ApplicationLoop myGame;
 	private Stage primaryStage;
 	private Timeline animation;
+	private CellXMLReader cellXMLReader;
 	
 	/**
 	 * 
@@ -42,12 +43,11 @@ public class Main extends Application {
 	 * Creates and displays the game's main scene. Runs the game loop.
 	 */
 	private void playGame(Stage stage) {
-		Scene scene = myGame.init(stage, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT);
+		Scene scene = myGame.init(stage, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT, cellXMLReader);
 		Group root = myGame.getRoot();
 		populateGridPageModules(root);
 		populateStage(stage, scene);
 		runGameLoop(ApplicationConstants.DEFAULT_FRAME_RATE);
-
 	}
 
 	/**
@@ -62,7 +62,6 @@ public class Main extends Application {
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-
 	}
 	
 	/**
@@ -332,13 +331,20 @@ public class Main extends Application {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				//TODO
-				activateErrorPage();
-				animation.stop();
+				try {
+					cellXMLReader = new CellXMLReader();
+					cellXMLReader.loadAndParseXMLFile("src/application/xml/test.xml");
+					cellXMLReader.populateCellListFromDocument();
+				}
+				catch (Exception exc){
+					activateErrorPage();
+					if(animation !=null)
+						animation.stop();
+				 }
 			}
 		});
 	}
-
+	
 	/**
 	 * Method for getting value of slider when mouse is let go
 	 * @param slider: slider for controlling frame rate
@@ -387,7 +393,8 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				start(primaryStage);
-				animation.stop();
+				if(animation !=null)
+					animation.stop();
 			}
 		});
 	}

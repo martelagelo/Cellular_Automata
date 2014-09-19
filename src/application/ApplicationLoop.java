@@ -43,6 +43,7 @@ public class ApplicationLoop {
 	private Grid grid = new Grid();
 	private Group root;
 	private CellXMLReader cellXMLReader;
+	public boolean goToErrorPage = false;
 
 	/**
 	 * Function to do each game frame
@@ -65,12 +66,12 @@ public class ApplicationLoop {
 	 *            : The pixel height of the application
 	 * @return: Returns the scene in which the game occurs
 	 */
-	public Scene init(Stage s, Integer width, Integer height) {
+	public Scene init(Stage s, Integer width, Integer height, CellXMLReader cxr) {
 		root = new Group();
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
 		grid.setRoot(root);
 		gridpane = initializeGridPane(root);
-		cellXMLReader = new CellXMLReader();
+		cellXMLReader = cxr;
 		return myScene;
 	}
 
@@ -103,30 +104,12 @@ public class ApplicationLoop {
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
-				//Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
-				//grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
-				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
+				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				//grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
 		}
-		
-		/*
-		// TODO: Splitting up the population is inefficient for large numbers of input cells > fix it
-		
-		// Set up the XML Reader for grid population
-		try {cellXMLReader.loadAndParseXMLFile("src/application/xml/GridSample.xml");}
-		catch (Exception exc){
-		//go to error page
-		 }
-		cellXMLReader.populateCellListFromDocument();
-
-		// loop through the list of cells obtained from the XML reader and populate grid
-		for(Cell cell: cellXMLReader.getCellList()) {
-			Rectangle rect = generateCell(cell.currentState);
-			grid.initializeAndPopulateMatrix(cell);
-			gp.add(rect, cell.xPos, cell.yPos,1,1);
-		}
-		*/
 		root.getChildren().add(gp);
 		return gp;
 	}
@@ -144,18 +127,18 @@ public class ApplicationLoop {
 		return rect;
 	}
 
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 45) {
-//			return Color.RED;
-//		} else if (i > 55) {
-//			return Color.BLUE;
-//		} else{
-//			return Color.WHITE;
-//		}
-//	}
-
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 45) {
+			return Color.RED;
+		} else if (i > 55) {
+			return Color.BLUE;
+		} else{
+			return Color.WHITE;
+		}
+	}
+//
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
 //		int i = rand.nextInt(100);
@@ -165,18 +148,18 @@ public class ApplicationLoop {
 //			return Color.WHITE;
 //		}
 //	}
-	
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 2) {
-			return Color.GREEN;
-//		} else if (i > 80){
-//			return Color.ORANGE;
-		} else {
-			return Color.BLUE;
-		}
-	}
+//	
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 2) {
+//			return Color.GREEN;
+////		} else if (i > 80){
+////			return Color.ORANGE;
+//		} else {
+//			return Color.BLUE;
+//		}
+//	}
 
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
