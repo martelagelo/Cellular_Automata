@@ -40,9 +40,11 @@ public class CellXMLReader
 		// Loop through Node List to get elements
 		for(int i=0; i<nodeList.getLength();i++) {
 			Node node = nodeList.item(i);
+			
 			if(node instanceof Element) {
 				Cell cell = checkModelTypeAndInitializeCell(node.getParentNode().getNodeName());
 				NodeList childNodes = node.getChildNodes();
+				
 				for(int j=0; j<childNodes.getLength(); j++) {
 					Node cNode = childNodes.item(j);
 					// Identify child tag of cell encountered
@@ -82,16 +84,19 @@ public class CellXMLReader
 	
 	public static void loadAttributeIntoCell(String attribute, Cell cell) {
 		switch(attribute) {
-		case "xPos":
-			cell.setXPos(Integer.parseInt(content));
-			break;
-		case "yPos":
-			cell.setYPos(Integer.parseInt(content));
-			break;
-		case "state":
-			cell.setCurrentState(content);
-			break;
-	}
-
+			// Standard attributes for all cells
+			case "xPos":
+				cell.setXPos(Integer.parseInt(content));
+				break;
+			case "yPos":
+				cell.setYPos(Integer.parseInt(content));
+				break;
+			case "state":
+				cell.setCurrentState(content);
+				break;
+			// Segregation threshold
+			case "threshold":
+				((SegregationCell) cell).setThreshold(Integer.parseInt(content));
+		}
 	}
 }
