@@ -15,6 +15,9 @@ public class GameOfLife extends Cell {
 		lifeUpdate(aliveCalculator());					
 	}
 
+	/*
+	 * Method for calculating alive neighbours
+	 */
 
 	private int aliveCalculator(){
 		for(int i = xPos-1; i <= xPos+1; i++){

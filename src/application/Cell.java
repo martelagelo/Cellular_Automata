@@ -11,9 +11,11 @@ public abstract class Cell {
 	Paint updatedState;
 	Cell[][] Matrix;
 	
+	//For now, 3 is the limit for both.
 	int turnsEating;
 	int turnsHungry;
 	
+
 	// Every frame, after the updateState is set, then all cells are updated
 	void update(){
 		currentState = updatedState;

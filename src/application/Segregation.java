@@ -21,6 +21,10 @@ public class Segregation extends Cell {
 		threshold = num;
 	}
 
+	/*
+	 * Method for calculating the percentage of same neighbours / total
+	 */
+	
 	private double percentageCalc(){
 		for(int i = xPos-1; i <= xPos+1; i++){
 			for(int j = yPos-1; j <= yPos+1; j++){
@@ -43,6 +47,10 @@ public class Segregation extends Cell {
 		return d;
 	}
 
+	/*
+	 * Method for updating cells depending on satisfaction of the current cell
+	 */
+	
 	private void cellMover(double percentage){
 		System.out.println(percentage);
 		if(percentage < threshold){

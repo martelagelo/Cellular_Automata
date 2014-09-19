@@ -253,7 +253,7 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * Method for creating 
+	 * Method for creating the text label for the slider
 	 * @param root
 	 */
 	private void createSliderLabel(Group root) {
@@ -261,32 +261,32 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating and setting the slider's max and min values as well as coordinate position
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createSlider(Group root) {
 		Slider slider = createSlider(0, 100, 50, 730, root);
 	} 
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating text display for XML error message
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createErrorMessage(Group root) {
 		Label label = createLabel("There is an error in format in your XML File", 3, 130, 100, root);
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Create text display for the authors of project
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createNameLabel(Group root) {
 		Label programmerNames = createLabel("Michael Deng\nPranava Raparla\nDavid Zhang", 2, 470, 200, root);
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Create text display for title of project
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createTitleLabel(Group root) {
 		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
@@ -340,8 +340,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
-	 * @param slider
+	 * Method for getting value of slider when mouse is let go
+	 * @param slider: slider for controlling frame rate
 	 */
 	private void setSliderEventListener(Slider slider) {
 		slider.setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -353,8 +353,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
-	 * @param btn
+	 * Method for activating button that will pause animation
+	 * @param btn:  The button that is clicked to launch the event.
 	 */
 	private void activatePauseAnimationButton(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -366,8 +366,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
-	 * @param btn
+	 * Method for activating button that will resume animation after pause
+	 * @param btn:  The button that is clicked to launch the event.
 	 */
 	private void activateResumeAnimationButton(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -379,8 +379,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
-	 * @param btn
+	 * Method to activate button that returns to start screen
+	 * @param btn:  The button that is clicked to launch the event.
 	 */
 	private void activateReturntoStart(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -393,8 +393,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
-	 * @param btn
+	 * Activate button that goes through one frame when clicked 
+	 * @param btn:  The button that is clicked to launch the event.
 	 */
 	private void activateStepThroughFrame(Button btn){
 		btn.setOnAction(new EventHandler<ActionEvent>() {
