@@ -88,8 +88,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Create modules for the start page
+	 * @param root: The stack that holds all scenes modules
 	 */
 	private void populateStartPageModules(Group root) {
 		createTitleLabel(root);
@@ -100,8 +100,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Initiates all the modules to be displayed 
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void populateGridPageModules(Group root) {
 		createExitButton(root);
@@ -114,8 +114,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 *  creates the error display
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void populateErrorPageModules(Group root) {
 		createErrorMessage(root);
@@ -145,12 +145,12 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param minValue
-	 * @param maxValue
-	 * @param x_Coord
-	 * @param y_Coord
-	 * @param root
+	 * Method to create the slider for animation speed
+	 * @param minValue: smallest value of slider
+	 * @param maxValue: largest value of slider
+	 * @param x_Coord: x position of slider
+	 * @param y_Coord: y position of slider
+	 * @param root: the stack that holds all scenes modules
 	 * @return
 	 */
 	private Slider createSlider(int minValue, int maxValue,  int x_Coord, int y_Coord, Group root){
@@ -169,12 +169,12 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param content
-	 * @param font_size
-	 * @param x_Coord
-	 * @param y_Coord
-	 * @param root
+	 * Creates a label
+	 * @param content: The text that is to be displayed 
+	 * @param font_size: Font size
+	 * @param x_Coord: x position of label
+	 * @param y_Coord: y position of label
+	 * @param root:the stack that holds all scenes modules
 	 * @return
 	 */
 	private Label createLabel(String content, int font_size, int x_Coord, int y_Coord,  Group root) {
@@ -190,8 +190,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating the start button 
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createStartGameButton(Group root){
 		Button btnStart = createButton("Start Simulation", 50, 450, root);
@@ -199,8 +199,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating the exit button
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createExitButton(Group root) {
 		Button btnExit = createButton("Exit Application", 50, 500, root);
@@ -208,8 +208,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating button to import XML file
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createImportXMLButton(Group root) {
 		Button btnImportXML = createButton("Import an XML File", 50, 550, root);
@@ -217,8 +217,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating button to return to start menu
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createReturnToStartButton(Group root) {
 		Button btnReturnToStart = createButton("Return to the start screen", 50, 450, root);
@@ -226,8 +226,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating button to pause animation
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createPauseButton(Group root) {
 		Button btnPauseApp = createButton("Pause Application", 50, 550, root);
@@ -235,8 +235,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating button to resume animation
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createResumeButton(Group root) {
 		Button btnResumeApp = createButton("Resume Application", 50, 600, root);
@@ -244,8 +244,8 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * Method for creating button to button to allow for stepping through frames
+	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createStepThroughButton(Group root) {
 		Button btnStepThroughFrames = createButton("Step through frames", 50, 650, root);
@@ -253,7 +253,7 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
+	 * Method for creating 
 	 * @param root
 	 */
 	private void createSliderLabel(Group root) {

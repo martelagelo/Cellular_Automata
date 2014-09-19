@@ -15,6 +15,7 @@ public class GameOfLife extends Cell {
 		lifeUpdate(aliveCalculator());					
 	}
 
+
 	private int aliveCalculator(){
 		for(int i = xPos-1; i <= xPos+1; i++){
 			for(int j = yPos-1; j <= yPos+1; j++){
@@ -29,6 +30,10 @@ public class GameOfLife extends Cell {
 		//System.out.println("Alive: " + Alive);
 		return Alive;
 	}
+	
+	/*
+	 * Updates state of current cell depending on Game of Life rules
+	 */
 	
 	private void lifeUpdate(int count){
 			if(count == 2){

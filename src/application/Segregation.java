@@ -5,6 +5,7 @@ import javafx.scene.paint.Paint;
 
 public class Segregation extends Cell {
 
+
 	private double same = 0;
 	private double different = 0;
 	private double threshold;
@@ -15,12 +16,20 @@ public class Segregation extends Cell {
 		//different = 0;
 		threshold = 0.5;
 		xPos = 0;
+
+
+	void segregateThisCell(){		
+		cellMover(percentageCalc());
 		//currentState = Color.WHITE;
+
 	}
 
 	private void setThreshold(double num){
 		threshold = num;
 	}
+
+
+
 
 	private double percentageCalc(){
 		for(int i = xPos-1; i <= xPos+1; i++){
@@ -39,6 +48,7 @@ public class Segregation extends Cell {
 		return d;
 	}
 
+
 	private void cellMover(double percentage){
 		if (Matrix[xPos][yPos].currentState == Color.WHITE && Matrix[xPos][yPos].updatedState == null) {
 			Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;
@@ -53,6 +63,7 @@ public class Segregation extends Cell {
 					} else if (Matrix[a][b].currentState==Color.WHITE && Matrix[a][b].updatedState == null){
 						Matrix[a][b].updatedState = Matrix[xPos][yPos].currentState;
 						Matrix[xPos][yPos].updatedState = Color.WHITE;
+
 						positionFound = true;
 						break outerloop;
 					} 
