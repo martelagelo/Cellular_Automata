@@ -35,41 +35,19 @@ public class CellXMLReader
 	public static NodeList getNodeListFromDocument(Document document) {
 		// Initialize list variables for parsing elements
 		List<Cell> cellList = new ArrayList<>();
-		
 		NodeList nodeList = document.getDocumentElement().getChildNodes();
 		
-		//System.out.println(nodeList);
-		
 		// Loop through Node List to get elements
-		
 		for(int i=0; i<nodeList.getLength();i++) {
 			Node node = nodeList.item(i);
-			//System.out.println(node);
-			
-			// Check to see what type of Cell model is present
-			
 			if(node instanceof Element) {
 				Cell cell = checkModelTypeAndInitializeCell(node.getParentNode().getNodeName());
-				
 				NodeList childNodes = node.getChildNodes();
 				for(int j=0; j<childNodes.getLength(); j++) {
 					Node cNode = childNodes.item(j);
 					// Identify child tag of cell encountered
-					if(cNode instanceof Element) {
-						String content = cNode.getLastChild().getTextContent().trim();
-						System.out.println(cNode + " text: " + content);
-						switch(cNode.getNodeName()) {
-							case "xPos":
-								cell.setXPos(Integer.parseInt(content));
-								break;
-							case "yPos":
-								cell.setYPos(Integer.parseInt(content));
-								break;
-							case "state":
-								cell.setCurrentState(content);
-								break;
-						}
-					}
+					if(cNode instanceof Element)
+						loadAttributeIntoCell(cNode.getLastChild().getTextContent().trim(), cell);
 				}
 				cellList.add(cell);
 			}
@@ -100,5 +78,20 @@ public class CellXMLReader
 			break;
 		}
 		return cell;
+	}
+	
+	public static void loadAttributeIntoCell(String attribute, Cell cell) {
+		switch(attribute) {
+		case "xPos":
+			cell.setXPos(Integer.parseInt(content));
+			break;
+		case "yPos":
+			cell.setYPos(Integer.parseInt(content));
+			break;
+		case "state":
+			cell.setCurrentState(content);
+			break;
+	}
+
 	}
 }
