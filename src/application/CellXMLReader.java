@@ -54,9 +54,7 @@ public class CellXMLReader
 				cellList.add(cell);
 			}
 		}
-		for(Cell cell: cellList) {
-			System.out.println(cell);
-		}
+		printCellList(cellList);
 		return nodeList;
 	}
 	
@@ -86,17 +84,22 @@ public class CellXMLReader
 		switch(attribute) {
 			// Standard attributes for all cells
 			case "xPos":
-				cell.setXPos(Integer.parseInt(content));
+				cell.setXPos(Integer.parseInt(attribute));
 				break;
 			case "yPos":
-				cell.setYPos(Integer.parseInt(content));
+				cell.setYPos(Integer.parseInt(attribute));
 				break;
 			case "state":
-				cell.setCurrentState(content);
+				cell.setCurrentState(attribute);
 				break;
 			// Segregation threshold
 			case "threshold":
-				((SegregationCell) cell).setThreshold(Integer.parseInt(content));
+				((SegregationCell) cell).setThreshold(Integer.parseInt(attribute));
 		}
+	}
+	
+	public static void printCellList(List<Cell> cellList) {
+		for(Cell cell: cellList)
+			System.out.println(cell);
 	}
 }
