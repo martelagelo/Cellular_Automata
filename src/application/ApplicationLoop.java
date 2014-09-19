@@ -94,14 +94,12 @@ public class ApplicationLoop {
 	 * @param root: The stack all the modules of the page go on
 	 * @return: The newly created GirdPane
 	 */
-	private GridPane initializeGridPane(Group root){
-		try {cellXMLReader.loadAndParseXMLFile("src/application/xml/GridSample.xml");}
-			catch (Exception exc) {/*go to error page*/}
-		cellXMLReader.populateCellListFromDocument();
-		
+	private GridPane initializeGridPane(Group root){		
+		// Set up GridPane
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(5));
-
+		
+		// Loop through entire Grid and randomly populate cells
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
@@ -111,14 +109,21 @@ public class ApplicationLoop {
 			}
 		}
 		
+		// TODO: Splitting up the population is inefficient for large numbers of input cells > fix it
+		
+		// Set up the XML Reader for grid population
+		try {cellXMLReader.loadAndParseXMLFile("src/application/xml/GridSample.xml");}
+		catch (Exception exc) {/*go to error page*/}
+		cellXMLReader.populateCellListFromDocument();
+
+		// loop through the list of cells obtained from the XML reader and populate grid
 		for(Cell cell: cellXMLReader.getCellList()) {
 			Rectangle rect = generateCell(cell.currentState);
 			grid.initializeAndPopulateMatrix(cell);
-			gp.add(rect, i, j,1,1);
+			gp.add(rect, cell.xPos, cell.yPos,1,1);
 		}
 		
 		root.getChildren().add(gp);
-		
 		return gp;
 	}
 
@@ -135,17 +140,17 @@ public class ApplicationLoop {
 		return rect;
 	}
 
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 45) {
-			return Color.RED;
-		} else if (i > 55) {
-			return Color.BLUE;
-		} else{
-			return Color.WHITE;
-		}
-	}
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 45) {
+//			return Color.RED;
+//		} else if (i > 55) {
+//			return Color.BLUE;
+//		} else{
+//			return Color.WHITE;
+//		}
+//	}
 
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
@@ -156,6 +161,18 @@ public class ApplicationLoop {
 //			return Color.WHITE;
 //		}
 //	}
+	
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 2) {
+			return Color.GREEN;
+//		} else if (i > 80){
+//			return Color.ORANGE;
+		} else {
+			return Color.BLUE;
+		}
+	}
 
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();

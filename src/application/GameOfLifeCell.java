@@ -6,6 +6,9 @@ public class GameOfLifeCell extends Cell {
 
 	private int Alive;
 	
+	/**
+	 * Updates the state of this particular cell
+	 */
 	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
 		Alive = 0;
@@ -15,10 +18,13 @@ public class GameOfLifeCell extends Cell {
 		lifeUpdate(aliveCalculator());					
 	}
 
+	/**
+	 * Calculates the number of alive cell neighbors
+	 * @return: The number of alive neighbors
+	 */
 	private int aliveCalculator(){
 		for(int i = xPos-1; i <= xPos+1; i++){
 			for(int j = yPos-1; j <= yPos+1; j++){
-				//System.out.println(i + "    " + j);
 				if(i >= 0 && j >= 0 && i < ApplicationConstants.NUM_OF_COLUMNS && j < ApplicationConstants.NUM_OF_ROWS && Matrix[i][j].currentState == Color.BLACK) {
 						Alive++;
 				}		
@@ -26,10 +32,13 @@ public class GameOfLifeCell extends Cell {
 		}
 		if (currentState == Color.BLACK) Alive --;
 		
-		//System.out.println("Alive: " + Alive);
 		return Alive;
 	}
 	
+	/**
+	 * Updates the state of the cell
+	 * @param count: The number of alive neighbors
+	 */
 	private void lifeUpdate(int count){
 			if(count == 2){
 				updatedState = currentState;
