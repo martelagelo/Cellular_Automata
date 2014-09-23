@@ -25,7 +25,7 @@ public class WaTorCell2 extends Cell{
 	}
 
 	private void updateState(){
-		//if (updatedState == null) {
+		if (updatedState == null) {
 			if (currentState == Color.ORANGE) {
 				updateShark();
 			} else if (currentState == Color.GREEN) {
@@ -33,7 +33,7 @@ public class WaTorCell2 extends Cell{
 			} else {
 				updatedState = currentState;
 			}
-		//}
+		}
 	}
 
 	private void updateShark() {
@@ -54,11 +54,13 @@ public class WaTorCell2 extends Cell{
 		System.out.println(emptyNeighbors.size());
 		if (emptyNeighbors.size() != 0) {
 			int index = new Random().nextInt(emptyNeighbors.size());
-			emptyNeighbors.get(index).updatedState = Color.ORANGE;
-			populateOtherCell(emptyNeighbors.get(index));
-			updatedState = Color.BLUE;														//HERE
+			populateOtherCell(emptyNeighbors.get(index));													//HERE
 			sharkTimeTillDeath--;
 			checkTimeTillSharkEvents(emptyNeighbors.get(index));
+			if (updatedState == null) {
+				updatedState = Color.BLUE;	
+			}
+			emptyNeighbors.get(index).updatedState = Color.ORANGE;
 		}
 		else {
 			sharkTimeTillDeath--;
@@ -85,11 +87,13 @@ public class WaTorCell2 extends Cell{
 		ArrayList<WaTorCell2> freeList = findNeighbors(xPos, yPos, Color.BLUE);
 		if (freeList.size() != 0) {
 			int index = new Random().nextInt(freeList.size());
-			freeList.get(index).updatedState = currentState;
-			System.out.println("Moving to " + freeList.get(index).xPos + "  " + freeList.get(index).yPos);
 			populateOtherCell(freeList.get(index));
-			updatedState = Color.BLUE;
+			currentState = Color.BLUE;
 			checkTimeTillFishBreeding(freeList.get(index));
+			if (updatedState == null) {
+				updatedState = Color.BLUE;
+			}
+			freeList.get(index).updatedState = Color.GREEN;
 		} 
 		else {
 			updatedState = Color.GREEN;
@@ -124,22 +128,22 @@ public class WaTorCell2 extends Cell{
 		ArrayList<WaTorCell2> list = new ArrayList<WaTorCell2>();
 
 		if (checkBounds(i + 1,j)) {
-			if (Matrix[i + 1][j].currentState == color) {
+			if (Matrix[i + 1][j].currentState == color && (Matrix[i+1][j].updatedState != Color.ORANGE &&  Matrix[i+1][j].updatedState != Color.GREEN)) {
 				list.add((WaTorCell2) Matrix[i + 1][j]);
 			}
 		} 
 		if (checkBounds(i - 1,j)) {
-			if(Matrix[i - 1][j].currentState == color) {
+			if(Matrix[i - 1][j].currentState == color && (Matrix[i-1][j].updatedState != Color.ORANGE &&  Matrix[i-1][j].updatedState != Color.GREEN)) {
 				list.add((WaTorCell2) Matrix[i - 1][j]);
 			}
 		} 
 		if (checkBounds(i,j + 1)) {
-			if (Matrix[i][j + 1].currentState == color) {
+			if (Matrix[i][j + 1].currentState == color && (Matrix[i][j+1].updatedState != Color.ORANGE &&  Matrix[i][j+1].updatedState != Color.GREEN)) {
 				list.add((WaTorCell2) Matrix[i][j + 1]);
 			}
 		} 
 		if (checkBounds(i,j - 1)) {
-			if (Matrix[i][j - 1].currentState == color) {
+			if (Matrix[i][j - 1].currentState == color && (Matrix[i][j-1].updatedState != Color.ORANGE &&  Matrix[i][j-1].updatedState != Color.GREEN)) {
 				list.add((WaTorCell2) Matrix[i][j - 1]);
 			}
 		} 
