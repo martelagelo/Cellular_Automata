@@ -1,6 +1,6 @@
 package application;
 
-public final class ApplicationConstants {
+public class ApplicationConstants {
 	
 	public static final Integer STAGE_WIDTH = 1500;
 	public static final Integer STAGE_HEIGHT = 800;
@@ -19,5 +19,7 @@ public final class ApplicationConstants {
 	public static final Integer SLIDER_LABEL_Y_POS = 275;
 	public static final Integer SLIDER_Y_POS = 305;
 	
-	
+//	public ApplicationConstants() {
+//		//TODO: Enter something here.
+//	}
 }
