@@ -12,6 +12,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -43,6 +46,9 @@ public class ApplicationLoop {
 	private Grid grid = new Grid();
 	private Group root;
 	private CellXMLReader cellXMLReader;
+	private Timeline animation;
+	
+	XYChart.Series series;
 
 	/**
 	 * Function to do each game frame
@@ -65,7 +71,8 @@ public class ApplicationLoop {
 	 *            : The pixel height of the application
 	 * @return: Returns the scene in which the game occurs
 	 */
-	public Scene init(Stage s, Integer width, Integer height) {
+	public Scene init(Stage s, Timeline animation, Integer width, Integer height) {
+		this.animation = animation;
 		root = new Group();
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
 		grid.setRoot(root);
@@ -85,8 +92,9 @@ public class ApplicationLoop {
 	 * Updates the grid
 	 */
 	public void updateGameLoop() {
+		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
-		System.out.println("Yo\n\nMom");
+		//addPointsToLineChart(animation.getCycleCount(), 10);
 	}
 	
 	/**
@@ -166,27 +174,28 @@ public class ApplicationLoop {
 //		}
 //	}
 	
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 20) {
-			return Color.GREEN;
-	//	} else if (i > 92){
-	//		return Color.ORANGE;
-		} else {
-			return Color.BLUE;
-		}
-	}
-
+	
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
 //		int i = rand.nextInt(100);
-//		if (i < 10) {
-//			return Color.RED;
-//		} else{
+//		if (i < 20) {
 //			return Color.GREEN;
+//		} else if (i > 92){
+//			return Color.ORANGE;
+//		} else {
+//			return Color.BLUE;
 //		}
 //	}
+
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 10) {
+			return Color.RED;
+		} else{
+			return Color.GREEN;
+		}
+	}
 	
 	/**
 	 * Gets the root of the current scene
@@ -194,6 +203,15 @@ public class ApplicationLoop {
 	 */
 	public Group getRoot(){
 		return root;
+	}
+	
+	public void populateLineChart(LineChart lineChart){
+		 series = new XYChart.Series();
+		 lineChart.getData().add(series);
+	}
+	
+	private void addPointsToLineChart(int XValue, int YValue) {
+		series.getData().add(new XYChart.Data(XValue, YValue));
 	}
 	
 }
