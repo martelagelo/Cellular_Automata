@@ -39,6 +39,11 @@ public class SegregationCell extends Cell {
 		return d;
 	}
 
+	
+	
+	/*
+	 * Method for updating and moving the cell that is dissatisfied 
+	 */
 	private void cellMover(double percentage){
 		if (Matrix[xPos][yPos].currentState == Color.WHITE && Matrix[xPos][yPos].updatedState == null) {
 			Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;
