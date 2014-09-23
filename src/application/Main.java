@@ -46,7 +46,7 @@ public class Main extends Application {
 	 * Creates and displays the game's main scene. Runs the game loop.
 	 */
 	private void playGame(Stage stage) {
-		Scene scene = myGame.init(stage, animation, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT, cellXMLReader);
+		Scene scene = myGame.init(stage, ApplicationConstants.STAGE_WIDTH, ApplicationConstants.STAGE_HEIGHT, cellXMLReader);
 		Group root = myGame.getRoot();
 		populateGridPageModules(root);
 		populateStage(stage, scene);
@@ -60,10 +60,11 @@ public class Main extends Application {
 		if(animation != null) {
 			animation.pause();
 		}
-		KeyFrame frame = myGame.start(speed);
 		animation = new Timeline();
+		KeyFrame frame = myGame.start(speed);
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
+		
 		animation.play();
 	}
 	
@@ -328,10 +329,10 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Start Button Pressed");
-				if(cellXMLReader != null)
+				//if(cellXMLReader != null)
 					playGame(stage);
-				else
-					System.out.println("Please import an XML File first!");
+				//else
+				//	System.out.println("Please import an XML File first!");
 			}
 		});
 	}
@@ -395,6 +396,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				animation.pause();
+				ApplicationConstants.gridEditable = true;
 			}
 		});
 	}
@@ -408,6 +410,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				animation.play();
+				ApplicationConstants.gridEditable = false;
 			}
 		});
 	}

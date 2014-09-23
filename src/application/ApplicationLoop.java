@@ -6,6 +6,7 @@ import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -50,6 +51,7 @@ public class ApplicationLoop {
 	
 	XYChart.Series series;
 	public boolean goToErrorPage = false;
+	private int currentFrameCount;
 
 
 	/**
@@ -73,8 +75,8 @@ public class ApplicationLoop {
 	 *            : The pixel height of the application
 	 * @return: Returns the scene in which the game occurs
 	 */
-	public Scene init(Stage s, Timeline animation, Integer width, Integer height, CellXMLReader cxr) {
-		this.animation = animation;
+	public Scene init(Stage s, Integer width, Integer height, CellXMLReader cxr) {
+		currentFrameCount = 0;
 		root = new Group();
 		Scene myScene = new Scene(root, width, height, Color.WHITE);
 		grid.setRoot(root);
@@ -96,7 +98,8 @@ public class ApplicationLoop {
 	public void updateGameLoop() {
 		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
-		//addPointsToLineChart(animation.getCycleCount(), 10);
+		currentFrameCount++;
+		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.BLACK));
 	}
 	
 	/**
@@ -113,20 +116,20 @@ public class ApplicationLoop {
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
-				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
-				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
-				//grid.initializeAndPopulateMatrix(i, j, rect.getFill());
+//				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+//				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
 		}
 		
 		// Loop through entire list of cells read in from XML file and add to grid
-		for(Cell cell: cellXMLReader.getCellList()) {
-			Rectangle rect = generateCell(cell.currentState);
-			grid.initializeAndPopulateMatrix(cell);
-			gp.add(rect, cell.xPos, cell.yPos,1,1);
-		}
-		
+//		for(Cell cell: cellXMLReader.getCellList()) {
+//			Rectangle rect = generateCell(cell.currentState);
+//			grid.initializeAndPopulateMatrix(cell);
+//			gp.add(rect, cell.xPos, cell.yPos,1,1);
+//		}
+//		
 		root.getChildren().add(gp);
 		return gp;
 	}
@@ -156,15 +159,15 @@ public class ApplicationLoop {
 //		}
 //	}
 //
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 20) {
-//			return Color.BLACK;
-//		} else {
-//			return Color.WHITE;
-//		}
-//	}
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 20) {
+			return Color.BLACK;
+		} else {
+			return Color.WHITE;
+		}
+	}
 //	
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
@@ -190,15 +193,15 @@ public class ApplicationLoop {
 //		}
 //	}
 
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 10) {
-			return Color.RED;
-		} else{
-			return Color.GREEN;
-		}
-	}
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 10) {
+//			return Color.RED;
+//		} else{
+//			return Color.GREEN;
+//		}
+//	}
 	
 	/**
 	 * Gets the root of the current scene
@@ -215,6 +218,16 @@ public class ApplicationLoop {
 	
 	private void addPointsToLineChart(int XValue, int YValue) {
 		series.getData().add(new XYChart.Data(XValue, YValue));
+	}
+	
+	private Integer countNumberOfCertainColorSpaces(Color color){
+		int counter = 0;
+		ObservableList<Node> list = gridpane.getChildren();
+		for(Node r : list) {
+			Rectangle rect = (Rectangle) r;
+			if (rect.getFill() == color) counter++;
+		}
+		return counter;
 	}
 	
 }

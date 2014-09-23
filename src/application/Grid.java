@@ -43,7 +43,7 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new FireCell();
+		cellMatrix[i][j] = new GameOfLifeCell();
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 	}
 	
@@ -94,18 +94,19 @@ public class Grid {
 		}	
 	}
 
-	/**
-	 * Generates a rectangle that becomes a cell in the grid pane
-	 * @param cell: The current cell in the matrix being referred to
-	 * @returns: A rectangle that will populate a cell in the grid pane 
-	 */
-	private Rectangle generateCell(Cell cell){
-		Rectangle rect = new Rectangle();
-		rect.setWidth(ApplicationConstants.CELL_WIDTH);
-		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-		rect.setFill(cell.updatedState);
-		return rect;
-	}
+//	/**
+//	 * Generates a rectangle that becomes a cell in the grid pane
+//	 * @param cell: The current cell in the matrix being referred to
+//	 * @returns: A rectangle that will populate a cell in the grid pane 
+//	 */
+//	private Rectangle generateCell(Cell cell){
+//		Rectangle rect = new Rectangle();
+//		rect.setWidth(ApplicationConstants.CELL_WIDTH);
+//		rect.setHeight(ApplicationConstants.CELL_WIDTH);
+//		rect.setFill(cell.updatedState);
+//		return rect;
+//	}
+	
 
 	/**
 	 * Grabs the root value from the application loop

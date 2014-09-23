@@ -19,6 +19,10 @@ public class ApplicationConstants {
 	public static final Integer SLIDER_LABEL_Y_POS = 275;
 	public static final Integer SLIDER_Y_POS = 305;
 	
+	
+	
+	public static boolean gridEditable = false;
+	
 //	public ApplicationConstants() {
 //		//TODO: Enter something here.
 //	}
