@@ -135,17 +135,17 @@ public class ApplicationLoop {
 		return rect;
 	}
 
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 45) {
-			return Color.RED;
-		} else if (i > 55) {
-			return Color.BLUE;
-		} else{
-			return Color.WHITE;
-		}
-	}
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 45) {
+//			return Color.RED;
+//		} else if (i > 55) {
+//			return Color.BLUE;
+//		} else{
+//			return Color.WHITE;
+//		}
+//	}
 //
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
@@ -157,17 +157,17 @@ public class ApplicationLoop {
 //		}
 //	}
 //	
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 2) {
-//			return Color.GREEN;
-////		} else if (i > 80){
-////			return Color.ORANGE;
-//		} else {
-//			return Color.BLUE;
-//		}
-//	}
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 2) {
+			return Color.GREEN;
+		} else if (i > 80){
+			return Color.ORANGE;
+		} else {
+			return Color.WHITE;
+		}
+	}
 
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
