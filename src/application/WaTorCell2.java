@@ -25,9 +25,7 @@ public class WaTorCell2 extends Cell{
 	}
 
 	private void updateState(){
-		//System.out.println("Yeah");
-		if (updatedState == null) {
-			//System.out.println("Made it in");
+		//if (updatedState == null) {
 			if (currentState == Color.ORANGE) {
 				updateShark();
 			} else if (currentState == Color.GREEN) {
@@ -35,17 +33,17 @@ public class WaTorCell2 extends Cell{
 			} else {
 				updatedState = currentState;
 			}
-		}
+		//}
 	}
 
 	private void updateShark() {
 		ArrayList<WaTorCell2> fishNeighbors = findNeighbors(xPos, yPos, Color.GREEN);
 		if (fishNeighbors.size() != 0) {
-			System.out.println(fishNeighbors.size());
+			int index = new Random().nextInt(fishNeighbors.size());
 			sharkTimeTillDeath = sharkTimeTillDeathParameter;
-			fishNeighbors.get(new Random().nextInt(fishNeighbors.size())).updatedState = Color.BLUE;
+			fishNeighbors.get(index).updatedState = Color.BLUE;
 			updatedState = currentState;
-			checkTimeTillSharkEvents(this);
+
 		} else {
 			moveShark();
 		}
@@ -55,12 +53,15 @@ public class WaTorCell2 extends Cell{
 		ArrayList<WaTorCell2> emptyNeighbors = findNeighbors(xPos, yPos, Color.BLUE);
 		System.out.println(emptyNeighbors.size());
 		if (emptyNeighbors.size() != 0) {
-			emptyNeighbors.get(new Random().nextInt(emptyNeighbors.size())).updatedState = Color.ORANGE;
-			populateOtherCell(emptyNeighbors.get(new Random().nextInt(emptyNeighbors.size())));
-			updatedState = Color.BLUE;
-			checkTimeTillSharkEvents(emptyNeighbors.get(new Random().nextInt(emptyNeighbors.size())));
+			int index = new Random().nextInt(emptyNeighbors.size());
+			emptyNeighbors.get(index).updatedState = Color.ORANGE;
+			populateOtherCell(emptyNeighbors.get(index));
+			updatedState = Color.BLUE;														//HERE
+			sharkTimeTillDeath--;
+			checkTimeTillSharkEvents(emptyNeighbors.get(index));
 		}
 		else {
+			sharkTimeTillDeath--;
 			checkTimeTillSharkEvents(this);
 		}
 	}
@@ -71,32 +72,35 @@ public class WaTorCell2 extends Cell{
 		} else if (cell.sharkTimeTillBreeding == 0){
 			cell.sharkTimeTillBreeding = sharkTimeTillBreedingParameter;
 			breed(cell, Color.ORANGE);
-		} else {
-			cell.sharkTimeTillBreeding--;
-		}
+		} 
 	}
 
 	private void killShark(WaTorCell2 cell) {
 		cell.updatedState = Color.BLUE;
-		cell.sharkTimeTillDeath = sharkTimeTillDeathParameter;
-		cell.sharkTimeTillBreeding = sharkTimeTillBreedingParameter;
+		//cell.sharkTimeTillDeath = sharkTimeTillDeathParameter;
+		//cell.sharkTimeTillBreeding = sharkTimeTillBreedingParameter;
 	}
 
 	private void updateFish() {
 		ArrayList<WaTorCell2> freeList = findNeighbors(xPos, yPos, Color.BLUE);
 		if (freeList.size() != 0) {
-			freeList.get(new Random().nextInt(freeList.size())).updatedState = currentState;
-			populateOtherCell(freeList.get(new Random().nextInt(freeList.size())));
+			int index = new Random().nextInt(freeList.size());
+			freeList.get(index).updatedState = currentState;
+			System.out.println("Moving to " + freeList.get(index).xPos + "  " + freeList.get(index).yPos);
+			populateOtherCell(freeList.get(index));
 			updatedState = Color.BLUE;
-			checkTimeTillFishBreeding(freeList.get(new Random().nextInt(freeList.size())));
-		} else {
-			updatedState = currentState;
+			checkTimeTillFishBreeding(freeList.get(index));
+		} 
+		else {
+			updatedState = Color.GREEN;
+			System.out.println(updatedState);
 		}
 	}
 
 	private void checkTimeTillFishBreeding(WaTorCell2 cell) {
 		if (cell.fishTimeTillBreeding == 0) {
 			cell.fishTimeTillBreeding = fishTimeTillBreedingParameter;
+			System.out.println("Bout to breed fish!");
 			breed(cell, Color.GREEN);
 		} else {
 			cell.fishTimeTillBreeding--;
@@ -104,10 +108,14 @@ public class WaTorCell2 extends Cell{
 	}
 
 	private void breed(WaTorCell2 cell, Color color) {
+		System.out.println("BREEED");
 		ArrayList<WaTorCell2> freeList = findNeighbors(cell.xPos, cell.yPos, Color.BLUE);
+		System.out.println(freeList.size());
 		if (freeList.size() != 0) {
-			freeList.get(new Random().nextInt(freeList.size())).updatedState = color;
-			initializeNewCell(freeList.get(new Random().nextInt(freeList.size())));
+			int index = new Random().nextInt(freeList.size());
+			System.out.println(freeList.get(index).xPos + "    " + freeList.get(index).yPos);
+			freeList.get(index).updatedState = color;
+			initializeNewCell(freeList.get(index));
 		}
 	}
 
@@ -119,15 +127,18 @@ public class WaTorCell2 extends Cell{
 			if (Matrix[i + 1][j].currentState == color) {
 				list.add((WaTorCell2) Matrix[i + 1][j]);
 			}
-		} else if (checkBounds(i - 1,j)) {
+		} 
+		if (checkBounds(i - 1,j)) {
 			if(Matrix[i - 1][j].currentState == color) {
 				list.add((WaTorCell2) Matrix[i - 1][j]);
 			}
-		} else if (checkBounds(i,j + 1)) {
+		} 
+		if (checkBounds(i,j + 1)) {
 			if (Matrix[i][j + 1].currentState == color) {
 				list.add((WaTorCell2) Matrix[i][j + 1]);
 			}
-		} else if (checkBounds(i,j - 1)) {
+		} 
+		if (checkBounds(i,j - 1)) {
 			if (Matrix[i][j - 1].currentState == color) {
 				list.add((WaTorCell2) Matrix[i][j - 1]);
 			}
