@@ -203,9 +203,6 @@ public class Main extends Application {
 		lineChart.setTitle(title);
 		lineChart.setLayoutX(x_Coord);
 		lineChart.setLayoutY(y_Coord);
-		//XYChart.Series series = new XYChart.Series();
-		//lineChart.getData().add(series);
-		//myGame.getValues();
 		root.getChildren().add(lineChart);
 		return lineChart;
 	}
@@ -383,6 +380,7 @@ public class Main extends Application {
 			@Override
 			public void handle(MouseEvent event) {
 				runGameLoop(slider.getValue());
+				ApplicationConstants.gridEditable = false;
 			}
 		});
 	}
@@ -397,6 +395,7 @@ public class Main extends Application {
 			public void handle(ActionEvent event){
 				animation.pause();
 				ApplicationConstants.gridEditable = true;
+				//myGame.editGrid();
 			}
 		});
 	}

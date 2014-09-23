@@ -48,7 +48,7 @@ public class ApplicationLoop {
 	private Group root;
 	private CellXMLReader cellXMLReader;
 	private Timeline animation;
-	
+
 	XYChart.Series series;
 	public boolean goToErrorPage = false;
 	private int currentFrameCount;
@@ -82,6 +82,7 @@ public class ApplicationLoop {
 		grid.setRoot(root);
 		cellXMLReader = cxr;
 		gridpane = initializeGridPane(root);
+		editGrid();
 		return myScene;
 	}
 
@@ -91,7 +92,7 @@ public class ApplicationLoop {
 	public KeyFrame start(Double frameRate) {
 		return new KeyFrame(Duration.millis(8000 / frameRate), oneFrame);
 	}
-	
+
 	/**
 	 * Updates the grid
 	 */
@@ -101,7 +102,7 @@ public class ApplicationLoop {
 		currentFrameCount++;
 		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.BLACK));
 	}
-	
+
 	/**
 	 * Creates what the initial GridPane and cellMatrix look like
 	 * @param root: The stack all the modules of the page go on
@@ -111,25 +112,26 @@ public class ApplicationLoop {
 		// Set up GridPane
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(5));
-		
+
 		// Loop through entire Grid and randomly populate cells
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
-//				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
-//				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				//				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				//				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
 				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
 		}
-		
+
 		// Loop through entire list of cells read in from XML file and add to grid
-//		for(Cell cell: cellXMLReader.getCellList()) {
-//			Rectangle rect = generateCell(cell.currentState);
-//			grid.initializeAndPopulateMatrix(cell);
-//			gp.add(rect, cell.xPos, cell.yPos,1,1);
-//		}
-//		
+		//		for(Cell cell: cellXMLReader.getCellList()) {
+		//			Rectangle rect = generateCell(cell.currentState);
+		//			grid.initializeAndPopulateMatrix(cell);
+		//			gp.add(rect, cell.xPos, cell.yPos,1,1);
+		//		}
+		//		
+
 		root.getChildren().add(gp);
 		return gp;
 	}
@@ -147,63 +149,61 @@ public class ApplicationLoop {
 		return rect;
 	}
 
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 45) {
-//			return Color.RED;
-//		} else if (i > 55) {
-//			return Color.BLUE;
-//		} else{
-//			return Color.WHITE;
-//		}
-//	}
+	//	private Paint generateRandomColor() {
+	//		Random rand = new Random();
+	//		int i = rand.nextInt(100);
+	//		if (i < 45) {
+	//			return Color.RED;
+	//		} else if (i > 55) {
+	//			return Color.BLUE;
+	//		} else{
+	//			return Color.WHITE;
+	//		}
+	//	}
 
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 45) {
-//			return Color.RED;
-//		} else if (i > 55) {
-//			return Color.BLUE;
-//		} else{
-//			return Color.WHITE;
-//		}
-//	}
-//
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 20) {
-//			return Color.BLACK;
-//		} else {
-//			return Color.WHITE;
-//		}
-//	}
-	
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 2) {
-			return Color.GREEN;
-		} else if (i > 80){
-			return Color.ORANGE;
-		} else {
-			return Color.WHITE;
+	//	private Paint generateRandomColor() {
+	//		Random rand = new Random();
+	//		int i = rand.nextInt(100);
+	//		if (i < 45) {
+	//			return Color.RED;
+	//		} else if (i > 55) {
+	//			return Color.BLUE;
+	//		} else{
+	//			return Color.WHITE;
+	//		}
+	//	}
+	//
+		private Paint generateRandomColor() {
+			Random rand = new Random();
+			int i = rand.nextInt(100);
+			if (i < 20) {
+				return Color.WHITE;
+			} else {
+				return Color.WHITE;
+			}
 		}
-	}
 
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 20) {
-//			return Color.GREEN;
-//		} else if (i > 92){
-//			return Color.ORANGE;
-//		} else {
-//			return Color.BLUE;
-//		}
-//	}
+	//	private Paint generateRandomColor() {
+	//		Random rand = new Random();
+	//		int i = rand.nextInt(100);
+	//		if (i > 90){
+	//			return Color.ORANGE;
+	//		} else {
+	//			return Color.GREEN;
+	//		}
+	//	}
+
+	//	private Paint generateRandomColor() {
+	//		Random rand = new Random();
+	//		int i = rand.nextInt(100);
+	//		if (i < 20) {
+	//			return Color.GREEN;
+	//		} else if (i > 92){
+	//			return Color.ORANGE;
+	//		} else {
+	//			return Color.BLUE;
+	//		}
+	//	}
 
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
@@ -215,16 +215,16 @@ public class ApplicationLoop {
 //		}
 //	}
 
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 10) {
-//			return Color.RED;
-//		} else{
-//			return Color.GREEN;
-//		}
-//	}
-	
+	//	private Paint generateRandomColor() {
+	//		Random rand = new Random();
+	//		int i = rand.nextInt(100);
+	//		if (i < 10) {
+	//			return Color.RED;
+	//		} else{
+	//			return Color.GREEN;
+	//		}
+	//	}
+
 	/**
 	 * Gets the root of the current scene
 	 * @return: The root of the main game's scene
@@ -232,16 +232,30 @@ public class ApplicationLoop {
 	public Group getRoot(){
 		return root;
 	}
-	
+
+	/**
+	 * 
+	 * @param lineChart
+	 */
 	public void populateLineChart(LineChart lineChart){
-		 series = new XYChart.Series();
-		 lineChart.getData().add(series);
+		series = new XYChart.Series();
+		lineChart.getData().add(series);
 	}
-	
+
+	/**
+	 * 
+	 * @param XValue
+	 * @param YValue
+	 */
 	private void addPointsToLineChart(int XValue, int YValue) {
 		series.getData().add(new XYChart.Data(XValue, YValue));
 	}
-	
+
+	/**
+	 * 
+	 * @param color
+	 * @return
+	 */
 	private Integer countNumberOfCertainColorSpaces(Color color){
 		int counter = 0;
 		ObservableList<Node> list = gridpane.getChildren();
@@ -252,4 +266,25 @@ public class ApplicationLoop {
 		return counter;
 	}
 	
+	/**
+	 * 
+	 */
+	private void editGrid(){
+		ObservableList<Node> list = gridpane.getChildren();
+		for(Node r : list) {
+			r.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event){
+					if (ApplicationConstants.gridEditable) {
+						//System.out.println(r.getLayoutX() +  "\t" +  r.getLayoutY());
+						grid.changeCellState(
+								list.get(
+								(int) (((r.getLayoutX()-5) / ApplicationConstants.CELL_WIDTH) * ApplicationConstants.NUM_OF_ROWS + ((r.getLayoutY()-5) / ApplicationConstants.CELL_WIDTH))
+								)
+								);
+					}
+				}
+			});
+		}
+	}
 }

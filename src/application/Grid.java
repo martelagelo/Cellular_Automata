@@ -26,7 +26,7 @@ public class Grid {
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	private Group root;
 
-	
+
 	/**
 	 * Updates the cell matrix and the gridpane
 	 * @param gridpane: The physical grid that displays on the application
@@ -43,10 +43,13 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new WaTorCell3();
+		cellMatrix[i][j] = new GameOfLifeCell();
+		cellMatrix[i][j].xPos = i;
+		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
+		cellMatrix[i][j].updatedState = cellMatrix[i][j].currentState;
 	}
-	
+
 	/**
 	 * Populates the values in the individual cells in the cellMatrix
 	 * @param i: The x position of the cell
@@ -65,8 +68,8 @@ public class Grid {
 	public void initializeAndPopulateMatrix(Cell cell){
 		cellMatrix[cell.xPos][cell.yPos] = cell;
 	}
-	
-	
+
+
 	/**
 	 * Updates the states of the cells in the cell matrix
 	 */
@@ -77,7 +80,7 @@ public class Grid {
 			}
 		}
 	}
-	
+
 	/**
 	 * Repopulates the gridpane with the updatedCells from the cell Matrix
 	 * @param gridpane: The physical grid that displays on the application
@@ -94,26 +97,26 @@ public class Grid {
 		}	
 	}
 
-//	/**
-//	 * Generates a rectangle that becomes a cell in the grid pane
-//	 * @param cell: The current cell in the matrix being referred to
-//	 * @returns: A rectangle that will populate a cell in the grid pane 
-//	 */
-//	private Rectangle generateCell(Cell cell){
-//		Rectangle rect = new Rectangle();
-//		rect.setWidth(ApplicationConstants.CELL_WIDTH);
-//		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-//		rect.setFill(cell.updatedState);
-//		return rect;
-//	}
-	
-
 	/**
 	 * Grabs the root value from the application loop
 	 * @param root: The stack that holds a pages modules
 	 */
 	void setRoot(Group root) {
 		this.root = root;
+	}
+
+	public void changeCellState(Node node) {
+		int i = (int) ((node.getLayoutX() - 5)/ApplicationConstants.CELL_WIDTH);
+		int j = (int) ((node.getLayoutY() - 5)/ApplicationConstants.CELL_WIDTH);
+		if (cellMatrix[i][j].currentState == Color.BLACK) { 
+			cellMatrix[i][j].currentState = Color.WHITE;
+			cellMatrix[i][j].updatedState = Color.WHITE;
+		} else {
+			cellMatrix[i][j].currentState = Color.BLACK;
+			cellMatrix[i][j].updatedState = Color.BLACK;
+		}
+		Rectangle r = (Rectangle) node;
+		r.setFill(cellMatrix[i][j].currentState);
 	}
 
 }
