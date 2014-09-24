@@ -9,7 +9,7 @@ public class AntCell extends Cell {
 	private boolean hasFoodItem = false;
 	private int homePheromones;
 	private int foodPheromones;
-	private AntCell homeBase;
+	private AntCell ;
 	private AntCell foodPile;
 	
 	@Override
@@ -21,12 +21,10 @@ public class AntCell extends Cell {
 
 	private void antForage() {
 		if (currentState == Color.RED) {
-			homePheromones = 1000000;
-			foodPheromones = 0;
+			 updatedState = Color.RED;
 		}
-		else if (currentState == Color.BROWN) {
-			homePheromones = 0;
-			foodPheromones = 1000000;
+		else if (currentState == Color.GREEN) {
+			updatedState = Color.GREEN;
 		}
 		else if (hasFoodItem) {
 			returnToNest();
@@ -37,26 +35,33 @@ public class AntCell extends Cell {
 	}
 	
 	private void returnToNest() {
-		ArrayList<AntCell> foodNeighbors = findNeighbors(Color.BROWN);
-		if (foodNeighbors == null) {
+		AntCell foodCell = findParticularCell(Color.GREEN);
+		if (foodCell == null) {
 			
 		}
 	}
 	
 	private void findFoodSource() {
-		
+		AntCell foodCell = findParticularCell(Color.GREEN);
+		if (foodCell == null) {
+			
+		}
 	}
 	
-	private ArrayList findNeighbors (Color color){
+	private Cell findNeighbors (Color color){
 		ArrayList<AntCell> list = new ArrayList<AntCell>();
 		for(int i = xPos-1; i <= xPos+1; i++){
 			for(int j = yPos-1; j <= yPos+1; j++){
 				if (Matrix[i][j].currentState == color) {
-					list.add((AntCell) Matrix[i][j]);
+					return Matrix[i][j];
 				}
 			}
 		}
-		return list;
+		return null;
+	}
+	
+	private AntCell findParticularCell(Color color) {
+		
 	}
 	
 	private boolean checkBounds(int i, int j){
