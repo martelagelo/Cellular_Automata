@@ -29,7 +29,7 @@ public class Main extends Application {
 	private CellXMLReader cellXMLReader;
 	
 	/**
-	 * 
+	 * Starts the program and initializes the splash page
 	 */
 	@Override
 	public void start(Stage primaryStage) {
@@ -69,7 +69,7 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
+	 * Moves the application to the error page
 	 */
 	private void activateErrorPage(){
 		Group root = new Group();
@@ -193,6 +193,14 @@ public class Main extends Application {
 		return label;
 	}
 	
+	/**
+	 * Creates and populates a line chart
+	 * @param title: The title of the line chart
+	 * @param x_Coord: The x coordinate of the line chart
+	 * @param y_Coord: The y coordinate of the line chart
+	 * @param root: The group the line chart belongs to
+	 * @return: A newly initialized line chart
+	 */
 	private LineChart createLineChart(String title, int x_Coord, int y_Coord, Group root) {
 		NumberAxis xAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
@@ -310,6 +318,10 @@ public class Main extends Application {
 		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
 	}
 	
+	/**
+	 * Creates a linechart for the application and populates with data
+	 * @param root: The group the linechart module belongs to 
+	 */
 	private void createGameGraph(Group root) {
 		LineChart lineChart = createLineChart("Population vs. Frame", ApplicationConstants.MODULE_X_POS, 400, root);
 		myGame.populateLineChart(lineChart);
@@ -350,8 +362,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
-	 * @param btn
+	 * Activates the Import XML Button
+	 * @param btn: The import XML Button
 	 */
 	public void activateImportXMLButton(Button btn) {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -443,7 +455,7 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
+	 * Launches the program
 	 * @param args
 	 */
 	public static void main(String[] args) {

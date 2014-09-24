@@ -234,8 +234,8 @@ public class ApplicationLoop {
 	}
 
 	/**
-	 * 
-	 * @param lineChart
+	 * Gives the linechart the capacity to have data inputted
+	 * @param lineChart: The physical graph
 	 */
 	public void populateLineChart(LineChart lineChart){
 		series = new XYChart.Series();
@@ -243,18 +243,18 @@ public class ApplicationLoop {
 	}
 
 	/**
-	 * 
-	 * @param XValue
-	 * @param YValue
+	 * Adds points to the lineChart once per frame
+	 * @param XValue: The current frame
+	 * @param YValue: The number of a certain type of blocks
 	 */
 	private void addPointsToLineChart(int XValue, int YValue) {
 		series.getData().add(new XYChart.Data(XValue, YValue));
 	}
 
 	/**
-	 * 
-	 * @param color
-	 * @return
+	 * Counts the number of blocks of a specified color in the grid
+	 * @param color: The specified color the program wants to check
+	 * @return: The number of certain colored blocks
 	 */
 	private Integer countNumberOfCertainColorSpaces(Color color){
 		int counter = 0;
@@ -267,7 +267,7 @@ public class ApplicationLoop {
 	}
 	
 	/**
-	 * 
+	 * Allows the grid to be editable when the game is paused
 	 */
 	private void editGrid(ObservableList<Node> list){
 		for(Node r : list) {
