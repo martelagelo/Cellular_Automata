@@ -36,25 +36,35 @@ public class WaTorCell3 extends Cell{
 		yPos = j;	
 		Matrix = cellMatrix;
 		if(updatedState == null) {
-			sharkUpdate();
+			updateThisCell();
 		}
 	}
 
-
-	private void sharkUpdate(){	
+	private void updateThisCell() {
 		if (currentState == Color.ORANGE){
-			eatFishList = findNeighbours(xPos, yPos, Color.GREEN);	
-			if(eatFishList.size() != 0){
-				eatFish();
-			}
-			else {
-				moveShark();
-			}
-		}
-		else {
+			sharkUpdate();
+		} else if (currentState == Color.GREEN) {
+			fishUpdate();
+		} else {
 			updatedState = currentState;
 		}
 	}
+
+	private void sharkUpdate(){	
+		eatFishList = findNeighbours(xPos, yPos, Color.GREEN);	
+		if(eatFishList.size() != 0){
+			eatFish();
+		}
+		else {
+			moveShark();
+		}
+	}
+
+
+	private void fishUpdate(){
+		moveFish();
+	}
+
 
 
 	private void eatFish(){
@@ -84,20 +94,46 @@ public class WaTorCell3 extends Cell{
 			sharkDeath--;
 			sharkBreed--;
 			sharkCheck(this);
-			
+
 		}
-		
+
 	}
+
+
+	private void moveFish(){
+
+		moveFishList = findNeighbours(xPos, yPos, Color.WHITE);
+		if(moveFishList.size() != 0){
+			int r = randomFinder(moveFishList);	
+
+			Matrix[xPos][yPos].updatedState = Color.WHITE;
+			fishBreed--;
+			moveFishList.get(r).updatedState = Color.GREEN;
+			moveFishList.get(r).fishBreed = fishBreed;
+			fishCheck(moveFishList.get(r));
+
+		}else{
+			updatedState = Color.GREEN;
+			fishBreed--;
+			fishCheck(this);
+		}
+	}
+
 
 
 	private void sharkCheck(WaTorCell3 cell){
 
 		if(sharkDeath == 0){
-			//killShark(cell);
-			breedShark(cell);
-			cell.sharkBreed = sharkTillBreed;
+			killShark(cell);	
 		}else if(sharkBreed == 0){
-			//breedShark(cell);
+			breedShark(cell);
+		}
+	}
+
+
+	private void fishCheck(WaTorCell3 cell){
+		if(fishBreed == 0){
+			breedFish(cell);
 		}
 	}
 
@@ -115,9 +151,22 @@ public class WaTorCell3 extends Cell{
 			breedSharkList.get(r).sharkDeath = sharkTillDeath;
 			breedSharkList.get(r).sharkBreed = sharkTillBreed;	
 		}	
-		
+
 		cell.updatedState = Color.ORANGE;
 		cell.sharkBreed = sharkTillBreed;		
+	}
+
+
+	private void breedFish(WaTorCell3 cell){
+		breedFishList = findNeighbours(cell.xPos, cell.yPos, Color.WHITE);
+		if(breedFishList.size() != 0){
+			int r = randomFinder(breedFishList);
+			breedFishList.get(r).updatedState = Color.GREEN;
+			breedFishList.get(r).fishBreed = fishTillBreed;
+		}
+
+		cell.updatedState = Color.GREEN;
+		cell.fishBreed = fishTillBreed;
 	}
 
 	private int randomFinder(List<WaTorCell3> list){
