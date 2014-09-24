@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Random;
+
 public class ApplicationConstants {
 	
 	public static final Integer STAGE_WIDTH = 1500;
@@ -22,6 +24,9 @@ public class ApplicationConstants {
 	
 	
 	public static boolean gridEditable = false;
+	
+	
+	public static Random rand = new Random();
 	
 //	public ApplicationConstants() {
 //		//TODO: Enter something here.

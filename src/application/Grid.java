@@ -112,12 +112,12 @@ public class Grid {
 	public void changeCellState(Node node) {
 		int i = (int) ((node.getLayoutX() - 5)/ApplicationConstants.CELL_WIDTH);
 		int j = (int) ((node.getLayoutY() - 5)/ApplicationConstants.CELL_WIDTH);
-		if (cellMatrix[i][j].currentState == Color.BLACK) { 
+		if (cellMatrix[i][j].currentState == Color.GREEN) { 
 			cellMatrix[i][j].currentState = Color.WHITE;
 			cellMatrix[i][j].updatedState = Color.WHITE;
 		} else {
-			cellMatrix[i][j].currentState = Color.BLACK;
-			cellMatrix[i][j].updatedState = Color.BLACK;
+			cellMatrix[i][j].currentState = Color.GREEN;
+			cellMatrix[i][j].updatedState = Color.GREEN;
 		}
 		Rectangle r = (Rectangle) node;
 		r.setFill(cellMatrix[i][j].currentState);
