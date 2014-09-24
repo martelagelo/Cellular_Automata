@@ -82,7 +82,7 @@ public class ApplicationLoop {
 		grid.setRoot(root);
 		cellXMLReader = cxr;
 		gridpane = initializeGridPane(root);
-		editGrid();
+		editGrid(gridpane.getChildren());
 		return myScene;
 	}
 
@@ -161,23 +161,23 @@ public class ApplicationLoop {
 	//		}
 	//	}
 
-	//	private Paint generateRandomColor() {
-	//		Random rand = new Random();
-	//		int i = rand.nextInt(100);
-	//		if (i < 45) {
-	//			return Color.RED;
-	//		} else if (i > 55) {
-	//			return Color.BLUE;
-	//		} else{
-	//			return Color.WHITE;
-	//		}
-	//	}
-	//
+//		private Paint generateRandomColor() {
+//			Random rand = new Random();
+//			int i = rand.nextInt(100);
+//			if (i < 45) {
+//				return Color.RED;
+//			} else if (i > 55) {
+//				return Color.BLUE;
+//			} else{
+//				return Color.WHITE;
+//			}
+//		}
+	
 		private Paint generateRandomColor() {
 			Random rand = new Random();
 			int i = rand.nextInt(100);
 			if (i < 20) {
-				return Color.WHITE;
+				return Color.BLACK;
 			} else {
 				return Color.WHITE;
 			}
@@ -269,19 +269,13 @@ public class ApplicationLoop {
 	/**
 	 * 
 	 */
-	private void editGrid(){
-		ObservableList<Node> list = gridpane.getChildren();
+	private void editGrid(ObservableList<Node> list){
 		for(Node r : list) {
 			r.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event){
 					if (ApplicationConstants.gridEditable) {
-						//System.out.println(r.getLayoutX() +  "\t" +  r.getLayoutY());
-						grid.changeCellState(
-								list.get(
-								(int) (((r.getLayoutX()-5) / ApplicationConstants.CELL_WIDTH) * ApplicationConstants.NUM_OF_ROWS + ((r.getLayoutY()-5) / ApplicationConstants.CELL_WIDTH))
-								)
-								);
+						grid.changeCellState(list.get((int) (((r.getLayoutX()-5) / ApplicationConstants.CELL_WIDTH) * ApplicationConstants.NUM_OF_ROWS + ((r.getLayoutY()-5) / ApplicationConstants.CELL_WIDTH))));
 					}
 				}
 			});

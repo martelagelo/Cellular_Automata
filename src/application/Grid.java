@@ -105,6 +105,10 @@ public class Grid {
 		this.root = root;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 */
 	public void changeCellState(Node node) {
 		int i = (int) ((node.getLayoutX() - 5)/ApplicationConstants.CELL_WIDTH);
 		int j = (int) ((node.getLayoutY() - 5)/ApplicationConstants.CELL_WIDTH);
