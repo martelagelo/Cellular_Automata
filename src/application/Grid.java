@@ -47,7 +47,6 @@ public class Grid {
 		cellMatrix[i][j].xPos = i;
 		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
-		//cellMatrix[i][j].updatedState = cellMatrix[i][j].currentState;
 	}
 
 	/**
