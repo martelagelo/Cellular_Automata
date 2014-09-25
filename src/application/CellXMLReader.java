@@ -23,18 +23,36 @@ public class CellXMLReader
 	public List<Cell> myCellList;
 	public String myModelType;
 	
+	/**
+	 * 
+	 */
 	public CellXMLReader() {
 		myCellList = new ArrayList<Cell>();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Document getDocument() {
 		return myDocument;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Cell> getCellList() {
 		return myCellList;
 	}
 	
+	/**
+	 * 
+	 * @param filename
+	 * @throws ParserConfigurationException
+	 * @throws IOException
+	 * @throws SAXException
+	 */
 	public void loadAndParseXMLFile(String filename) throws ParserConfigurationException, IOException, SAXException {
 		// Get DOM builder from DOM builder factory
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -45,6 +63,9 @@ public class CellXMLReader
 		myDocument = doc;
 	}
 	
+	/**
+	 * 
+	 */
 	public void populateCellListFromDocument() {
 		// Do not run method if myDocument has not been populated
 		if(myDocument == null)
@@ -73,6 +94,10 @@ public class CellXMLReader
 		printCellList(myCellList);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Cell checkModelTypeAndInitializeCell() {
 		Cell cell = new GameOfLifeCell();
 		switch (myModelType.toLowerCase()) {
@@ -95,6 +120,11 @@ public class CellXMLReader
 		return cell;
 	}
 	
+	/**
+	 * 
+	 * @param cell
+	 * @param node
+	 */
 	public void loadAttributesIntoCell(Cell cell, Node node) {
 		//System.out.println("New Cell:: ");
 		Element element = (Element) node;
@@ -105,10 +135,13 @@ public class CellXMLReader
 		cell.setCurrentState(element.getElementsByTagName("state").item(0).getTextContent());
 		//System.out.println("\t\tstate: " + cell.currentState);
 		// Segregation threshold
-		if(myModelType.equalsIgnoreCase("threshold"))
-			((SegregationCell) cell).setThreshold(Double.parseDouble(element.getElementsByTagName("threshold").item(0).getTextContent()));
+		cell.setThreshold(Double.parseDouble(element.getElementsByTagName("threshold").item(0).getTextContent()));
 	}
 	
+	/**
+	 * 
+	 * @param cellList
+	 */
 	public void printCellList(List<Cell> cellList) {
 		for(Cell cell: cellList)
 			System.out.println(cell);

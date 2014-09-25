@@ -12,8 +12,10 @@ public abstract class Cell {
 	int yPos;
 	Paint currentState;
 	Paint updatedState;
+	double threshold;
+	String gridEdgeType;
+	String gridLocationShape;
 	Cell[][] Matrix;
-	String gridEdgeType;	
 
 	/**
 	 * Every frame, after the updateState is set, then all cells are updated
@@ -52,6 +54,13 @@ public abstract class Cell {
 	void setYPos(int y){
 		yPos = y;
 	}
+	/**
+	 * Called upon creation in XML reader
+	 * @param num
+	 */
+	public void setThreshold(double num){
+		threshold = num;
+	}
 	
 	/**
 	 * 
@@ -59,6 +68,14 @@ public abstract class Cell {
 	 */
 	void setGridEdgeType(String s) {
 		gridEdgeType = s;
+	}
+	
+	/**
+	 * 
+	 * @param s
+	 */
+	void setGridLocationShape(String s) {
+		gridLocationShape = s;
 	}
 
 	/**
