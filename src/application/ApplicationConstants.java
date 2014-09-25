@@ -9,7 +9,7 @@ public class ApplicationConstants {
 	public static final Integer STAGE_HEIGHT = 800;
 	public static final Integer GRID_WIDTH = 980;
 	public static final Integer GRID_HEIGHT = 780;
-	public static final Integer CELL_WIDTH = 20;
+	public static final Integer CELL_WIDTH = 10;
 	public static final Integer NUM_OF_ROWS = GRID_HEIGHT/CELL_WIDTH ;
 	public static final Integer NUM_OF_COLUMNS = GRID_WIDTH/CELL_WIDTH;
 	public static final Double DEFAULT_FRAME_RATE = 2.0;

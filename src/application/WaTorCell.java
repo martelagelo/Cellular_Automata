@@ -49,7 +49,7 @@ public class WaTorCell extends Cell{
 	}
 
 	private void sharkUpdate(){	
-		eatFishList = findCardinalToroidalNeighbors(xPos, yPos, Color.GREEN, Color.GREEN);	
+		eatFishList = findToroidalCardinalNeighbors(xPos, yPos, Color.GREEN, Color.GREEN);	
 		if(eatFishList.size() != 0){
 			eatFish();
 		}
@@ -63,8 +63,6 @@ public class WaTorCell extends Cell{
 		moveFish();
 	}
 
-
-
 	private void eatFish(){
 		for(int i = 0; i < eatFishList.size(); i++){			
 			eatFishList.get(i).updatedState = Color.WHITE;
@@ -76,7 +74,7 @@ public class WaTorCell extends Cell{
 	}
 
 	private void moveShark(){	
-		moveSharkList = findCardinalToroidalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
+		moveSharkList = findToroidalCardinalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
 		if (moveSharkList.size() != 0) {
 			int r = randomFinder(moveSharkList);
 			Matrix[xPos][yPos].updatedState = Color.WHITE;	
@@ -92,15 +90,12 @@ public class WaTorCell extends Cell{
 			sharkDeath--;
 			sharkBreed--;
 			sharkCheck(this);
-
 		}
-
 	}
-
 
 	private void moveFish(){
 
-		moveFishList = findCardinalToroidalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
+		moveFishList = findToroidalCardinalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
 		if(moveFishList.size() != 0) {
 			int r = randomFinder(moveFishList);	
 
@@ -143,7 +138,7 @@ public class WaTorCell extends Cell{
 	}
 
 	private void breed(WaTorCell waTorCell, Color color){
-		breedList = findCardinalToroidalNeighbors(waTorCell.xPos, waTorCell.yPos, Color.WHITE, Color.WHITE);
+		breedList = findToroidalCardinalNeighbors(waTorCell.xPos, waTorCell.yPos, Color.WHITE, Color.WHITE);
 		if(breedList.size() != 0){
 			int r = randomFinder(breedList);			
 			breedList.get(r).updatedState = color;
@@ -160,37 +155,6 @@ public class WaTorCell extends Cell{
 		int random = ApplicationConstants.rand.nextInt(moveFishList2.size());
 		return random;
 	}
-
-//	private ArrayList findNeighbours(int i, int j, Color color){
-//		ArrayList<WaTorCell3> list = new ArrayList<WaTorCell3>();
-//
-//		if (checkBounds(i+1,j)) {
-//			if ((Matrix[i + 1][j].currentState == color && Matrix[i+1][j].updatedState==null) || Matrix[i+1][j].updatedState == color) {
-//				list.add((WaTorCell3) Matrix[i + 1][j]);
-//			} 
-//		}
-//		if (checkBounds(i - 1,j)) {
-//			if((Matrix[i - 1][j].currentState == color && Matrix[i-1][j].updatedState==null) || Matrix[i-1][j].updatedState == color) {
-//				list.add((WaTorCell3) Matrix[i - 1][j]);
-//			}
-//		} 
-//		if (checkBounds(i,j+1)) {
-//			if ((Matrix[i][j+1].currentState == color && Matrix[i][j+1].updatedState==null) || Matrix[i][j+1].updatedState == color) {
-//				list.add((WaTorCell3) Matrix[i][j+1]);
-//			}
-//		} 
-//		if (checkBounds(i,j - 1)) {
-//			if ((Matrix[i][j-1].currentState == color && Matrix[i][j-1].updatedState==null) || Matrix[i][j-1].updatedState == color) {
-//				list.add((WaTorCell3) Matrix[i][j - 1]);
-//			}
-//		} 		
-//		return list;
-//	}
-//
-//	private boolean checkBounds(int i, int j){
-//		return (i < ApplicationConstants.NUM_OF_COLUMNS && i >= 0 && j < ApplicationConstants.NUM_OF_ROWS && j >= 0);
-//	}
-
 	
 	@Override
 	void setCurrentState(String s) {

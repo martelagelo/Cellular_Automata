@@ -17,25 +17,9 @@ public class GameOfLifeCell extends Cell {
 		Matrix = cellMatrix;
 		xPos = i;
 		yPos = j;
-		lifeUpdate(findSquareNeighbors(xPos,yPos,Color.BLACK).size());					
+		lifeUpdate(findToroidalSquareNeighbors(xPos,yPos,Color.BLACK).size());					
 	}
 
-	/**
-	 * Calculates the number of alive cell neighbors
-	 * @return: The number of alive neighbors
-	 */
-//	private int aliveCalculator(){
-//		for(int i = xPos-1; i <= xPos+1; i++){
-//			for(int j = yPos-1; j <= yPos+1; j++){
-//				if(i >= 0 && j >= 0 && i < ApplicationConstants.NUM_OF_COLUMNS && j < ApplicationConstants.NUM_OF_ROWS && Matrix[i][j].currentState == Color.BLACK) {
-//						Alive++;
-//				}		
-//			}
-//		}
-//		if (currentState == Color.BLACK) Alive --;
-//		
-//		return Alive;
-//	}
 	
 	/**
 	 * Updates the state of the cell

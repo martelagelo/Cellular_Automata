@@ -62,25 +62,25 @@ public abstract class Cell {
 	 * @param color
 	 * @return
 	 */
-	protected ArrayList findCardinalDirectionNeighbors(int i, int j, Color color) {
+	protected ArrayList findCardinalNeighbors(int i, int j, Color color) {
 		ArrayList<Cell> list = new ArrayList<Cell>();
 		if (checkBounds(i+1,j)) {
-			if (this.Matrix[i + 1][j].currentState == color) {//|| Matrix[i+1][j].updatedState == color) {
+			if (this.Matrix[i + 1][j].currentState == color) {
 				list.add(Matrix[i + 1][j]);
 			} 
 		}
 		if (checkBounds(i - 1,j)) {
-			if(this.Matrix[i - 1][j].currentState == color) {//|| Matrix[i-1][j].updatedState == color) {
+			if(this.Matrix[i - 1][j].currentState == color) {
 				list.add(Matrix[i - 1][j]);
 			}
 		} 
 		if (checkBounds(i,j+1)) {
-			if (this.Matrix[i][j+1].currentState == color) {//|| Matrix[i][j+1].updatedState == color) {
+			if (this.Matrix[i][j+1].currentState == color) {
 				list.add(Matrix[i][j+1]);
 			}
 		} 
 		if (checkBounds(i,j - 1)) {
-			if (this.Matrix[i][j-1].currentState == color) {//|| Matrix[i][j-1].updatedState == color) {
+			if (this.Matrix[i][j-1].currentState == color) {
 				list.add(Matrix[i][j - 1]);
 			}
 		} 		
@@ -95,7 +95,7 @@ public abstract class Cell {
 	 * @param updatedColor
 	 * @return
 	 */
-	protected ArrayList findCardinalDirectionNeighbors(int i, int j, Color currentColor, Color updatedColor) {
+	protected ArrayList findCardinalNeighbors(int i, int j, Color currentColor, Color updatedColor) {
 		ArrayList<Cell> list = new ArrayList<Cell>();
 		if (checkBounds(i+1,j)) {
 			if ((this.Matrix[i + 1][j].currentState == currentColor && Matrix[i+1][j].updatedState==null) || Matrix[i+1][j].updatedState == updatedColor) {
@@ -127,10 +127,10 @@ public abstract class Cell {
 	 * @param color
 	 * @return
 	 */
-	protected ArrayList findSquareNeighbors(int i, int j, Color color){
+	protected ArrayList findCornerNeighbors(int i, int j, Color color){
 		ArrayList<Cell> list = new ArrayList<Cell>();
-		int[] x = new int[] {-1, 0, 1, -1, 1, -1, 0, 1};
-		int[] y = new int[] {-1, -1, -1, 0, 0, 1, 1, 1};
+		int[] x = new int[] {-1, 1, -1, 1};
+		int[] y = new int[] {-1, -1, 1, 1};
 		for(int k = 0; k < x.length; k++){
 			if(checkBounds(i + x[k],j + y[k])) {
 				if (Matrix[i + x[k]][j + y[k]].currentState == color) {
@@ -138,6 +138,13 @@ public abstract class Cell {
 				}
 			}
 		}
+		return list;
+	}
+
+
+	protected ArrayList findSquareNeighbors(int i, int j, Color color) {
+		ArrayList<Cell> list = findCardinalNeighbors(i, j, color);
+		list.addAll(findCornerNeighbors(i, j, color));
 		return list;
 	}
 
@@ -158,8 +165,8 @@ public abstract class Cell {
 	 * @param color
 	 * @return
 	 */
-	protected ArrayList findCardinalToroidalNeighbors(int i, int j, Color color) {
-		ArrayList<Cell> list = findCardinalDirectionNeighbors(i, j, color);
+	protected ArrayList findToroidalCardinalNeighbors(int i, int j, Color color) {
+		ArrayList<Cell> list = findCardinalNeighbors(i, j, color);
 		if (!checkBounds(i+1,j)) {
 			if (this.Matrix[0][j].currentState == color) {
 				list.add(Matrix[0][j]);
@@ -191,8 +198,8 @@ public abstract class Cell {
 	 * @param updatedColor
 	 * @return
 	 */
-	protected ArrayList findCardinalToroidalNeighbors(int i, int j, Color currentColor, Color updatedColor) {
-		ArrayList<Cell> list = findCardinalDirectionNeighbors(i, j, currentColor, updatedColor);
+	protected ArrayList findToroidalCardinalNeighbors(int i, int j, Color currentColor, Color updatedColor) {
+		ArrayList<Cell> list = findCardinalNeighbors(i, j, currentColor, updatedColor);
 
 		if (!checkBounds(i+1,j)) {
 			if ((this.Matrix[0][j].currentState == currentColor && Matrix[0][j].updatedState==null) || Matrix[0][j].updatedState == updatedColor) {
@@ -216,7 +223,7 @@ public abstract class Cell {
 		} 		
 		return list;
 	}
-	
+
 	/**
 	 * 
 	 * @param i
@@ -224,17 +231,82 @@ public abstract class Cell {
 	 * @param color
 	 * @return
 	 */
-	protected ArrayList findToroidalSquareNeighbors(int i, int j, Color color){
-		ArrayList<Cell> list = findSquareNeighbors(i, j, color);
-		int[] x = new int[] {-1, 0, 1, -1, 1, -1, 0, 1};
-		int[] y = new int[] {-1, -1, -1, 0, 0, 1, 1, 1};
-		for(int k = 0; k < x.length; k++){
-			if(checkBounds(i + x[k],j + y[k])) {
-				if (Matrix[i + x[k]][j + y[k]].currentState == color) {
-					list.add(Matrix[i + x[k]][j + y[k]]);
+	protected ArrayList findToroidalCornerNeighbors(int i, int j, Color color){
+		ArrayList<Cell> list = findCornerNeighbors(i, j, color);
+		if (!checkBounds(i + 1,j + 1)) {
+			if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
+				if (this.Matrix[0][0].currentState == color) {
+					list.add(Matrix[0][0]);
+				}
+			}
+			else if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j != ApplicationConstants.NUM_OF_ROWS - 1) {
+				if (this.Matrix[0][j+1].currentState == color) {
+					list.add(Matrix[0][j+1]);
+				}
+			}
+			else if (i != ApplicationConstants.NUM_OF_COLUMNS - 1 && j == ApplicationConstants.NUM_OF_ROWS - 1){
+				if (this.Matrix[i+1][0].currentState == color) {
+					list.add(Matrix[i+1][0]);
 				}
 			}
 		}
+		if (!checkBounds(i - 1,j + 1)) {
+			if (i == 0 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
+				if(this.Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][0].currentState == color) {
+					list.add(Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][0]);
+				}
+			}
+			else if (i != 0 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
+				if(this.Matrix[i-1][0].currentState == color) {
+					list.add(Matrix[i-1][0]);
+				}
+			}
+			else if (i == 0 && j != ApplicationConstants.NUM_OF_ROWS - 1) {
+				if(this.Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j + 1].currentState == color) {
+					list.add(Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j + 1]);
+				}
+			}
+		} 
+		if (!checkBounds(i + 1,j - 1)) {
+			if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j == 0) {
+				if (this.Matrix[0][ApplicationConstants.NUM_OF_ROWS - 1].currentState == color) {
+					list.add(Matrix[0][ApplicationConstants.NUM_OF_ROWS - 1]);
+				}
+			}
+			else if (i != ApplicationConstants.NUM_OF_COLUMNS - 1 && j == 0) {
+				if (this.Matrix[i + 1][ApplicationConstants.NUM_OF_ROWS - 1].currentState == color) {
+					list.add(Matrix[i + 1][ApplicationConstants.NUM_OF_ROWS - 1]);
+				}
+			}
+			else if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j != 0) {
+				if (this.Matrix[0][j - 1].currentState == color) {
+					list.add(Matrix[0][j - 1]);
+				}
+			}
+		} 
+		if (!checkBounds(i - 1,j - 1)) {
+			if(i == 0 && j == 0) {
+				if (this.Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][ApplicationConstants.NUM_OF_ROWS - 1].currentState == color) {
+					list.add(Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][ApplicationConstants.NUM_OF_ROWS - 1]);
+				}
+			}
+			else if (i != 0 && j == 0) {
+				if (this.Matrix[i - 1][ApplicationConstants.NUM_OF_ROWS - 1].currentState == color) {
+					list.add(Matrix[i - 1][ApplicationConstants.NUM_OF_ROWS - 1]);
+				}
+			}
+			else if (i == 0 && j != 0) {
+				if (this.Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j - 1].currentState == color) {
+					list.add(Matrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j - 1]);
+				}
+			}
+		} 	
+		return list;
+	}
+
+	protected ArrayList findToroidalSquareNeighbors(int i, int j, Color color) {
+		ArrayList<Cell> list = findToroidalCardinalNeighbors(i, j, color);
+		list.addAll(findToroidalCornerNeighbors(i, j, color));
 		return list;
 	}
 

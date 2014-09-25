@@ -39,7 +39,7 @@ public class FireCell extends Cell {
 	 * Find if any of the neighbors are on fire
 	 */
 	private void findFireNeighbors(){
-		fireNeighbors = findCardinalToroidalNeighbors(xPos, yPos, Color.RED);
+		fireNeighbors = findToroidalCornerNeighbors(xPos, yPos, Color.RED);
 		if (fireNeighbors.size() != 0) {
 			isNextToFire = true;
 		}
@@ -50,7 +50,7 @@ public class FireCell extends Cell {
 	 */
 	private void calculateBurnChance(){
 		if (isNextToFire && super.currentState == Color.GREEN) {
-			burningChance = .50;
+			burningChance = .99;
 		} else {
 			burningChance = 0.0;
 		}
