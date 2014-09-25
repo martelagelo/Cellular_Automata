@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -46,7 +47,7 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new GameOfLifeCell();
+		cellMatrix[i][j] = new WaTorCell();
 		cellMatrix[i][j].xPos = i;
 		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
@@ -95,7 +96,7 @@ public class Grid {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				cellMatrix[i][j].currentState = cellMatrix[i][j].updatedState;
 				cellMatrix[i][j].updatedState = null;
-				Rectangle r = (Rectangle) list.get(i*ApplicationConstants.NUM_OF_ROWS + j);
+				Polygon r = (Polygon) list.get(i*ApplicationConstants.NUM_OF_ROWS + j);
 				r.setFill(cellMatrix[i][j].currentState);
 			}	
 		}	
@@ -123,7 +124,7 @@ public class Grid {
 			cellMatrix[i][j].currentState = Color.BLACK;
 			cellMatrix[i][j].updatedState = Color.BLACK;
 		}
-		Rectangle r = (Rectangle) node;
+		Polygon r = (Polygon) node;
 		r.setFill(cellMatrix[i][j].currentState);
 	}
 
@@ -258,6 +259,20 @@ public class Grid {
 	}
 	
 	/**
+	 * Creates a map of neighbors based off of how hexagons link
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @return: The map of hexagonal neighbors
+	 */
+	private Map createHexagonalNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
+		int[] x = new int[]{-1, -1, 0, 0, 1, 1};
+		int[] y = new int[]{0, 1, 1, -1, -1, 0};
+		addCellsToMap(i, j, x, y, neighbors);
+		return neighbors;
+	}
+	
+	/**
 	 * Adds cells to a map if not out of bounds
 	 * @param i: The x position of the particular cell
 	 * @param j: The y position of the particular cell
@@ -289,7 +304,7 @@ public class Grid {
 	public void populateMatrixNeighborMaps() {
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].neighbors = createToroidalSquareNeighborsMap(i, j);
+				cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
 			}	
 		}
 	}

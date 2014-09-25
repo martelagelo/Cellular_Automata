@@ -28,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -101,7 +102,7 @@ public class ApplicationLoop {
 		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
 		currentFrameCount++;
-		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.GREEN));
+		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.BLACK));
 	}
 
 	/**
@@ -117,8 +118,8 @@ public class ApplicationLoop {
 		// Loop through entire Grid and randomly populate cells
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				Rectangle rect = generateCell(Color.WHITE);
-				//	Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				Polygon rect = generateCell(Color.WHITE);
+				//  Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
 				//	grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
 				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
@@ -133,69 +134,88 @@ public class ApplicationLoop {
 			grid.initializeAndPopulateMatrix(cell);
 			gp.add(rect, cell.xPos, cell.yPos,1,1);
 		}	
-			*/
-		
+		 */
+
 		root.getChildren().add(gp);
 		return gp;
 	}
 
 	/**
-	 * Generates a cell in the object form of a rectangle
+	 * Generates a cell in the form of a rectangle
 	 * @param color: The color of the cell
 	 * @return: The newly created rectangle for the grid pane
 	 */
-	private Rectangle generateCell(Paint color){
-		Rectangle rect = new Rectangle();
-		rect.setWidth(ApplicationConstants.CELL_WIDTH);
-		rect.setHeight(ApplicationConstants.CELL_WIDTH);
+	private Polygon generateCell(Paint color){
+		Polygon rect = new Polygon();
+		rect.getPoints().addAll(new Double[] { 
+				0.0, 0.0, 
+				0.0, (double) ApplicationConstants.CELL_WIDTH, 
+				(double) ApplicationConstants.CELL_WIDTH, (double) ApplicationConstants.CELL_WIDTH, 
+				(double) ApplicationConstants.CELL_WIDTH, 0.0
+		});
 		rect.setFill(generateRandomColor());
 		return rect;
 	}
 
-//		private Paint generateRandomColor() {
-//			Random rand = new Random();
-//			int i = rand.nextInt(100);
-//			if (i < 45) {
-//				return Color.RED;
-//			} else if (i > 55) {
-//				return Color.BLUE;
-//			} else{
-//				return Color.WHITE;
-//			}
-//		}
-
-	
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 20) {
-			return Color.WHITE;
-		} else {
-			return Color.WHITE;
-		}
+	/**
+	 * Generates a cell in the form of a hexagon
+	 * @param color: The color of the cell
+	 * @return: The newly created rectangle for the gird pane
+	 */
+	private Polygon generatePoly(Paint color) {
+		Polygon poly = new Polygon();
+		poly.getPoints().addAll(new Double[] { 
+				10-(10*Math.sqrt(3)/2), 5.0, 10.0, 0.0, 10+(10*Math.sqrt(3)/2), 5.0, 10+(10*Math.sqrt(3)/2), 15.0, 10.0, 20.0, 10-(10*Math.sqrt(3)/2), 15.0
+		});
+		poly.setFill(generateRandomColor());
+		return poly;
 	}
 
-//		private Paint generateRandomColor() {
-//			Random rand = new Random();
-//			int i = rand.nextInt(100);
-//			if (i < 20) {
-//				return Color.GREEN;
-//			} else if (i > 92){
-//				return Color.ORANGE;
-//			} else {
-//				return Color.WHITE;
-//			}
-//		}
+	//		private Paint generateRandomColor() {
+	//			Random rand = new Random();
+	//			int i = rand.nextInt(100);
+	//			if (i < 45) {
+	//				return Color.RED;
+	//			} else if (i > 55) {
+	//				return Color.BLUE;
+	//			} else{
+	//				return Color.WHITE;
+	//			}
+	//		}
+
 
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();
 //		int i = rand.nextInt(100);
-//		if (i < 5) {
-//			return Color.RED;
-//		} else{
-//			return Color.GREEN;
+//		if (i < 1) {
+//			return Color.BLACK;
+//		} else {
+//			return Color.WHITE;
 //		}
 //	}
+
+
+			private Paint generateRandomColor() {
+				Random rand = new Random();
+				int i = rand.nextInt(100);
+				if (i < 20) {
+					return Color.GREEN;
+				} else if (i > 92){
+					return Color.ORANGE;
+				} else {
+					return Color.WHITE;
+				}
+			}
+
+	//	private Paint generateRandomColor() {
+	//		Random rand = new Random();
+	//		int i = rand.nextInt(100);
+	//		if (i < 5) {
+	//			return Color.RED;
+	//		} else{
+	//			return Color.GREEN;
+	//		}
+	//	}
 
 
 	/**
@@ -233,12 +253,12 @@ public class ApplicationLoop {
 		int counter = 0;
 		ObservableList<Node> list = gridpane.getChildren();
 		for(Node r : list) {
-			Rectangle rect = (Rectangle) r;
+			Polygon rect = (Polygon) r;
 			if (rect.getFill() == color) counter++;
 		}
 		return counter;
 	}
-	
+
 	/**
 	 * Allows the grid to be editable when the game is paused
 	 */
