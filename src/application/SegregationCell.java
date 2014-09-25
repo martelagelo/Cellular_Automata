@@ -17,32 +17,19 @@ public class SegregationCell extends Cell {
 	}
 	
 	private double percentageCalc(){
-		for(int i = xPos-1; i <= xPos+1; i++){
-			for(int j = yPos-1; j <= yPos+1; j++){
-				if(i >= 0 && j >= 0 && i < ApplicationConstants.NUM_OF_COLUMNS && j < ApplicationConstants.NUM_OF_ROWS){
-					if(Matrix[i][j].currentState==Matrix[xPos][yPos].currentState){
-						same++;
-					} else {
-						different++;							
-					}
-				}							
-			}
-		}
-		same--;
-		//same = findWantedNeighbors((Color) currentState).size();
-		Double d = (same/(same + different));
+		same = findWantedNeighbors((Color) currentState).size();
+		Double d = (same/8);
 		return d;
 	}
-
 	
-	
-	/*
+	/**
 	 * Method for updating and moving the cell that is dissatisfied 
+	 * @param percentage
 	 */
 	private void cellMover(double percentage){
-		if (Matrix[xPos][yPos].currentState == Color.WHITE && Matrix[xPos][yPos].updatedState == null) {
-			Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;
-		} else if (Matrix[xPos][yPos].currentState == Color.WHITE && Matrix[xPos][yPos].updatedState != null) {
+		if (currentState == Color.WHITE && updatedState == null) {
+			updatedState = currentState;
+		} else if (currentState == Color.WHITE && updatedState != null) {
 		} else if (percentage < threshold){
 			Boolean positionFound = false;
 			outerloop:
@@ -51,21 +38,24 @@ public class SegregationCell extends Cell {
 					if(b == yPos && a <= xPos) {// check if in part of row before current cell
 						continue; // continue to next iteration if true
 					} else if (Matrix[a][b].currentState==Color.WHITE && Matrix[a][b].updatedState == null){
-						Matrix[a][b].updatedState = Matrix[xPos][yPos].currentState;
-						Matrix[xPos][yPos].updatedState = Color.WHITE;
+						Matrix[a][b].updatedState = currentState;
+						updatedState = Color.WHITE;
 						positionFound = true;
 						break outerloop;
 					} 
 				}
 			}
 			if(!positionFound) {
-				Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;
+				updatedState = currentState;
 			}
 		} else {
-			Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;	
+			updatedState = currentState;	
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	void setCurrentState(String s) {
 
@@ -81,12 +71,14 @@ public class SegregationCell extends Cell {
 			break;
 		}
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public void updateCell(int i, int j) {
 		same = 0;
 		different = 0;
-		//super.Matrix = cellMatrix;
 		super.xPos = i;
 		super.yPos = j;
 		cellMover(percentageCalc());

@@ -25,7 +25,7 @@ public class WaTorCell extends Cell{
 
 	//FISHES ARE GREEN
 	//SHARKS ARE ORANGE
-	//SEA IS BLUE	
+	//SEA IS WHITE	
 
 
 	@Override
@@ -49,7 +49,7 @@ public class WaTorCell extends Cell{
 	}
 
 	private void sharkUpdate(){	
-		eatFishList = findToroidalCardinalNeighbors(xPos, yPos, Color.GREEN, Color.GREEN);	
+		eatFishList = findWantedNeighbors(Color.GREEN, Color.GREEN);	
 		if(eatFishList.size() != 0){
 			eatFish();
 		}
@@ -74,7 +74,7 @@ public class WaTorCell extends Cell{
 	}
 
 	private void moveShark(){	
-		moveSharkList = findToroidalCardinalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
+		moveSharkList = findWantedNeighbors(Color.WHITE, Color.WHITE);
 		if (moveSharkList.size() != 0) {
 			int r = randomFinder(moveSharkList);
 			Matrix[xPos][yPos].updatedState = Color.WHITE;	
@@ -95,7 +95,7 @@ public class WaTorCell extends Cell{
 
 	private void moveFish(){
 
-		moveFishList = findToroidalCardinalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
+		moveFishList = findWantedNeighbors(Color.WHITE, Color.WHITE);
 		if(moveFishList.size() != 0) {
 			int r = randomFinder(moveFishList);	
 
@@ -138,7 +138,7 @@ public class WaTorCell extends Cell{
 	}
 
 	private void breed(WaTorCell waTorCell, Color color){
-		breedList = findToroidalCardinalNeighbors(waTorCell.xPos, waTorCell.yPos, Color.WHITE, Color.WHITE);
+		breedList = findWantedNeighbors(waTorCell, Color.WHITE, Color.WHITE);
 		if(breedList.size() != 0){
 			int r = randomFinder(breedList);			
 			breedList.get(r).updatedState = color;

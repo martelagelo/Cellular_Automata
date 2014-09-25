@@ -46,7 +46,7 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new SegregationCell();
+		cellMatrix[i][j] = new WaTorCell();
 		cellMatrix[i][j].xPos = i;
 		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
@@ -141,6 +141,12 @@ public class Grid {
 		return neighbors;
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	private Map createCardinalNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
 		int[] x = new int[]{0, 0, -1, 1};
@@ -149,18 +155,32 @@ public class Grid {
 		return neighbors;
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	private Map createSquareNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
+		neighbors.putAll(createCornerNeighborsMap(i, j));
+		return neighbors;
+	}
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @param x
+	 * @param y
+	 * @param map
+	 */
 	private void addCellsToMap(int i, int j, int[] x, int[] y, Map map) {
 		for(int k = 0; k < x.length; k++) {
 			if (checkBounds(i + x[k], j + y[k])) {
 				map.put(cellMatrix[i + x[k]][j + y[k]].cellID, cellMatrix[i + x[k]][j + y[k]]);
 			}
 		}
-	}
-	
-	private Map createSquareNeighborsMap(int i, int j) {
-		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
-		neighbors.putAll(createCornerNeighborsMap(i, j));
-		return neighbors;
 	}
 
 	/**
@@ -169,7 +189,7 @@ public class Grid {
 	public void populateMatrixNeighborMaps() {
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
+				cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
 			}	
 		}
 	}

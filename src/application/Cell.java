@@ -362,6 +362,26 @@ public abstract class Cell {
 		}
 		return list;
 	}
+	
+	protected List findWantedNeighbors(Color currentColor, Color updatedColor) {
+		List<Cell> list = new ArrayList<Cell>();
+		for (Integer key : neighbors.keySet()) {
+			if ((neighbors.get(key).currentState == currentColor && neighbors.get(key).updatedState == null) || neighbors.get(key).updatedState == updatedColor) {
+				list.add(neighbors.get(key));
+			}
+		}
+		return list;
+	}
+	
+	protected List findWantedNeighbors(Cell otherCell, Color currentColor, Color updatedColor) {
+		List<Cell> list = new ArrayList<Cell>();
+		for (Integer key : otherCell.neighbors.keySet()) {
+			if ((otherCell.neighbors.get(key).currentState == currentColor && otherCell.neighbors.get(key).updatedState == null) || otherCell.neighbors.get(key).updatedState == updatedColor) {
+				list.add(otherCell.neighbors.get(key));
+			}
+		}
+		return list;
+	}
 
 	/**
 	 * For printing purposes
