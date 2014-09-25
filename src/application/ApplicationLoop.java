@@ -101,7 +101,6 @@ public class ApplicationLoop {
 	public void updateGameLoop() {
 		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
-		currentFrameCount++;
 		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.BLACK));
 	}
 
@@ -113,12 +112,12 @@ public class ApplicationLoop {
 	private GridPane initializeGridPane(Group root){		
 		// Set up GridPane
 		GridPane gp = new GridPane();
-		gp.setPadding(new Insets(5));
+		//gp.setPadding(new Insets(5));
 
 		// Loop through entire Grid and randomly populate cells
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				Polygon rect = generateCell(Color.WHITE);
+				Polygon rect = generateHex(Color.WHITE);
 				//  Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
 				//	grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
 				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
@@ -145,7 +144,7 @@ public class ApplicationLoop {
 	 * @param color: The color of the cell
 	 * @return: The newly created rectangle for the grid pane
 	 */
-	private Polygon generateCell(Paint color){
+	private Polygon generateRect(Paint color){
 		Polygon rect = new Polygon();
 		rect.getPoints().addAll(new Double[] { 
 				0.0, 0.0, 
@@ -162,10 +161,15 @@ public class ApplicationLoop {
 	 * @param color: The color of the cell
 	 * @return: The newly created rectangle for the gird pane
 	 */
-	private Polygon generatePoly(Paint color) {
+	private Polygon generateHex(Paint color) {
 		Polygon poly = new Polygon();
 		poly.getPoints().addAll(new Double[] { 
-				10-(10*Math.sqrt(3)/2), 5.0, 10.0, 0.0, 10+(10*Math.sqrt(3)/2), 5.0, 10+(10*Math.sqrt(3)/2), 15.0, 10.0, 20.0, 10-(10*Math.sqrt(3)/2), 15.0
+				(double) (ApplicationConstants.CELL_WIDTH/2)-((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH/4, 
+				(double) (ApplicationConstants.CELL_WIDTH/2), 0.0, 
+				(double) (ApplicationConstants.CELL_WIDTH/2)+((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH/4, 
+				(double) (ApplicationConstants.CELL_WIDTH/2)+((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH * .75,
+				(double) (ApplicationConstants.CELL_WIDTH/2), (double) ApplicationConstants.CELL_WIDTH,
+				(double) (ApplicationConstants.CELL_WIDTH/2)-((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH * .75
 		});
 		poly.setFill(generateRandomColor());
 		return poly;
@@ -184,28 +188,28 @@ public class ApplicationLoop {
 	//		}
 
 
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 1) {
-//			return Color.BLACK;
-//		} else {
-//			return Color.WHITE;
-//		}
-//	}
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 1) {
+			return Color.BLACK;
+		} else {
+			return Color.WHITE;
+		}
+	}
 
 
-			private Paint generateRandomColor() {
-				Random rand = new Random();
-				int i = rand.nextInt(100);
-				if (i < 20) {
-					return Color.GREEN;
-				} else if (i > 92){
-					return Color.ORANGE;
-				} else {
-					return Color.WHITE;
-				}
-			}
+//			private Paint generateRandomColor() {
+//				Random rand = new Random();
+//				int i = rand.nextInt(100);
+//				if (i < 20) {
+//					return Color.GREEN;
+//				} else if (i > 92){
+//					return Color.ORANGE;
+//				} else {
+//					return Color.WHITE;
+//				}
+//			}
 
 	//	private Paint generateRandomColor() {
 	//		Random rand = new Random();
@@ -241,6 +245,7 @@ public class ApplicationLoop {
 	 * @param YValue: The number of a certain type of blocks
 	 */
 	private void addPointsToLineChart(int XValue, int YValue) {
+		currentFrameCount++;
 		series.getData().add(new XYChart.Data(XValue, YValue));
 	}
 
@@ -268,7 +273,8 @@ public class ApplicationLoop {
 				@Override
 				public void handle(MouseEvent event){
 					if (ApplicationConstants.gridEditable) {
-						grid.changeCellState(list.get((int) (((r.getLayoutX()-5) / ApplicationConstants.CELL_WIDTH) * ApplicationConstants.NUM_OF_ROWS + ((r.getLayoutY()-5) / ApplicationConstants.CELL_WIDTH))));
+						System.out.println(r.getLayoutX() + "\t" + r.getLayoutY());
+						grid.changeCellState(list.get((int) (((r.getLayoutX()) / ApplicationConstants.CELL_WIDTH) * ApplicationConstants.NUM_OF_ROWS + ((r.getLayoutY()) / ApplicationConstants.CELL_WIDTH))));
 					}
 				}
 			});

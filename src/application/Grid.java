@@ -47,7 +47,7 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new WaTorCell();
+		cellMatrix[i][j] = new FloodCell();
 		cellMatrix[i][j].xPos = i;
 		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
@@ -115,8 +115,8 @@ public class Grid {
 	 * @param node: The cell being referenced
 	 */
 	public void changeCellState(Node node) {
-		int i = (int) ((node.getLayoutX() - 5)/ApplicationConstants.CELL_WIDTH);
-		int j = (int) ((node.getLayoutY() - 5)/ApplicationConstants.CELL_WIDTH);
+		int i = (int) ((node.getLayoutX())/ApplicationConstants.CELL_WIDTH);
+		int j = (int) ((node.getLayoutY())/ApplicationConstants.CELL_WIDTH);
 		if (cellMatrix[i][j].currentState == Color.BLACK) { 
 			cellMatrix[i][j].currentState = Color.WHITE;
 			cellMatrix[i][j].updatedState = Color.WHITE;
@@ -259,7 +259,7 @@ public class Grid {
 	}
 	
 	/**
-	 * Creates a map of neighbors based off of how hexagons link
+	 * Creates a map of neighbors based off of how hexagons link (non-toroidal)
 	 * @param i: The x position of the particular cell
 	 * @param j: The y position of the particular cell
 	 * @return: The map of hexagonal neighbors
@@ -304,7 +304,7 @@ public class Grid {
 	public void populateMatrixNeighborMaps() {
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
+				cellMatrix[i][j].neighbors = createHexagonalNeighborsMap(i, j);
 			}	
 		}
 	}
