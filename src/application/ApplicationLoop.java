@@ -173,37 +173,27 @@ public class ApplicationLoop {
 //			}
 //		}
 	
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 20) {
-//			return Color.BLACK;
-//		} else {
-//			return Color.WHITE;
-//		}
-//	}
+	private Paint generateRandomColor() {
+		Random rand = new Random();
+		int i = rand.nextInt(100);
+		if (i < 20) {
+			return Color.BLACK;
+		} else {
+			return Color.WHITE;
+		}
+	}
 
 //		private Paint generateRandomColor() {
 //			Random rand = new Random();
 //			int i = rand.nextInt(100);
-//			if (i > 90){
+//			if (i < 20) {
+//				return Color.GREEN;
+//			} else if (i > 92){
 //				return Color.ORANGE;
 //			} else {
 //				return Color.WHITE;
 //			}
 //		}
-
-		private Paint generateRandomColor() {
-			Random rand = new Random();
-			int i = rand.nextInt(100);
-			if (i < 20) {
-				return Color.GREEN;
-			} else if (i > 92){
-				return Color.ORANGE;
-			} else {
-				return Color.WHITE;
-			}
-		}
 
 //	private Paint generateRandomColor() {
 //		Random rand = new Random();

@@ -18,12 +18,10 @@ public class WaTorCell3 extends Cell{
 	private int sharkBreed = sharkTillBreed;
 
 	private List<WaTorCell3> moveFishList = new ArrayList<WaTorCell3>();
-	private List<WaTorCell3> breedFishList = new ArrayList<WaTorCell3>();
 
 	private List<WaTorCell3> eatFishList = new ArrayList<WaTorCell3>();
 	private List<WaTorCell3> moveSharkList = new ArrayList<WaTorCell3>();
 	
-	private List<WaTorCell3> breedSharkList = new ArrayList<WaTorCell3>();
 	private List<WaTorCell3> breedList = new ArrayList<WaTorCell3>();
 
 
@@ -53,7 +51,7 @@ public class WaTorCell3 extends Cell{
 	}
 
 	private void sharkUpdate(){	
-		eatFishList = findCardinalDirectionNeighbors(xPos, yPos, Color.GREEN);	
+		eatFishList = findCardinalDirectionNeighbors(xPos, yPos, Color.GREEN, Color.GREEN);	
 		if(eatFishList.size() != 0){
 			eatFish();
 		}
@@ -80,7 +78,7 @@ public class WaTorCell3 extends Cell{
 	}
 
 	private void moveShark(){	
-		moveSharkList = findCardinalDirectionNeighbors(xPos, yPos, Color.WHITE);
+		moveSharkList = findCardinalDirectionNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
 		if (moveSharkList.size() != 0) {
 			int r = randomFinder(moveSharkList);
 			Matrix[xPos][yPos].updatedState = Color.WHITE;	
@@ -104,7 +102,7 @@ public class WaTorCell3 extends Cell{
 
 	private void moveFish(){
 
-		moveFishList = findCardinalDirectionNeighbors(xPos, yPos, Color.WHITE);
+		moveFishList = findCardinalDirectionNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
 		if(moveFishList.size() != 0) {
 			int r = randomFinder(moveFishList);	
 
@@ -147,7 +145,7 @@ public class WaTorCell3 extends Cell{
 	}
 
 	private void breed(WaTorCell3 cell, Color color){
-		breedList = findCardinalDirectionNeighbors(cell.xPos, cell.yPos, Color.WHITE);
+		breedList = findCardinalDirectionNeighbors(cell.xPos, cell.yPos, Color.WHITE, Color.WHITE);
 		if(breedList.size() != 0){
 			int r = randomFinder(breedList);			
 			breedList.get(r).updatedState = color;
