@@ -3,6 +3,15 @@ package application;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+/**
+ * Version 1
+ * Date: 9/14/2014
+ * 
+ * @author Michael Deng
+ * @author Pranava Raparla
+ * @author David Zhang
+ *
+ */
 public class SegregationCell extends Cell {
 
 	private double same = 0;
@@ -16,6 +25,10 @@ public class SegregationCell extends Cell {
 		//currentState = Color.WHITE;
 	}
 	
+	/**
+	 * Finds the percentage of the same colored neighbors out of the total amount of neighbors
+	 * @return: The percentage of same colored neighbors
+	 */
 	private double percentageCalc(){
 		same = findWantedNeighbors((Color) currentState).size();
 		Double d = (same/8);
@@ -54,7 +67,7 @@ public class SegregationCell extends Cell {
 	}
 
 	/**
-	 * 
+	 * Selects a color based off of the inputed string
 	 */
 	@Override
 	void setCurrentState(String s) {
@@ -73,7 +86,7 @@ public class SegregationCell extends Cell {
 	}
 	
 	/**
-	 * 
+	 * Updates the cell state
 	 */
 	@Override
 	public void updateCell(int i, int j) {
@@ -83,7 +96,10 @@ public class SegregationCell extends Cell {
 		super.yPos = j;
 		cellMover(percentageCalc());
 	}
-
+	
+	/**
+	 * Updates the cell state
+	 */
 	@Override
 	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		same = 0;

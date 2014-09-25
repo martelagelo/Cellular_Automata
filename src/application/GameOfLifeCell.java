@@ -5,6 +5,15 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 
+/**
+ * Version 1
+ * Date: 9/14/2014
+ * 
+ * @author Michael Deng
+ * @author Pranava Raparla
+ * @author David Zhang
+ *
+ */
 public class GameOfLifeCell extends Cell {
 
 	/**
@@ -14,8 +23,7 @@ public class GameOfLifeCell extends Cell {
 	public void updateCell(int i, int j) {
 		xPos = i;
 		yPos = j;
-		lifeUpdate(findWantedNeighbors(Color.BLACK).size());
-		//lifeUpdate(findToroidalSquareNeighbors(xPos,yPos,Color.BLACK).size());					
+		lifeUpdate(findWantedNeighbors(Color.BLACK).size());			
 	}
 
 	

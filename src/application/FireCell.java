@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 public class FireCell extends Cell {
 
 	private Boolean isNextToFire = false;
-	// use threshold for burningChance
 	private double threshold = 0;
 	
 	private List<Cell> fireNeighbors = new ArrayList<Cell>();

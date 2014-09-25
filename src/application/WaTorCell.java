@@ -5,6 +5,15 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 
+/**
+ * Version 1
+ * Date: 9/14/2014
+ * 
+ * @author Michael Deng
+ * @author Pranava Raparla
+ * @author David Zhang
+ *
+ */
 public class WaTorCell extends Cell{
 	
 	private int fishTillBreed=3;
@@ -16,10 +25,8 @@ public class WaTorCell extends Cell{
 	private int sharkBreed = sharkTillBreed;
 
 	private List<WaTorCell> moveFishList = new ArrayList<WaTorCell>();
-
 	private List<WaTorCell> eatFishList = new ArrayList<WaTorCell>();
 	private List<WaTorCell> moveSharkList = new ArrayList<WaTorCell>();
-	
 	private List<WaTorCell> breedList = new ArrayList<WaTorCell>();
 
 
@@ -28,16 +35,22 @@ public class WaTorCell extends Cell{
 	//SEA IS WHITE	
 
 
+	/**
+	 * Updates the cell state
+	 */
 	@Override
 	public void updateCell(int i, int j) {
 		xPos = i;
 		yPos = j;	
 		if(updatedState == null) {
-			updateThisCell();
+			update();
 		}
 	}
-
-	private void updateThisCell() {
+	
+	/**
+	 * Selects the cell type and updates it
+	 */
+	private void update() {
 		if (currentState == Color.ORANGE){
 			sharkUpdate();
 		} else if (currentState == Color.GREEN) {
@@ -46,7 +59,10 @@ public class WaTorCell extends Cell{
 			updatedState = currentState;
 		}
 	}
-
+	
+	/**
+	 * Have the shark eat the fish around it or move if there are not fish
+	 */
 	private void sharkUpdate(){	
 		eatFishList = findWantedNeighbors(Color.GREEN, Color.GREEN);	
 		if(eatFishList.size() != 0){
@@ -57,11 +73,16 @@ public class WaTorCell extends Cell{
 		}
 	}
 
-
+	/**
+	 * Moves the fish
+	 */
 	private void fishUpdate(){
 		moveFish();
 	}
-
+	
+	/**
+	 * Find the fish neighbors and eat them
+	 */
 	private void eatFish(){
 		for(int i = 0; i < eatFishList.size(); i++){			
 			eatFishList.get(i).updatedState = Color.WHITE;
@@ -72,6 +93,9 @@ public class WaTorCell extends Cell{
 		sharkCheck(this);
 	}
 
+	/**
+	 * Moves the shark to a free location and then checks its breed and death statuses
+	 */
 	private void moveShark(){	
 		moveSharkList = findWantedNeighbors(Color.WHITE, Color.WHITE);
 		if (moveSharkList.size() != 0) {
@@ -92,18 +116,18 @@ public class WaTorCell extends Cell{
 		}
 	}
 
+	/**
+	 * Moves the fish to a free location and then checks it breed status
+	 */
 	private void moveFish(){
-
 		moveFishList = findWantedNeighbors(Color.WHITE, Color.WHITE);
 		if(moveFishList.size() != 0) {
 			int r = randomFinder(moveFishList);	
-
 			this.updatedState = Color.WHITE;
 			fishBreed--;
 			moveFishList.get(r).updatedState = Color.GREEN;
 			moveFishList.get(r).fishBreed = fishBreed;
 			fishCheck(moveFishList.get(r));
-
 		}
 		else {
 			updatedState = Color.GREEN;
@@ -112,8 +136,10 @@ public class WaTorCell extends Cell{
 		}
 	}
 
-
-
+	/**
+	 * Checks if the shark should die or breed or do nothing
+	 * @param waTorCell: The cell the shark has moved to 
+	 */
 	private void sharkCheck(WaTorCell waTorCell){
 		if(sharkDeath == 0){
 			killShark(waTorCell);	
@@ -123,19 +149,31 @@ public class WaTorCell extends Cell{
 		}
 	}
 
-
+	/**
+	 * Checks if the fish should breed or do nothing
+	 * @param waTorCell: The cell the fish has moved to
+	 */
 	private void fishCheck(WaTorCell waTorCell){
 		if(fishBreed == 0){
 			breed(waTorCell, Color.GREEN);
 		}
 	}
 
+	/**
+	 * Kills the shark if its time for him to die
+	 * @param waTorCell: The cell the shark moved to 
+	 */
 	private void killShark(WaTorCell waTorCell){
 		waTorCell.updatedState = Color.WHITE;
 		waTorCell.sharkDeath = sharkTillDeath;
 		waTorCell.sharkBreed = sharkTillBreed;
 	}
 
+	/**
+	 * Breed either the shark or the fish
+	 * @param waTorCell: The cell the shark or fish moved to
+	 * @param color: The identification of either a shark or a fish
+	 */
 	private void breed(WaTorCell waTorCell, Color color){
 		breedList = findWantedNeighbors(waTorCell, Color.WHITE, Color.WHITE);
 		if(breedList.size() != 0){
@@ -149,7 +187,12 @@ public class WaTorCell extends Cell{
 		waTorCell.sharkBreed = sharkTillBreed;	
 		waTorCell.fishBreed = fishTillBreed;
 	}
-
+	
+	/**
+	 * Creates a random integer that selects an index in the inputted array
+	 * @param moveFishList2: The list that is being referenced
+	 * @return: The index of the array selected
+	 */
 	private int randomFinder(List<WaTorCell> moveFishList2){
 		return ApplicationConstants.rand.nextInt(moveFishList2.size());
 	}

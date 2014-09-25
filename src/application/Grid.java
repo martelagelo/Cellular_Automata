@@ -110,8 +110,8 @@ public class Grid {
 	}
 
 	/**
-	 * 
-	 * @param node
+	 * Changes the cell state of a particular cell
+	 * @param node: The cell being referenced
 	 */
 	public void changeCellState(Node node) {
 		int i = (int) ((node.getLayoutX() - 5)/ApplicationConstants.CELL_WIDTH);
@@ -128,10 +128,10 @@ public class Grid {
 	}
 
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @return
+	 * Creates a map of corner neighbors for a particular cell
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @return: The map of corner neighbors
 	 */
 	private Map createCornerNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
@@ -142,10 +142,10 @@ public class Grid {
 	}
 	
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @return
+	 * Creates a map of cardinal directional neighbors for a particular cell
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @return: The map of cardinal directional neighbors
 	 */
 	private Map createCardinalNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
@@ -156,10 +156,10 @@ public class Grid {
 	}
 	
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @return
+	 * Creates a map of square neighbors for a particular cell
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @return: The map of square neighbors
 	 */
 	private Map createSquareNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
@@ -167,6 +167,12 @@ public class Grid {
 		return neighbors;
 	}
 	
+	/**
+	 * Creates a map of corner neighbors for a particular cell with toroidal capabilities
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @return: The map of corner neighbors
+	 */
 	private Map createToroidalCornerNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = createCornerNeighborsMap(i, j);
 		if (!checkBounds(i + 1,j + 1)) {
@@ -217,10 +223,10 @@ public class Grid {
 	}
 	
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @return
+	 * Creates a map of cardinal directional neighbors for a particular cell with toroidal capabilities
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @return: The map of cardinal directional neighbors
 	 */
 	private Map createToroidalCardinalNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
@@ -240,10 +246,10 @@ public class Grid {
 	}
 	
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @return
+	 * Creates a map of square neighbors for a particular cell with toroidal capabilities
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @return: The map of square neighbors
 	 */
 	private Map createToroidalSquareNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = createToroidalCardinalNeighborsMap(i, j);
@@ -252,12 +258,12 @@ public class Grid {
 	}
 	
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @param x
-	 * @param y
-	 * @param map
+	 * Adds cells to a map if not out of bounds
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @param x: An array of x positions 
+	 * @param y: An array of y positions
+	 * @param map: The map that needs to be added to
 	 */
 	private void addCellsToMap(int i, int j, int[] x, int[] y, Map map) {
 		for(int k = 0; k < x.length; k++) {
@@ -268,9 +274,9 @@ public class Grid {
 	}
 
 	/**
-	 * 
-	 * @param i
-	 * @param j
+	 * Checks to make sure referenced locations are in the bounds of the grid
+	 * @param i: The x position of the particular location
+	 * @param j: The x position of the particular location
 	 * @return
 	 */
 	private boolean checkBounds(int i, int j) {
@@ -278,7 +284,7 @@ public class Grid {
 	}
 	
 	/**
-	 * 
+	 * Populates the neighbors of each of the cells in the cell matrix
 	 */
 	public void populateMatrixNeighborMaps() {
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
