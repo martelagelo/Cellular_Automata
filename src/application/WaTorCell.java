@@ -29,10 +29,9 @@ public class WaTorCell extends Cell{
 
 
 	@Override
-	public void updateCell(int i, int j, Cell[][] cellMatrix) {
+	public void updateCell(int i, int j) {
 		xPos = i;
 		yPos = j;	
-		Matrix = cellMatrix;
 		if(updatedState == null) {
 			updateThisCell();
 		}
@@ -77,7 +76,7 @@ public class WaTorCell extends Cell{
 		moveSharkList = findWantedNeighbors(Color.WHITE, Color.WHITE);
 		if (moveSharkList.size() != 0) {
 			int r = randomFinder(moveSharkList);
-			Matrix[xPos][yPos].updatedState = Color.WHITE;	
+			this.updatedState = Color.WHITE;	
 			sharkDeath --;
 			sharkBreed --;
 			moveSharkList.get(r).updatedState = Color.ORANGE;
@@ -99,7 +98,7 @@ public class WaTorCell extends Cell{
 		if(moveFishList.size() != 0) {
 			int r = randomFinder(moveFishList);	
 
-			Matrix[xPos][yPos].updatedState = Color.WHITE;
+			this.updatedState = Color.WHITE;
 			fishBreed--;
 			moveFishList.get(r).updatedState = Color.GREEN;
 			moveFishList.get(r).fishBreed = fishBreed;
@@ -152,8 +151,7 @@ public class WaTorCell extends Cell{
 	}
 
 	private int randomFinder(List<WaTorCell> moveFishList2){
-		int random = ApplicationConstants.rand.nextInt(moveFishList2.size());
-		return random;
+		return ApplicationConstants.rand.nextInt(moveFishList2.size());
 	}
 	
 	@Override
@@ -163,9 +161,10 @@ public class WaTorCell extends Cell{
 	}
 
 	@Override
-	protected void updateCell(int i, int j) {
+	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 }

@@ -46,7 +46,7 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new WaTorCell();
+		cellMatrix[i][j] = new GameOfLifeCell();
 		cellMatrix[i][j].xPos = i;
 		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
@@ -80,7 +80,7 @@ public class Grid {
 	private void updateCellMatrix(){
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].updateCell(i, j, cellMatrix);
+				cellMatrix[i][j].updateCell(i, j);
 			}
 		}
 	}
@@ -167,6 +167,90 @@ public class Grid {
 		return neighbors;
 	}
 	
+	private Map createToroidalCornerNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = createCornerNeighborsMap(i, j);
+		if (!checkBounds(i + 1,j + 1)) {
+			if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
+				neighbors.put(cellMatrix[0][0].cellID, cellMatrix[0][0]);
+			}
+			else if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j != ApplicationConstants.NUM_OF_ROWS - 1) {
+				neighbors.put(cellMatrix[0][j+1].cellID, cellMatrix[0][j+1]);
+			}
+			else if (i != ApplicationConstants.NUM_OF_COLUMNS - 1 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
+				neighbors.put(cellMatrix[i+1][0].cellID, cellMatrix[i+1][0]);
+			}
+		}
+		if (!checkBounds(i - 1,j + 1)) {
+			if (i == 0 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
+				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][0].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][0]);
+			}
+			else if (i != 0 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
+				neighbors.put(cellMatrix[i-1][0].cellID, cellMatrix[i-1][0]);
+			}
+			else if (i == 0 && j != ApplicationConstants.NUM_OF_ROWS - 1) {
+				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j + 1].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j + 1]);
+			}
+		}
+		if (!checkBounds(i + 1,j - 1)) {
+			if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j == 0) {
+				neighbors.put(cellMatrix[0][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[0][ApplicationConstants.NUM_OF_ROWS - 1]);
+			}
+			else if (i != ApplicationConstants.NUM_OF_COLUMNS - 1 && j == 0) {
+				neighbors.put(cellMatrix[i + 1][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[i + 1][ApplicationConstants.NUM_OF_ROWS - 1]);
+			}
+			else if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j != 0) {
+				neighbors.put(cellMatrix[0][j - 1].cellID, cellMatrix[0][j - 1]);
+			}
+		}
+		if (!checkBounds(i - 1,j - 1)) {
+			if(i == 0 && j == 0) {
+				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][ApplicationConstants.NUM_OF_ROWS - 1]);
+			}
+			else if (i != 0 && j == 0) {
+				neighbors.put(cellMatrix[i - 1][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[i - 1][ApplicationConstants.NUM_OF_ROWS - 1]);
+			}
+			else if (i == 0 && j != 0) {
+				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j - 1].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j - 1]);
+			}
+		}
+		return neighbors;
+	}
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	private Map createToroidalCardinalNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
+		if (!checkBounds(i+1,j)) {
+			neighbors.put(cellMatrix[0][j].cellID, cellMatrix[0][j]);
+		}
+		if (!checkBounds(i - 1,j)) {
+			neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j]);
+		} 
+		if (!checkBounds(i,j+1)) {
+				neighbors.put(cellMatrix[i][0].cellID, cellMatrix[i][0]);
+		} 
+		if (!checkBounds(i,j - 1)) {
+			neighbors.put(cellMatrix[i][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[i][ApplicationConstants.NUM_OF_ROWS - 1]);
+		} 	
+		return neighbors;
+	}
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	private Map createToroidalSquareNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = createToroidalCardinalNeighborsMap(i, j);
+		neighbors.putAll(createToroidalCornerNeighborsMap(i, j));
+		return neighbors;
+	}
+	
 	/**
 	 * 
 	 * @param i
@@ -185,23 +269,23 @@ public class Grid {
 
 	/**
 	 * 
-	 */
-	public void populateMatrixNeighborMaps() {
-		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
-			}	
-		}
-	}
-
-	/**
-	 * 
 	 * @param i
 	 * @param j
 	 * @return
 	 */
 	private boolean checkBounds(int i, int j) {
 		return (i < ApplicationConstants.NUM_OF_COLUMNS && i >= 0 && j < ApplicationConstants.NUM_OF_ROWS && j >= 0);
+	}
+	
+	/**
+	 * 
+	 */
+	public void populateMatrixNeighborMaps() {
+		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
+			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+				cellMatrix[i][j].neighbors = createToroidalSquareNeighborsMap(i, j);
+			}	
+		}
 	}
 
 }
