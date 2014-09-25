@@ -43,11 +43,10 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new WaTorCell3();
+		cellMatrix[i][j] = new GameOfLifeCell();
 		cellMatrix[i][j].xPos = i;
 		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
-		//cellMatrix[i][j].updatedState = cellMatrix[i][j].currentState;
 	}
 
 	/**
@@ -112,12 +111,12 @@ public class Grid {
 	public void changeCellState(Node node) {
 		int i = (int) ((node.getLayoutX() - 5)/ApplicationConstants.CELL_WIDTH);
 		int j = (int) ((node.getLayoutY() - 5)/ApplicationConstants.CELL_WIDTH);
-		if (cellMatrix[i][j].currentState == Color.GREEN) { 
+		if (cellMatrix[i][j].currentState == Color.BLACK) { 
 			cellMatrix[i][j].currentState = Color.WHITE;
 			cellMatrix[i][j].updatedState = Color.WHITE;
 		} else {
-			cellMatrix[i][j].currentState = Color.GREEN;
-			cellMatrix[i][j].updatedState = Color.GREEN;
+			cellMatrix[i][j].currentState = Color.BLACK;
+			cellMatrix[i][j].updatedState = Color.BLACK;
 		}
 		Rectangle r = (Rectangle) node;
 		r.setFill(cellMatrix[i][j].currentState);

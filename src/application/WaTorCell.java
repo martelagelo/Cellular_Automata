@@ -7,139 +7,195 @@ import javafx.scene.paint.Color;
 
 public class WaTorCell extends Cell{
 	
+	private int fishTillBreed=3;
+	private int sharkTillDeath=6;
+	private int sharkTillBreed=6;
+
+	private int fishBreed = fishTillBreed;
+	private int sharkDeath = sharkTillDeath;
+	private int sharkBreed = sharkTillBreed;
+
+	private List<WaTorCell> moveFishList = new ArrayList<WaTorCell>();
+
+	private List<WaTorCell> eatFishList = new ArrayList<WaTorCell>();
+	private List<WaTorCell> moveSharkList = new ArrayList<WaTorCell>();
 	
-	private List<Integer> eatFishX = new ArrayList<Integer>();
-	private List<Integer> eatFishY = new ArrayList<Integer>();		
-	private List<Integer> moveSharkX = new ArrayList<Integer>();
-	private List<Integer> moveSharkY = new ArrayList<Integer>();
-	private List<Integer> breedCellX = new ArrayList<Integer>();
-	private List<Integer> breedCellY = new ArrayList<Integer>();
-	private List<Integer> moveFishX = new ArrayList<Integer>();
-	private List<Integer> moveFishY = new ArrayList<Integer>();
-	
-	private int fishThreshold = 3;
-	private int sharkThreshold = 3;
-	
+	private List<WaTorCell> breedList = new ArrayList<WaTorCell>();
+
+
 	//FISHES ARE GREEN
 	//SHARKS ARE ORANGE
-	//SEA IS BLUE
-	
+	//SEA IS BLUE	
+
 
 	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
-		// TODO Auto-generated method stub		
-		super.xPos = i;
-		super.yPos = j;	
-		super.Matrix = cellMatrix;
-		
-		sharkEatUpdate();
-		sharkDieUpdate();
-		fishBreedUpdate();
-		//fishMoveUpdate still needs to be written.
+		xPos = i;
+		yPos = j;	
+		Matrix = cellMatrix;
+		if(updatedState == null) {
+			updateThisCell();
+		}
 	}
 
+	private void updateThisCell() {
+		if (currentState == Color.ORANGE){
+			sharkUpdate();
+		} else if (currentState == Color.GREEN) {
+			fishUpdate();
+		} else {
+			updatedState = currentState;
+		}
+	}
+
+	private void sharkUpdate(){	
+		eatFishList = findCardinalToroidalNeighbors(xPos, yPos, Color.GREEN, Color.GREEN);	
+		if(eatFishList.size() != 0){
+			eatFish();
+		}
+		else {
+			moveShark();
+		}
+	}
+
+
+	private void fishUpdate(){
+		moveFish();
+	}
+
+
+
+	private void eatFish(){
+		for(int i = 0; i < eatFishList.size(); i++){			
+			eatFishList.get(i).updatedState = Color.WHITE;
+		}
+		updatedState = currentState;		
+		sharkDeath = sharkTillDeath;
+		sharkBreed--;			
+		sharkCheck(this);
+	}
+
+	private void moveShark(){	
+		moveSharkList = findCardinalToroidalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
+		if (moveSharkList.size() != 0) {
+			int r = randomFinder(moveSharkList);
+			Matrix[xPos][yPos].updatedState = Color.WHITE;	
+			sharkDeath --;
+			sharkBreed --;
+			moveSharkList.get(r).updatedState = Color.ORANGE;
+			moveSharkList.get(r).sharkDeath = sharkDeath;
+			moveSharkList.get(r).sharkBreed = sharkBreed;
+			sharkCheck(moveSharkList.get(r));
+		}
+		else {
+			updatedState = Color.ORANGE;
+			sharkDeath--;
+			sharkBreed--;
+			sharkCheck(this);
+
+		}
+
+	}
+
+
+	private void moveFish(){
+
+		moveFishList = findCardinalToroidalNeighbors(xPos, yPos, Color.WHITE, Color.WHITE);
+		if(moveFishList.size() != 0) {
+			int r = randomFinder(moveFishList);	
+
+			Matrix[xPos][yPos].updatedState = Color.WHITE;
+			fishBreed--;
+			moveFishList.get(r).updatedState = Color.GREEN;
+			moveFishList.get(r).fishBreed = fishBreed;
+			fishCheck(moveFishList.get(r));
+
+		}
+		else {
+			updatedState = Color.GREEN;
+			fishBreed--;
+			fishCheck(this);
+		}
+	}
+
+
+
+	private void sharkCheck(WaTorCell waTorCell){
+		if(sharkDeath == 0){
+			killShark(waTorCell);	
+		}
+		else if(sharkBreed == 0){
+			breed(waTorCell, Color.ORANGE);
+		}
+	}
+
+
+	private void fishCheck(WaTorCell waTorCell){
+		if(fishBreed == 0){
+			breed(waTorCell, Color.GREEN);
+		}
+	}
+
+	private void killShark(WaTorCell waTorCell){
+		waTorCell.updatedState = Color.WHITE;
+		waTorCell.sharkDeath = sharkTillDeath;
+		waTorCell.sharkBreed = sharkTillBreed;
+	}
+
+	private void breed(WaTorCell waTorCell, Color color){
+		breedList = findCardinalToroidalNeighbors(waTorCell.xPos, waTorCell.yPos, Color.WHITE, Color.WHITE);
+		if(breedList.size() != 0){
+			int r = randomFinder(breedList);			
+			breedList.get(r).updatedState = color;
+			breedList.get(r).sharkDeath = sharkTillDeath;
+			breedList.get(r).sharkBreed = sharkTillBreed;
+			breedList.get(r).fishBreed = fishTillBreed;
+		}	
+		waTorCell.updatedState = color;
+		waTorCell.sharkBreed = sharkTillBreed;	
+		waTorCell.fishBreed = fishTillBreed;
+	}
+
+	private int randomFinder(List<WaTorCell> moveFishList2){
+		int random = ApplicationConstants.rand.nextInt(moveFishList2.size());
+		return random;
+	}
+
+//	private ArrayList findNeighbours(int i, int j, Color color){
+//		ArrayList<WaTorCell3> list = new ArrayList<WaTorCell3>();
+//
+//		if (checkBounds(i+1,j)) {
+//			if ((Matrix[i + 1][j].currentState == color && Matrix[i+1][j].updatedState==null) || Matrix[i+1][j].updatedState == color) {
+//				list.add((WaTorCell3) Matrix[i + 1][j]);
+//			} 
+//		}
+//		if (checkBounds(i - 1,j)) {
+//			if((Matrix[i - 1][j].currentState == color && Matrix[i-1][j].updatedState==null) || Matrix[i-1][j].updatedState == color) {
+//				list.add((WaTorCell3) Matrix[i - 1][j]);
+//			}
+//		} 
+//		if (checkBounds(i,j+1)) {
+//			if ((Matrix[i][j+1].currentState == color && Matrix[i][j+1].updatedState==null) || Matrix[i][j+1].updatedState == color) {
+//				list.add((WaTorCell3) Matrix[i][j+1]);
+//			}
+//		} 
+//		if (checkBounds(i,j - 1)) {
+//			if ((Matrix[i][j-1].currentState == color && Matrix[i][j-1].updatedState==null) || Matrix[i][j-1].updatedState == color) {
+//				list.add((WaTorCell3) Matrix[i][j - 1]);
+//			}
+//		} 		
+//		return list;
+//	}
+//
+//	private boolean checkBounds(int i, int j){
+//		return (i < ApplicationConstants.NUM_OF_COLUMNS && i >= 0 && j < ApplicationConstants.NUM_OF_ROWS && j >= 0);
+//	}
+
+	
 	@Override
 	void setCurrentState(String s) {
 		// TODO Auto-generated method stub
-		
-				
-	}
-	
-	
 
-	/*
-	 * All of these methods check all 4 neighbours with 4 separate if statements.
-	 * I created arraylists to store the information, because I have to pick a random one afterwards 
-	 * to either move to (fish) or to eat (shark)
-	 * 
-	 * I used separate arraylists for X coordinate and Y coordiante because I couldn't come up with another way
-	 */
-	
-	
-	private void sharkEatUpdate(){
-		if(Matrix[xPos][yPos].currentState == Color.ORANGE){
-
-			if(Matrix[xPos][yPos+1].currentState != null && Matrix[xPos][yPos+1].currentState == Color.GREEN){
-				eatFishX.add(xPos);
-				eatFishY.add(yPos+1);				
-			}else if(Matrix[xPos][yPos+1].currentState != null && Matrix[xPos][yPos+1].currentState == Color.BLUE){				
-				moveSharkX.add(xPos);
-				moveSharkY.add(yPos+1);			
-			}
-			if(Matrix[xPos+1][yPos].currentState != null && Matrix[xPos+1][yPos].currentState == Color.GREEN){
-				eatFishX.add(xPos+1);
-				eatFishY.add(yPos);
-			}else if(Matrix[xPos+1][yPos].currentState != null && Matrix[xPos+1][yPos].currentState == Color.BLUE){
-				moveSharkX.add(xPos);
-				moveSharkY.add(yPos+1);
-			}
-			if(Matrix[xPos-1][yPos].currentState != null && Matrix[xPos-1][yPos].currentState == Color.GREEN){
-				eatFishX.add(xPos-1);
-				eatFishY.add(yPos);
-			}else if(Matrix[xPos-1][yPos].currentState != null && Matrix[xPos-1][yPos].currentState == Color.BLUE){
-				moveSharkX.add(xPos-1);
-				moveSharkY.add(yPos);
-			}
-			if(Matrix[xPos][yPos-1].currentState != null && Matrix[xPos][yPos-1].currentState == Color.GREEN){
-				eatFishX.add(xPos-1);
-				eatFishY.add(yPos);
-			} else if(Matrix[xPos][yPos-1].currentState != null && Matrix[xPos][yPos-1].currentState == Color.BLUE){
-				moveSharkX.add(xPos);
-				moveSharkY.add(yPos-1);
-			}			
-		}
-		if(eatFishX != null){
-			int random = (int)(Math.random()*eatFishX.size()-1);
-			Matrix[eatFishX.get(random)][eatFishY.get(random)].updatedState = Color.GREEN;
-			Matrix[xPos][yPos].turnsHungry = 0;				
-		}
-		
-		if(eatFishX==null){				
-			int random = (int)(Math.random()*moveSharkX.size()-1);				
-			Matrix[moveSharkX.get(random)][moveSharkY.get(random)].updatedState = Color.ORANGE;
-			Matrix[moveSharkX.get(random)][moveSharkY.get(random)].turnsHungry = Matrix[xPos][yPos].turnsHungry + 1;
-			Matrix[xPos][yPos].updatedState = Color.BLUE;
-			Matrix[xPos][yPos].turnsHungry = 0;			
-		}
-		
 	}
-	
-	private void sharkDieUpdate(){
-		if(Matrix[xPos][yPos].turnsHungry== sharkThreshold && Matrix[xPos][yPos].currentState==Color.ORANGE){
-			Matrix[xPos][yPos].updatedState = Color.BLUE;
-			Matrix[xPos][yPos].turnsHungry = 0;
-		}
-	}
-	
-	
-	private void fishBreedUpdate(){
-		if(Matrix[xPos][yPos].turnsEating == fishThreshold && Matrix[xPos][yPos].currentState == Color.GREEN){
-			if(Matrix[xPos][yPos+1].currentState != null && Matrix[xPos][yPos+1].currentState == Color.BLUE){
-				breedCellX.add(xPos);
-				breedCellY.add(yPos+1);				
-			}			
-			if(Matrix[xPos+1][yPos].currentState != null && Matrix[xPos+1][yPos].currentState == Color.BLUE){
-				breedCellX.add(xPos+1);
-				breedCellY.add(yPos);
-			}			
-			if(Matrix[xPos-1][yPos].currentState != null && Matrix[xPos-1][yPos].currentState == Color.BLUE){
-				breedCellX.add(xPos-1);
-				breedCellY.add(yPos);
-			}			
-			if(Matrix[xPos][yPos-1].currentState != null && Matrix[xPos][yPos-1].currentState == Color.BLUE){
-				breedCellX.add(xPos-1);
-				breedCellY.add(yPos);
-			}			
-			if(breedCellX != null){
-				int random = (int)(Math.random()*breedCellX.size()-1);	
-				Matrix[breedCellX.get(random)][breedCellY.get(random)].updatedState = Color.GREEN;
-				Matrix[breedCellX.get(random)][breedCellY.get(random)].turnsEating = 0;				
-			}	
-		}
-	}
-	
-
-	
-	
 	
 }
