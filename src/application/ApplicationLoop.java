@@ -112,11 +112,14 @@ public class ApplicationLoop {
 		}
 		
 		// Loop through entire list of cells read in from XML file and add to grid
+		// Uncomment segment below to incorporate read in cells into the game.
+		/*
 		for(Cell cell: cellXMLReader.getCellList()) {
 			Rectangle rect = generateCell(cell.currentState);
 			grid.initializeAndPopulateMatrix(cell);
 			gp.add(rect, cell.xPos, cell.yPos,1,1);
 		}
+		*/
 		
 		root.getChildren().add(gp);
 		return gp;
