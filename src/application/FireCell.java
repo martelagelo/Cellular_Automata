@@ -18,7 +18,8 @@ import javafx.scene.paint.Color;
 public class FireCell extends Cell {
 
 	private Boolean isNextToFire = false;
-	private double burningChance = 0;
+	// use threshold for burningChance
+	private double threshold = 0;
 	
 	private List<WaTorCell3> fireNeighbors = new ArrayList<WaTorCell3>();
 
@@ -50,9 +51,10 @@ public class FireCell extends Cell {
 	 */
 	private void calculateBurnChance(){
 		if (isNextToFire && super.currentState == Color.GREEN) {
-			burningChance = .99;
+			threshold = .50;
+
 		} else {
-			burningChance = 0.0;
+			threshold = 0.0;
 		}
 	}
 
@@ -63,7 +65,7 @@ public class FireCell extends Cell {
 		if (super.currentState == Color.RED) {
 			super.updatedState = Color.YELLOW;
 		}
-		else if (ApplicationConstants.rand.nextFloat() < burningChance) {
+		else if (ApplicationConstants.rand.nextFloat() < threshold) {
 			super.updatedState = Color.RED;
 		} else {
 			super.updatedState = super.currentState;

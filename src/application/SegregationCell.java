@@ -7,7 +7,6 @@ public class SegregationCell extends Cell {
 
 	private double same = 0;
 	private double different = 0;
-	public double threshold;
 
 	public SegregationCell(){
 		//same = 0;
@@ -17,11 +16,6 @@ public class SegregationCell extends Cell {
 		//currentState = Color.WHITE;
 	}
 	
-	// Called upon creation in XML reader
-	public void setThreshold(double num){
-		threshold = num;
-	}
-
 	private double percentageCalc(){
 		for(int i = xPos-1; i <= xPos+1; i++){
 			for(int j = yPos-1; j <= yPos+1; j++){

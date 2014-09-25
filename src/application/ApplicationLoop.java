@@ -117,21 +117,23 @@ public class ApplicationLoop {
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				Rectangle rect = generateCell(Color.WHITE);
-				//				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
-				//				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				//	Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				//	grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
 				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
 		}
 
 		// Loop through entire list of cells read in from XML file and add to grid
-		//		for(Cell cell: cellXMLReader.getCellList()) {
-		//			Rectangle rect = generateCell(cell.currentState);
-		//			grid.initializeAndPopulateMatrix(cell);
-		//			gp.add(rect, cell.xPos, cell.yPos,1,1);
-		//		}
-		//		
-
+		// Uncomment segment below to incorporate XML Reader.
+		/* 
+		for(Cell cell: cellXMLReader.getCellList()) {
+			Rectangle rect = generateCell(cell.currentState);
+			grid.initializeAndPopulateMatrix(cell);
+			gp.add(rect, cell.xPos, cell.yPos,1,1);
+		}	
+			*/
+		
 		root.getChildren().add(gp);
 		return gp;
 	}
