@@ -10,11 +10,7 @@ public abstract class Cell {
 	Paint currentState;
 	Paint updatedState;
 	Cell[][] Matrix;
-	
-	//For now, 3 is the limit for both.
-	int turnsEating;
-	int turnsHungry;
-	
+	String gridEdgeType;	
 
 	// Every frame, after the updateState is set, then all cells are updated
 	void update(){
@@ -34,6 +30,10 @@ public abstract class Cell {
 	}
 	void setYPos(int y){
 		yPos = y;
+	}
+	
+	void setGridEdgeType(String s) {
+		gridEdgeType = s;
 	}
 	
 	// For printing purposes

@@ -9,6 +9,9 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -26,7 +29,7 @@ public class Main extends Application {
 	private CellXMLReader cellXMLReader;
 	
 	/**
-	 * 
+	 * Starts the program and initializes the splash page
 	 */
 	@Override
 	public void start(Stage primaryStage) {
@@ -57,15 +60,16 @@ public class Main extends Application {
 		if(animation != null) {
 			animation.pause();
 		}
-		KeyFrame frame = myGame.start(speed);
 		animation = new Timeline();
+		KeyFrame frame = myGame.start(speed);
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
+		
 		animation.play();
 	}
 	
 	/**
-	 * 
+	 * Moves the application to the error page
 	 */
 	private void activateErrorPage(){
 		Group root = new Group();
@@ -110,6 +114,7 @@ public class Main extends Application {
 		createSliderLabel(root);
 		createSlider(root);
 		createReturnToStartButton(root);
+		createGameGraph(root);
 	}
 	
 	/**
@@ -189,11 +194,33 @@ public class Main extends Application {
 	}
 	
 	/**
+	 * Creates and populates a line chart
+	 * @param title: The title of the line chart
+	 * @param x_Coord: The x coordinate of the line chart
+	 * @param y_Coord: The y coordinate of the line chart
+	 * @param root: The group the line chart belongs to
+	 * @return: A newly initialized line chart
+	 */
+	private LineChart createLineChart(String title, int x_Coord, int y_Coord, Group root) {
+		NumberAxis xAxis = new NumberAxis();
+		NumberAxis yAxis = new NumberAxis();
+		xAxis.setLabel("Timeline Frames");
+		yAxis.setLabel("Amount of Squares");
+		
+		LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+		lineChart.setTitle(title);
+		lineChart.setLayoutX(x_Coord);
+		lineChart.setLayoutY(y_Coord);
+		root.getChildren().add(lineChart);
+		return lineChart;
+	}
+	
+	/**
 	 * Method for creating the start button 
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createStartGameButton(Group root){
-		Button btnStart = createButton("Start Simulation", 50, 450, root);
+		Button btnStart = createButton("Start Simulation", ApplicationConstants.MODULE_X_POS, ApplicationConstants.FIRST_BUTTON_Y_POS, root);
 		activateStartButton(btnStart, primaryStage);
 	}
 	
@@ -202,7 +229,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createExitButton(Group root) {
-		Button btnExit = createButton("Exit Application", 50, 500, root);
+		Button btnExit = createButton("Exit Application", ApplicationConstants.MODULE_X_POS, ApplicationConstants.SECOND_BUTTON_Y_POS, root);
 		activateExitAppButton(btnExit);
 	}
 	
@@ -211,7 +238,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createImportXMLButton(Group root) {
-		Button btnImportXML = createButton("Import an XML File", 50, 550, root);
+		Button btnImportXML = createButton("Import an XML File", ApplicationConstants.MODULE_X_POS, ApplicationConstants.THIRD_BUTTON_Y_POS, root);
 		activateImportXMLButton(btnImportXML);
 	}
 	
@@ -220,7 +247,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createReturnToStartButton(Group root) {
-		Button btnReturnToStart = createButton("Return to the start screen", 50, 450, root);
+		Button btnReturnToStart = createButton("Return to the start screen", ApplicationConstants.MODULE_X_POS, ApplicationConstants.FIRST_BUTTON_Y_POS, root);
 		activateReturntoStart(btnReturnToStart);
 	}
 	
@@ -229,7 +256,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createPauseButton(Group root) {
-		Button btnPauseApp = createButton("Pause Application", 50, 550, root);
+		Button btnPauseApp = createButton("Pause Application", ApplicationConstants.MODULE_X_POS, ApplicationConstants.THIRD_BUTTON_Y_POS, root);
 		activatePauseAnimationButton(btnPauseApp);
 	}
 	
@@ -238,7 +265,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createResumeButton(Group root) {
-		Button btnResumeApp = createButton("Resume Application", 50, 600, root);
+		Button btnResumeApp = createButton("Resume Application", ApplicationConstants.MODULE_X_POS, ApplicationConstants.FOURTH_BUTTON_Y_POS, root);
 		activateResumeAnimationButton(btnResumeApp);
 	}
 	
@@ -247,7 +274,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createStepThroughButton(Group root) {
-		Button btnStepThroughFrames = createButton("Step through frames", 50, 650, root);
+		Button btnStepThroughFrames = createButton("Step through frames", ApplicationConstants.MODULE_X_POS, ApplicationConstants.FIFTH_BUTTON_Y_POS, root);
 		activateStepThroughFrame(btnStepThroughFrames);
 	}
 	
@@ -256,7 +283,7 @@ public class Main extends Application {
 	 * @param root
 	 */
 	private void createSliderLabel(Group root) {
-		Label sliderLabel = createLabel("Frame Rate of Application", 1, 50, 700, root);
+		Label sliderLabel = createLabel("Frame Rate of Application", 1, ApplicationConstants.MODULE_X_POS, ApplicationConstants.SLIDER_LABEL_Y_POS, root);
 	}
 	
 	/**
@@ -264,7 +291,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createSlider(Group root) {
-		Slider slider = createSlider(0, 100, 50, 730, root);
+		Slider slider = createSlider(0, 100, ApplicationConstants.MODULE_X_POS, ApplicationConstants.SLIDER_Y_POS, root);
 	} 
 	
 	/**
@@ -290,6 +317,15 @@ public class Main extends Application {
 	private void createTitleLabel(Group root) {
 		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
 	}
+	
+	/**
+	 * Creates a linechart for the application and populates with data
+	 * @param root: The group the linechart module belongs to 
+	 */
+	private void createGameGraph(Group root) {
+		LineChart lineChart = createLineChart("Population vs. Frame", ApplicationConstants.MODULE_X_POS, 400, root);
+		myGame.populateLineChart(lineChart);
+	}
 
 	/**
 	 * Creates an event handler that launches the game on button click.
@@ -302,10 +338,10 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Start Button Pressed");
-				if(cellXMLReader != null)
+				//if(cellXMLReader != null)
 					playGame(stage);
-				else
-					System.out.println("Please import an XML File first!");
+				//else
+				//	System.out.println("Please import an XML File first!");
 			}
 		});
 	}
@@ -326,8 +362,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
-	 * @param btn
+	 * Activates the Import XML Button
+	 * @param btn: The import XML Button
 	 */
 	public void activateImportXMLButton(Button btn) {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -356,6 +392,7 @@ public class Main extends Application {
 			@Override
 			public void handle(MouseEvent event) {
 				runGameLoop(slider.getValue());
+				ApplicationConstants.gridEditable = false;
 			}
 		});
 	}
@@ -369,6 +406,8 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				animation.pause();
+				ApplicationConstants.gridEditable = true;
+				//myGame.editGrid();
 			}
 		});
 	}
@@ -382,6 +421,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event){
 				animation.play();
+				ApplicationConstants.gridEditable = false;
 			}
 		});
 	}
@@ -415,7 +455,7 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
+	 * Launches the program
 	 * @param args
 	 */
 	public static void main(String[] args) {
