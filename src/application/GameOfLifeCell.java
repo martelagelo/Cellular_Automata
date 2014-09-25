@@ -7,17 +7,15 @@ import javafx.scene.paint.Color;
 
 public class GameOfLifeCell extends Cell {
 
-	private int Alive;
 	/**
 	 * Updates the state of this particular cell
 	 */
 	@Override
-	public void updateCell(int i, int j, Cell[][] cellMatrix) {
-		Alive = 0;
-		Matrix = cellMatrix;
+	public void updateCell(int i, int j) {
 		xPos = i;
 		yPos = j;
-		lifeUpdate(findToroidalSquareNeighbors(xPos,yPos,Color.BLACK).size());					
+		lifeUpdate(findWantedNeighbors(Color.BLACK).size());
+		//lifeUpdate(findToroidalSquareNeighbors(xPos,yPos,Color.BLACK).size());					
 	}
 
 	
@@ -37,6 +35,13 @@ public class GameOfLifeCell extends Cell {
 
 	@Override
 	void setCurrentState(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		// TODO Auto-generated method stub
 		
 	}

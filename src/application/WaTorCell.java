@@ -161,5 +161,11 @@ public class WaTorCell extends Cell{
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	protected void updateCell(int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

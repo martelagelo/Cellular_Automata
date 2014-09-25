@@ -1,6 +1,10 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -16,6 +20,8 @@ public abstract class Cell {
 	String gridEdgeType;
 	String gridLocationShape;
 	Cell[][] Matrix;
+	Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
+	int cellID;
 
 	/**
 	 * Every frame, after the updateState is set, then all cells are updated
@@ -32,6 +38,13 @@ public abstract class Cell {
 	 * @param cellMatrix
 	 */
 	protected abstract void updateCell(int i, int j, Cell[][] cellMatrix);
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	protected abstract void updateCell(int i, int j);
 
 	/**
 	 * Each class should know how to set its current state
@@ -327,9 +340,26 @@ public abstract class Cell {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @param color
+	 * @return
+	 */
 	protected ArrayList findToroidalSquareNeighbors(int i, int j, Color color) {
 		ArrayList<Cell> list = findToroidalCardinalNeighbors(i, j, color);
 		list.addAll(findToroidalCornerNeighbors(i, j, color));
+		return list;
+	}
+	
+	protected List findWantedNeighbors(Color color) {
+		List<Cell> list = new ArrayList<Cell>();
+		for (Integer key : neighbors.keySet()) {
+			if (neighbors.get(key).currentState == color) {
+				list.add(neighbors.get(key));
+			}
+		}
 		return list;
 	}
 
@@ -340,4 +370,5 @@ public abstract class Cell {
 	public String toString() {
 		return "Cell: " + "\n\tX: " + xPos + "\n\tY: " + yPos + "\n\tState: " + currentState;
 	}
+
 }

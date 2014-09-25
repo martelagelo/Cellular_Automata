@@ -29,7 +29,8 @@ public class SegregationCell extends Cell {
 			}
 		}
 		same--;
-		Double d = (same/(same+different));
+		//same = findWantedNeighbors((Color) currentState).size();
+		Double d = (same/(same + different));
 		return d;
 	}
 
@@ -82,7 +83,17 @@ public class SegregationCell extends Cell {
 	}
 
 	@Override
-	public void updateCell(int i, int j, Cell[][] cellMatrix) {
+	public void updateCell(int i, int j) {
+		same = 0;
+		different = 0;
+		//super.Matrix = cellMatrix;
+		super.xPos = i;
+		super.yPos = j;
+		cellMover(percentageCalc());
+	}
+
+	@Override
+	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		same = 0;
 		different = 0;
 		super.Matrix = cellMatrix;
@@ -90,5 +101,7 @@ public class SegregationCell extends Cell {
 		super.yPos = j;
 		cellMover(percentageCalc());
 	}
+
+	
 }
 

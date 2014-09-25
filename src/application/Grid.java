@@ -1,5 +1,7 @@
 package application;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.w3c.dom.NodeList;
@@ -25,6 +27,7 @@ public class Grid {
 
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 	private Group root;
+	private int cellID = 0;
 
 
 	/**
@@ -47,6 +50,8 @@ public class Grid {
 		cellMatrix[i][j].xPos = i;
 		cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
+		cellMatrix[i][j].cellID = this.cellID;
+		this.cellID++;
 	}
 
 	/**
@@ -120,6 +125,63 @@ public class Grid {
 		}
 		Rectangle r = (Rectangle) node;
 		r.setFill(cellMatrix[i][j].currentState);
+	}
+
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	private Map createCornerNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
+		int[] x = new int[]{-1, 1, -1, 1};
+		int[] y = new int[]{-1, -1, 1, 1};
+		addCellsToMap(i, j, x, y, neighbors);
+		return neighbors;
+	}
+	
+	private Map createCardinalNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
+		int[] x = new int[]{0, 0, -1, 1};
+		int[] y = new int[]{-1, 1, 0, 0};
+		addCellsToMap(i, j, x, y, neighbors);
+		return neighbors;
+	}
+	
+	private void addCellsToMap(int i, int j, int[] x, int[] y, Map map) {
+		for(int k = 0; k < x.length; k++) {
+			if (checkBounds(i + x[k], j + y[k])) {
+				map.put(cellMatrix[i + x[k]][j + y[k]].cellID, cellMatrix[i + x[k]][j + y[k]]);
+			}
+		}
+	}
+	
+	private Map createSquareNeighborsMap(int i, int j) {
+		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
+		neighbors.putAll(createCornerNeighborsMap(i, j));
+		return neighbors;
+	}
+
+	/**
+	 * 
+	 */
+	public void populateMatrixNeighborMaps() {
+		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
+			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+				cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
+			}	
+		}
+	}
+
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	private boolean checkBounds(int i, int j) {
+		return (i < ApplicationConstants.NUM_OF_COLUMNS && i >= 0 && j < ApplicationConstants.NUM_OF_ROWS && j >= 0);
 	}
 
 }
