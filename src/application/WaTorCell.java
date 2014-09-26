@@ -30,11 +30,6 @@ public class WaTorCell extends Cell{
 	private List<WaTorCell> breedList = new ArrayList<WaTorCell>();
 
 
-	//FISHES ARE GREEN
-	//SHARKS ARE ORANGE
-	//SEA IS WHITE	
-
-
 	/**
 	 * Updates the cell state
 	 */
