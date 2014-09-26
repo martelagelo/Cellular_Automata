@@ -124,6 +124,8 @@ public class ApplicationLoop {
 				//grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
+		System.out.println("Colors: " + cellXMLReader.myColors);
+		System.out.println("Game Of Life: " + cellXMLReader.myModelType);
 		// Loop through entire list of cells read in from XML file and add to grid
 		//		for(Cell cell: cellXMLReader.getCellList()) {
 		//			Polygon rect = generateRect(cell.currentState);

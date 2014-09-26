@@ -40,6 +40,11 @@ public abstract class Cell {
 	 */
 	protected abstract void updateCell(int i, int j, Cell[][] cellMatrix);
 
+	void update() {
+		currentState = updatedState;
+		updatedState = null;
+	}
+	
 	/**
 	 * Sets the current state of the current cell
 	 * @param s: The string that decides the state

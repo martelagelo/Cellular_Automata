@@ -46,10 +46,7 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-
 		cellMatrix[i][j] = new WaTorCell();
-		//cellMatrix[i][j].xPos = i;
-		//cellMatrix[i][j].yPos = j;
 		cellMatrix[i][j].setXPos(i);
 		cellMatrix[i][j].setYPos(j);
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.

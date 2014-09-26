@@ -1,8 +1,10 @@
 <CellSociety>
 	<ApplicationDetails>
 		<NumRows>20</NumRows>
-		<NumCols>20</NumCols><ModelType>Wator</ModelType>
-		<Colors>wgo</Colors><GridEdgeType>Toroidal</GridEdgeType>
+		<NumCols>20</NumCols>
+		<ModelType>Segregation</ModelType>
+		<Colors>wbr</Colors>
+		<GridEdgeType>Toroidal</GridEdgeType>
 		<GridLocationShape>Square</GridLocationShape>
 	</ApplicationDetails>
 	<Row>01212020212012002210</Row>
