@@ -39,20 +39,20 @@ public class Grid {
 		repopulateGridPane(gridpane);
 	}
 
-	/**
-	 * Populates the values in the individual cells in the cellMatrix
-	 * @param i: The x position of the cell
-	 * @param j: The y position of the cell
-	 * @param initialColor: The initial color of the cell
-	 */
-	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new WaTorCell();
-		cellMatrix[i][j].setXPos(i);
-		cellMatrix[i][j].setYPos(j);
-		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
-		cellMatrix[i][j].cellID = this.cellID;
-		this.cellID++;
-	}
+//	/**
+//	 * Populates the values in the individual cells in the cellMatrix
+//	 * @param i: The x position of the cell
+//	 * @param j: The y position of the cell
+//	 * @param initialColor: The initial color of the cell
+//	 */
+//	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
+//		cellMatrix[i][j] = new WaTorCell();
+//		cellMatrix[i][j].setXPos(i);
+//		cellMatrix[i][j].setYPos(j);
+//		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
+//		cellMatrix[i][j].cellID = this.cellID;
+//		this.cellID++;
+//	}
 
 	/**
 	 * Populates the values in the individual cells in the cellMatrix
@@ -96,8 +96,7 @@ public class Grid {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 				cellMatrix[i][j].currentState = cellMatrix[i][j].updatedState;
 				cellMatrix[i][j].updatedState = null;
-				Polygon r = (Polygon) list.get(i*ApplicationConstants.NUM_OF_ROWS + j);
-				r.setFill(cellMatrix[i][j].currentState);
+				((Polygon) list.get(i*ApplicationConstants.NUM_OF_ROWS + j)).setFill(cellMatrix[i][j].currentState);
 			}	
 		}	
 	}
