@@ -126,7 +126,7 @@ public class Main extends Application {
 	}
 	
 	/**
-	 *  creates the error display
+	 * Creates the error display
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void populateErrorPageModules(Group root) {
@@ -136,15 +136,15 @@ public class Main extends Application {
 	}
 
 	/**
-	 * Creates a button.
+	 * Creates a button
 	 * 
 	 * @param content
-	 *            : What the button says.
+	 *            : What the button says
 	 * @param x_Coord
-	 *            : The x position of the button on the application.
+	 *            : The x position of the button on the application
 	 * @param y_Coord
-	 *            : The y position of the button on the application.
-	 * @return: Returns the newly created button.
+	 *            : The y position of the button on the application
+	 * @return: Returns the newly created button
 	 */
 	private Button createButton(String content, int x_Coord, int y_Coord, Group root) {
 		Button btn = new Button();
@@ -214,11 +214,12 @@ public class Main extends Application {
 		NumberAxis yAxis = new NumberAxis();
 		xAxis.setLabel("Timeline Frames");
 		yAxis.setLabel("Amount of Squares");
-		
 		LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
 		lineChart.setTitle(title);
 		lineChart.setLayoutX(x_Coord);
 		lineChart.setLayoutY(y_Coord);
+		lineChart.setLegendVisible(true);
+		System.out.println(lineChart.getLegendSide());
 		root.getChildren().add(lineChart);
 		return lineChart;
 	}
@@ -291,7 +292,7 @@ public class Main extends Application {
 	 * @param root
 	 */
 	private void createSliderLabel(Group root) {
-		Label sliderLabel = createLabel("Frame Rate of Application", 1, ApplicationConstants.MODULE_X_POS, ApplicationConstants.SLIDER_LABEL_Y_POS, root);
+		Label sliderLabel = createLabel("Frame Rate of Application", ApplicationConstants.LABEL_FONT_SIZE, ApplicationConstants.MODULE_X_POS, ApplicationConstants.SLIDER_LABEL_Y_POS, root);
 	}
 	
 	/**
@@ -299,7 +300,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createSlider(Group root) {
-		Slider slider = createSlider(0, 100, ApplicationConstants.MODULE_X_POS, ApplicationConstants.SLIDER_Y_POS, root);
+		Slider slider = createSlider(ApplicationConstants.SLIDER_MIN_VALUE, ApplicationConstants.SLIDER_MAX_VALUE, ApplicationConstants.MODULE_X_POS, ApplicationConstants.SLIDER_Y_POS, root);
 	} 
 	
 	/**
@@ -307,7 +308,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createErrorMessage(Group root) {
-		Label label = createLabel("There is an error in format in your XML File", 3, 130, 100, root);
+		Label label = createLabel("There is an error in format in your XML File", ApplicationConstants.TITLE_FONT_SIZE, ApplicationConstants.ERROR_LABEL_X_POS, ApplicationConstants.TITLE_LABEL_Y_POS, root);
 	}
 	
 	/**
@@ -315,7 +316,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createNameLabel(Group root) {
-		Label programmerNames = createLabel("Michael Deng\nPranava Raparla\nDavid Zhang", 2, 470, 200, root);
+		Label programmerNames = createLabel("Michael Deng\nPranava Raparla\nDavid Zhang", ApplicationConstants.NAMES_FONT_SIZE, ApplicationConstants.NAMES_LABEL_X_POS, ApplicationConstants.NAMES_LABEL_Y_POS, root);
 	}
 	
 	/**
@@ -323,7 +324,7 @@ public class Main extends Application {
 	 * @param root: the stack that holds all scenes modules
 	 */
 	private void createTitleLabel(Group root) {
-		Label title = createLabel("CELLULAR AUTOMATA!!", 4, 230, 100, root);
+		Label title = createLabel("CELLULAR AUTOMATA!!", ApplicationConstants.BIGGER_TITLE_FONT_SIZE, ApplicationConstants.TITLE_LABEL_X_POS, ApplicationConstants.TITLE_LABEL_Y_POS, root);
 	}
 	
 	/**
@@ -331,7 +332,7 @@ public class Main extends Application {
 	 * @param root: The group the linechart module belongs to 
 	 */
 	private void createGameGraph(Group root) {
-		LineChart lineChart = createLineChart("Population vs. Frame", ApplicationConstants.MODULE_X_POS, 400, root);
+		LineChart lineChart = createLineChart("Population vs. Frame", ApplicationConstants.MODULE_X_POS, ApplicationConstants.LINECHART_Y_POS, root);
 		myGame.populateLineChart(lineChart);
 	}
 
@@ -415,7 +416,6 @@ public class Main extends Application {
 			public void handle(ActionEvent event){
 				animation.pause();
 				ApplicationConstants.gridEditable = true;
-				//myGame.editGrid();
 			}
 		});
 	}

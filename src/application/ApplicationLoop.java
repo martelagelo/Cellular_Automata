@@ -51,6 +51,7 @@ public class ApplicationLoop {
 	private Timeline animation;
 
 	XYChart.Series series;
+	XYChart.Series series2;
 	public boolean goToErrorPage = false;
 	private int currentFrameCount;
 
@@ -101,7 +102,7 @@ public class ApplicationLoop {
 	public void updateGameLoop() {
 		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
-		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.BLACK));
+		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.GREEN), countNumberOfCertainColorSpaces(Color.ORANGE));
 	}
 
 	/**
@@ -188,28 +189,28 @@ public class ApplicationLoop {
 	//		}
 
 
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 1) {
-			return Color.BLACK;
-		} else {
-			return Color.WHITE;
-		}
-	}
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 1) {
+//			return Color.BLACK;
+//		} else {
+//			return Color.WHITE;
+//		}
+//	}
 
 
-//			private Paint generateRandomColor() {
-//				Random rand = new Random();
-//				int i = rand.nextInt(100);
-//				if (i < 20) {
-//					return Color.GREEN;
-//				} else if (i > 92){
-//					return Color.ORANGE;
-//				} else {
-//					return Color.WHITE;
-//				}
-//			}
+			private Paint generateRandomColor() {
+				Random rand = new Random();
+				int i = rand.nextInt(100);
+				if (i < 20) {
+					return Color.GREEN;
+				} else if (i > 92){
+					return Color.ORANGE;
+				} else {
+					return Color.WHITE;
+				}
+			}
 
 	//	private Paint generateRandomColor() {
 	//		Random rand = new Random();
@@ -236,7 +237,9 @@ public class ApplicationLoop {
 	 */
 	public void populateLineChart(LineChart lineChart){
 		series = new XYChart.Series();
+		series2 = new XYChart.Series();
 		lineChart.getData().add(series);
+		lineChart.getData().add(series2);
 	}
 
 	/**
@@ -244,9 +247,10 @@ public class ApplicationLoop {
 	 * @param XValue: The current frame
 	 * @param YValue: The number of a certain type of blocks
 	 */
-	private void addPointsToLineChart(int XValue, int YValue) {
+	private void addPointsToLineChart(int XValue, int YValue, int YValue2) {
 		currentFrameCount++;
 		series.getData().add(new XYChart.Data(XValue, YValue));
+		series2.getData().add(new XYChart.Data(XValue, YValue2));
 	}
 
 	/**
