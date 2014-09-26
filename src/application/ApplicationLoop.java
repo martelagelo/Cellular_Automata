@@ -117,7 +117,7 @@ public class ApplicationLoop {
 		// Loop through entire Grid and randomly populate cells
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				Polygon rect = generateHex(Color.WHITE);
+				Polygon rect = generateRect(Color.WHITE);
 				//  Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
 				//	grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
 				grid.initializeAndPopulateMatrix(i, j, rect.getFill());

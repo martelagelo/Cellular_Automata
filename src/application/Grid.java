@@ -304,7 +304,7 @@ public class Grid {
 	public void populateMatrixNeighborMaps() {
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].neighbors = createHexagonalNeighborsMap(i, j);
+				cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
 			}	
 		}
 	}
