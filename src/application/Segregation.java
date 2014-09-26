@@ -81,5 +81,10 @@ public class Segregation extends Cell {
 		Double d = percentageCalc();
 		cellMover(d);
 	}
+
+	@Override
+	protected void updateCell(int i, int j) {
+		// TODO Auto-generated method stub
+	}
 }
 

@@ -4,15 +4,16 @@ import java.util.Random;
 
 public class ApplicationConstants {
 	
-	public static final Integer PADDING = 5;
-	public static final Integer STAGE_WIDTH = 1500;
-	public static final Integer STAGE_HEIGHT = 800;
-	public static final Integer GRID_WIDTH = 980;
-	public static final Integer GRID_HEIGHT = 780;
+	public static final Integer STAGE_WIDTH = 1520;
+	public static final Integer STAGE_HEIGHT = 820;
+	public static final Integer GRID_WIDTH = 1000;
+	public static final Integer GRID_HEIGHT = 800;
 	public static final Integer CELL_WIDTH = 20;
-	public static final Integer NUM_OF_ROWS = GRID_HEIGHT/CELL_WIDTH ;
+	public static final Integer NUM_OF_ROWS = GRID_HEIGHT/CELL_WIDTH;
 	public static final Integer NUM_OF_COLUMNS = GRID_WIDTH/CELL_WIDTH;
 	public static final Double DEFAULT_FRAME_RATE = 2.0;
+	
+	public static final Double HEX_OFFSET = 5.0;
 	
 	public static final Integer MODULE_X_POS = STAGE_WIDTH - 500;
 	

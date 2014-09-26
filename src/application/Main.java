@@ -20,7 +20,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-
+/**
+ * Version 1
+ * Date: 9/14/2014
+ * 
+ * @author Michael Deng
+ * @author Pranava Raparla
+ * @author David Zhang
+ *
+ */
 public class Main extends Application {
 
 	private ApplicationLoop myGame;
