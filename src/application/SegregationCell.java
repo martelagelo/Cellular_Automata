@@ -48,8 +48,8 @@ public class SegregationCell extends Cell {
 			outerloop:
 			for(int b = yPos; b < ApplicationConstants.NUM_OF_ROWS; b++){
 				for(int a = 0; a < ApplicationConstants.NUM_OF_COLUMNS; a++){
-					if(b == yPos && a <= xPos) {// check if in part of row before current cell
-						continue; // continue to next iteration if true
+					if(b == yPos && a <= xPos) {
+						continue; 
 					} else if (Matrix[a][b].currentState==Color.WHITE && Matrix[a][b].updatedState == null){
 						Matrix[a][b].updatedState = currentState;
 						updatedState = Color.WHITE;

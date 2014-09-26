@@ -32,7 +32,6 @@ public abstract class Cell {
 	Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
 	int cellID;
 
-
 	/**
 	 * Updates the current cell
 	 * @param i: The x position of the current cell

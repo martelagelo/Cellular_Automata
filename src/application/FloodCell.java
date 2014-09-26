@@ -15,10 +15,11 @@ public class FloodCell extends Cell{
 		OKToFlood = false;
 		xPos = i;
 		yPos = j;	
-		update();
+		updateThis();
 	}
 	
-	private void update() {
+
+	private void updateThis() {
 		if (findWantedNeighbors(Color.BLACK).size() != 0) {
 			OKToFlood = true;
 		}
@@ -34,11 +35,6 @@ public class FloodCell extends Cell{
 		}
 	}
 	
-	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected void updateCell(int i, int j, Cell[][] cellMatrix) {

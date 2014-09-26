@@ -30,7 +30,6 @@ public class Grid {
 	private Group root;
 	private int cellID = 0;
 
-
 	/**
 	 * Updates the cell matrix and the gridpane
 	 * @param gridpane: The physical grid that displays on the application
@@ -47,7 +46,7 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new GameOfLifeCell();
+		cellMatrix[i][j] = new WaTorCell();
 		cellMatrix[i][j].setXPos(i);
 		cellMatrix[i][j].setYPos(j);
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
@@ -64,6 +63,8 @@ public class Grid {
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor, Cell cell){
 		cellMatrix[i][j] = cell;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
+		cellMatrix[i][j].cellID = this.cellID;
+		this.cellID++;
 	}
 
 	/**
@@ -80,7 +81,7 @@ public class Grid {
 	private void updateCellMatrix(){
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].updateCell(i, j, cellMatrix);
+				cellMatrix[i][j].updateCell(i, j);
 			}
 		}
 	}
@@ -140,7 +141,7 @@ public class Grid {
 		addCellsToMap(i, j, x, y, neighbors);
 		return neighbors;
 	}
-	
+
 	/**
 	 * Creates a map of cardinal directional neighbors for a particular cell
 	 * @param i: The x position of the particular cell
@@ -154,7 +155,7 @@ public class Grid {
 		addCellsToMap(i, j, x, y, neighbors);
 		return neighbors;
 	}
-	
+
 	/**
 	 * Creates a map of square neighbors for a particular cell
 	 * @param i: The x position of the particular cell
@@ -166,7 +167,7 @@ public class Grid {
 		neighbors.putAll(createCornerNeighborsMap(i, j));
 		return neighbors;
 	}
-	
+
 	/**
 	 * Creates a map of corner neighbors for a particular cell with toroidal capabilities
 	 * @param i: The x position of the particular cell
@@ -221,7 +222,7 @@ public class Grid {
 		}
 		return neighbors;
 	}
-	
+
 	/**
 	 * Creates a map of cardinal directional neighbors for a particular cell with toroidal capabilities
 	 * @param i: The x position of the particular cell
@@ -237,14 +238,14 @@ public class Grid {
 			neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j]);
 		} 
 		if (!checkBounds(i,j+1)) {
-				neighbors.put(cellMatrix[i][0].cellID, cellMatrix[i][0]);
+			neighbors.put(cellMatrix[i][0].cellID, cellMatrix[i][0]);
 		} 
 		if (!checkBounds(i,j - 1)) {
 			neighbors.put(cellMatrix[i][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[i][ApplicationConstants.NUM_OF_ROWS - 1]);
 		} 	
 		return neighbors;
 	}
-	
+
 	/**
 	 * Creates a map of square neighbors for a particular cell with toroidal capabilities
 	 * @param i: The x position of the particular cell
@@ -256,7 +257,7 @@ public class Grid {
 		neighbors.putAll(createToroidalCornerNeighborsMap(i, j));
 		return neighbors;
 	}
-	
+
 	/**
 	 * Creates a map of neighbors based off of how hexagons link (non-toroidal)
 	 * @param i: The x position of the particular cell
@@ -270,7 +271,7 @@ public class Grid {
 		addCellsToMap(i, j, x, y, neighbors);
 		return neighbors;
 	}
-	
+
 	/**
 	 * Adds cells to a map if not out of bounds
 	 * @param i: The x position of the particular cell
@@ -296,7 +297,7 @@ public class Grid {
 	private boolean checkBounds(int i, int j) {
 		return (i < ApplicationConstants.NUM_OF_COLUMNS && i >= 0 && j < ApplicationConstants.NUM_OF_ROWS && j >= 0);
 	}
-	
+
 	/**
 	 * Populates the neighbors of each of the cells in the cell matrix
 	 */
