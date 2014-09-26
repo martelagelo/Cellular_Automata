@@ -28,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -49,7 +50,8 @@ public class ApplicationLoop {
 	private CellXMLReader cellXMLReader;
 	private Timeline animation;
 
-	XYChart.Series series;
+	ArrayList<XYChart.Series> series;
+
 	public boolean goToErrorPage = false;
 	private int currentFrameCount;
 
@@ -82,6 +84,7 @@ public class ApplicationLoop {
 		grid.setRoot(root);
 		cellXMLReader = cxr;
 		gridpane = initializeGridPane(root);
+		grid.populateMatrixNeighborMaps();
 		editGrid(gridpane.getChildren());
 		return myScene;
 	}
@@ -99,113 +102,164 @@ public class ApplicationLoop {
 	public void updateGameLoop() {
 		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
-		currentFrameCount++;
-		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.GREEN));
+		for(int i=0; i<cellXMLReader.myColors.size(); i++)
+			addPointsToLineChart(i, currentFrameCount, countNumberOfCertainColorSpaces(cellXMLReader.myColors.get(i)));
 	}
 
 	/**
-	 * Creates what the initial GridPane and cellMatrix look like
+	 * Creates what the initial GridPane and cellMatrix look li)ke
 	 * @param root: The stack all the modules of the page go on
 	 * @return: The newly created GirdPane
 	 */
 	private GridPane initializeGridPane(Group root){		
 		// Set up GridPane
 		GridPane gp = new GridPane();
-		gp.setPadding(new Insets(5));
 
 		// Loop through entire Grid and randomly populate cells
-		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++)
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				Rectangle rect = generateCell(Color.WHITE);
-				//	Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
-				//	grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
-				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
+				Polygon rect = generateRect();
+				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				//grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
-		}
-
+		System.out.println("Colors: " + cellXMLReader.myColors);
+		System.out.println("Game Of Life: " + cellXMLReader.myModelType);
 		// Loop through entire list of cells read in from XML file and add to grid
-		// Uncomment segment below to incorporate XML Reader.
-		/* 
-		for(Cell cell: cellXMLReader.getCellList()) {
-			Rectangle rect = generateCell(cell.currentState);
-			grid.initializeAndPopulateMatrix(cell);
-			gp.add(rect, cell.xPos, cell.yPos,1,1);
-		}	
-			*/
-		
+		//		for(Cell cell: cellXMLReader.getCellList()) {
+		//			Polygon rect = generateRect(cell.currentState);
+		//			//grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+		//			grid.initializeAndPopulateMatrix(cell);
+		//			gp.add(rect, cell.xPos, cell.yPos,1,1);
+		//		}	
+		// Add the grid pane to the root and return for display
 		root.getChildren().add(gp);
 		return gp;
 	}
 
 	/**
-	 * Generates a cell in the object form of a rectangle
+	 * 
+	 * @return
+	 */
+	//	private Paint generateRandomColor() {
+	//		int range = 100;
+	//		int numColors = cellXMLReader.myColors.size();
+	//		Random rand = new Random();
+	//		int i = rand.nextInt(range);
+	//		System.out.println("Color list: " + cellXMLReader.myColors + " i: " + i + " size: " + cellXMLReader.myColors.size());
+	//		for(int k=0; k<numColors; k++)
+	//			if (i > k*range/numColors && i < (k+1)*range/numColors) {
+	//				System.out.println(cellXMLReader.myColors.get(k));
+	//				return cellXMLReader.myColors.get(k);
+	//			}
+	//		return Color.WHITE;
+	//	}
+
+	/** 
+	 * Generates a cell in the form of a rectangle with random color
+	 * @return: The newly created rectangle for the grid pane
+	 */
+	private Polygon generateRect(){
+		return generateRectHelper(generateRandomColor());
+	}
+
+	/** 
+	 * Generates a cell in the form of a rectangle
 	 * @param color: The color of the cell
 	 * @return: The newly created rectangle for the grid pane
 	 */
-	private Rectangle generateCell(Paint color){
-		Rectangle rect = new Rectangle();
-		rect.setWidth(ApplicationConstants.CELL_WIDTH);
-		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-		rect.setFill(generateRandomColor());
+	private Polygon generateRect(Paint color){
+		return generateRectHelper(color);
+	}
+
+	/** 
+	 * Helper method for generating Rect of certain color
+	 * @param color: The color of the cell
+	 * @return: The newly created rectangle for the grid pane
+	 */
+	private Polygon generateRectHelper(Paint color) {
+		Polygon rect = new Polygon();
+		rect.getPoints().addAll(new Double[] { 
+				0.0, 0.0, 
+				0.0, (double) ApplicationConstants.CELL_WIDTH, 
+				(double) ApplicationConstants.CELL_WIDTH, (double) ApplicationConstants.CELL_WIDTH, 
+				(double) ApplicationConstants.CELL_WIDTH, 0.0
+		});
+		rect.setFill(color);
 		return rect;
 	}
 
-		private Paint generateRandomColor() {
-			Random rand = new Random();
-			int i = rand.nextInt(100);
-			if (i < 45) {
-				return Color.RED;
-			} else if (i > 55) {
-				return Color.BLUE;
-			} else{
-				return Color.WHITE;
-			}
-		}
+	/** 
+	 * Generates a cell in the form of a hexagon with random color
+	 * @return: The newly created rectangle for the grid pane
+	 */
+	private Polygon generateHex(){
+		return generateHexHelper(generateRandomColor());
+	}
 
-//		private Paint generateRandomColor() {
-//			Random rand = new Random();
-//			int i = rand.nextInt(100);
-//			if (i < 45) {
-//				return Color.RED;
-//			} else if (i > 55) {
-//				return Color.BLUE;
-//			} else{
-//				return Color.WHITE;
+	/** 
+	 * Generates a cell in the form of a hexagon
+	 * @param color: The color of the cell
+	 * @return: The newly created rectangle for the grid pane
+	 */
+	private Polygon generateHex(Paint color){
+		return generateHexHelper(color);
+	}
+
+	/**
+	 * Helper method for generating a cell in the form of a hexagon
+	 * @param color: The color of the cell
+	 * @return: The newly created rectangle for the gird pane
+	 */
+	private Polygon generateHexHelper(Paint color) {
+		Polygon poly = new Polygon();
+		poly.getPoints().addAll(new Double[] { 
+				(double) (ApplicationConstants.CELL_WIDTH/2)-((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH/4, 
+				(double) (ApplicationConstants.CELL_WIDTH/2), 0.0, 
+				(double) (ApplicationConstants.CELL_WIDTH/2)+((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH/4, 
+				(double) (ApplicationConstants.CELL_WIDTH/2)+((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH * .75,
+				(double) (ApplicationConstants.CELL_WIDTH/2), (double) ApplicationConstants.CELL_WIDTH,
+				(double) (ApplicationConstants.CELL_WIDTH/2)-((ApplicationConstants.CELL_WIDTH/2)*Math.sqrt(3)/2), (double) ApplicationConstants.CELL_WIDTH * .75
+		});
+		poly.setFill(color);
+		return poly;
+	}
+
+//			private Paint generateRandomColor() {
+//				Random rand = new Random();
+//				int i = rand.nextInt(100);
+//				if (i < 35) {
+//					return Color.RED;
+//				} else if (i > 65) {
+//					return Color.BLUE;
+//				} else{
+//					return Color.WHITE;
+//				}
 //			}
-//		}
-	
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 20) {
-//			return Color.BLACK;
-//		} else {
-//			return Color.WHITE;
-//		}
-//	}
+
 
 //		private Paint generateRandomColor() {
 //			Random rand = new Random();
 //			int i = rand.nextInt(100);
 //			if (i < 20) {
-//				return Color.GREEN;
-//			} else if (i > 92){
-//				return Color.ORANGE;
+//				return Color.BLACK;
 //			} else {
 //				return Color.WHITE;
 //			}
 //		}
 
-//	private Paint generateRandomColor() {
-//		Random rand = new Random();
-//		int i = rand.nextInt(100);
-//		if (i < 10) {
-//			return Color.RED;
-//		} else{
-//			return Color.GREEN;
-//		}
-//	}
+					private Paint generateRandomColor() {
+						Random rand = new Random();
+						int i = rand.nextInt(100);
+						if (i < 20) {
+							return Color.GREEN;
+						} else if (i > 92){
+							return Color.ORANGE;
+						} else {
+							return Color.WHITE;
+						}
+					}
 
 //		private Paint generateRandomColor() {
 //			Random rand = new Random();
@@ -216,6 +270,7 @@ public class ApplicationLoop {
 //				return Color.GREEN;
 //			}
 //		}
+
 
 	/**
 	 * Gets the root of the current scene
@@ -230,8 +285,13 @@ public class ApplicationLoop {
 	 * @param lineChart: The physical graph
 	 */
 	public void populateLineChart(LineChart lineChart){
-		series = new XYChart.Series();
-		lineChart.getData().add(series);
+		series = new ArrayList<XYChart.Series>();
+		for(int i=0; i<cellXMLReader.myColors.size(); i++) {
+			series.add(i, new XYChart.Series());
+			lineChart.getData().add(series.get(i));
+			series.get(i).setName("Somthing");						//TODO: Pranava, this title needs to be populated with the names the colors represent.
+		}
+
 	}
 
 	/**
@@ -239,8 +299,9 @@ public class ApplicationLoop {
 	 * @param XValue: The current frame
 	 * @param YValue: The number of a certain type of blocks
 	 */
-	private void addPointsToLineChart(int XValue, int YValue) {
-		series.getData().add(new XYChart.Data(XValue, YValue));
+	private void addPointsToLineChart(int index, int XValue, int YValue) {
+		series.get(index).getData().add(new XYChart.Data(XValue, YValue));
+		currentFrameCount++;
 	}
 
 	/**
@@ -252,12 +313,12 @@ public class ApplicationLoop {
 		int counter = 0;
 		ObservableList<Node> list = gridpane.getChildren();
 		for(Node r : list) {
-			Rectangle rect = (Rectangle) r;
+			Polygon rect = (Polygon) r;
 			if (rect.getFill() == color) counter++;
 		}
 		return counter;
 	}
-	
+
 	/**
 	 * Allows the grid to be editable when the game is paused
 	 */
@@ -267,7 +328,8 @@ public class ApplicationLoop {
 				@Override
 				public void handle(MouseEvent event){
 					if (ApplicationConstants.gridEditable) {
-						grid.changeCellState(list.get((int) (((r.getLayoutX()-5) / ApplicationConstants.CELL_WIDTH) * ApplicationConstants.NUM_OF_ROWS + ((r.getLayoutY()-5) / ApplicationConstants.CELL_WIDTH))));
+						System.out.println(r.getLayoutX() + "\t" + r.getLayoutY());
+						grid.changeCellState(list.get((int) (((r.getLayoutX()) / ApplicationConstants.CELL_WIDTH) * ApplicationConstants.NUM_OF_ROWS + ((r.getLayoutY()) / ApplicationConstants.CELL_WIDTH))));
 					}
 				}
 			});

@@ -18,32 +18,19 @@ import javafx.scene.paint.Color;
 public class FireCell extends Cell {
 
 	private Boolean isNextToFire = false;
-	// use threshold for burningChance
 	private double threshold = 0;
 	
-	private List<WaTorCell3> fireNeighbors = new ArrayList<WaTorCell3>();
-
-	/**
-	 * Updates this particular cell based off its surroundings
-	 */
-	public void updateCell(int column, int row, Cell[][] grid) {
-		isNextToFire = false;
-		super.Matrix = grid;
-		super.xPos = column;
-		super.yPos = row;
-		findFireNeighbors();
-		calculateBurnChance();
-		updateState();
-	}
+	private List<Cell> fireNeighbors = new ArrayList<Cell>();
 
 	/**
 	 * Find if any of the neighbors are on fire
 	 */
 	private void findFireNeighbors(){
-		fireNeighbors = findToroidalCornerNeighbors(xPos, yPos, Color.RED);
+		fireNeighbors = findWantedNeighbors(Color.RED);
 		if (fireNeighbors.size() != 0) {
 			isNextToFire = true;
 		}
+		
 	}
 
 	/**
@@ -73,9 +60,12 @@ public class FireCell extends Cell {
 	}
 
 	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-
+	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
+		isNextToFire = false;
+		super.xPos = i;
+		super.yPos = j;
+		findFireNeighbors();
+		calculateBurnChance();
+		updateState();
 	}
-
 }

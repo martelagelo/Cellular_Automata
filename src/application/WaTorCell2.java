@@ -167,10 +167,5 @@ public class WaTorCell2 extends Cell{
 		cell.sharkTimeTillDeath = sharkTimeTillDeath;
 	}
 
-	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
