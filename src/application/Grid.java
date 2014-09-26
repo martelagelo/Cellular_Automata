@@ -26,7 +26,8 @@ import javafx.scene.shape.Rectangle;
  */
 public class Grid {
 
-	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
+	//Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
+	Cell[][] cellMatrix;
 	private Group root;
 	private int cellID = 0;
 
@@ -37,6 +38,10 @@ public class Grid {
 	public void updateGrid(GridPane gridpane){
 		updateCellMatrix();
 		repopulateGridPane(gridpane);
+	}
+	
+	public Grid(int row, int col) {
+		cellMatrix = new Cell[row][col];
 	}
 
 //	/**
@@ -61,6 +66,8 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor, Cell cell){
+		cell.setXPos(i);
+		cell.setYPos(j);
 		cellMatrix[i][j] = cell;
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 		cellMatrix[i][j].cellID = this.cellID;
@@ -72,7 +79,9 @@ public class Grid {
 	 * @param cell: The cell to populate the CellMatrix cell
 	 */
 	public void initializeAndPopulateMatrix(Cell cell){
+		cell.cellID = this.cellID;
 		cellMatrix[cell.xPos][cell.yPos] = cell;
+		this.cellID++;
 	}
 
 	/**
@@ -300,12 +309,26 @@ public class Grid {
 	/**
 	 * Populates the neighbors of each of the cells in the cell matrix
 	 */
-	public void populateMatrixNeighborMaps() {
+	public void populateMatrixNeighborMaps(CellXMLReader cxr) {
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
+				if(cxr.getGridEdgeType().equalsIgnoreCase("toroidal") && cxr.getGridNeighborType().equalsIgnoreCase("corner"))
+					cellMatrix[i][j].neighbors = createToroidalCornerNeighborsMap(i, j);
+				else if(cxr.getGridEdgeType().equalsIgnoreCase("toroidal") && cxr.getGridNeighborType().equalsIgnoreCase("cardinal"))
+					cellMatrix[i][j].neighbors = createToroidalCardinalNeighborsMap(i, j);
+				else if(cxr.getGridEdgeType().equalsIgnoreCase("toroidal") && cxr.getGridNeighborType().equalsIgnoreCase("square"))
+					cellMatrix[i][j].neighbors = createToroidalSquareNeighborsMap(i, j);
+				else if(cxr.getGridEdgeType().equalsIgnoreCase("finite") && cxr.getGridNeighborType().equalsIgnoreCase("corner"))
+					cellMatrix[i][j].neighbors = createCornerNeighborsMap(i, j);
+				else if(cxr.getGridEdgeType().equalsIgnoreCase("finite") && cxr.getGridNeighborType().equalsIgnoreCase("cardinal"))
+					cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
+				else if(cxr.getGridEdgeType().equalsIgnoreCase("finite") && cxr.getGridNeighborType().equalsIgnoreCase("square"))
+					cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
+				else if(cxr.getGridLocationShape().equalsIgnoreCase("hexagonal"))
+					cellMatrix[i][j].neighbors = createHexagonalNeighborsMap(i, j);
+				else
+					cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
 			}	
 		}
 	}
-
 }

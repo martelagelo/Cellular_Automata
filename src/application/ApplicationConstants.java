@@ -16,7 +16,7 @@ public class ApplicationConstants {
 	public static final Integer STAGE_WIDTH = 1520;
 	public static final Integer STAGE_HEIGHT = 820;
 	public static final Integer GRID_WIDTH = 1000;
-	public static final Integer GRID_HEIGHT = 800;
+	public static final Integer GRID_HEIGHT = 1000;
 	public static final Integer CELL_WIDTH = 20;
 	public static final Integer NUM_OF_ROWS = GRID_HEIGHT/CELL_WIDTH ;
 	public static final Integer NUM_OF_COLUMNS = GRID_WIDTH/CELL_WIDTH;

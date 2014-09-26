@@ -30,6 +30,22 @@ public class WaTorCell extends Cell{
 	private List<WaTorCell> breedList = new ArrayList<WaTorCell>();
 
 	/**
+	 *  Constructors
+	 */
+	public WaTorCell() {
+		super();
+		fishBreed = fishTillBreed;
+		sharkBreed = sharkTillBreed;
+		sharkDeath = sharkTillDeath;
+	}
+	
+	public WaTorCell(int ftb, int stb, int std) {
+		fishBreed = fishTillBreed = ftb;
+		sharkBreed = sharkTillBreed = stb;
+		sharkDeath = sharkTillDeath = std;
+	}
+	
+	/**
 	 * Updates the cell state
 	 */
 	@Override
