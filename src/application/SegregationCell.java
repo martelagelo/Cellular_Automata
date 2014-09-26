@@ -66,22 +66,6 @@ public class SegregationCell extends Cell {
 	}
 
 	@Override
-	void setCurrentState(String s) {
-
-		switch(s.toUpperCase()) {
-		case "WHITE":
-			currentState = Color.WHITE;
-			break;
-		case "RED":
-			currentState = Color.RED;
-			break;
-		case "BLUE":
-			currentState = Color.BLUE;
-			break;
-		}
-	}
-
-	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
 		same = 0;
 		different = 0;

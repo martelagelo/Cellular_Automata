@@ -22,12 +22,21 @@ public class CellXMLReader
 	public NodeList myNodeList;
 	public List<Cell> myCellList;
 	public String myModelType;
+	public double myThreshold;
+	public String myGridEdgeType;
+	public String myGridLocationShape;
+	public ArrayList<Color> myColors;
+	public int myRows;
+	public int myCols;
 	
 	/**
 	 * 
 	 */
 	public CellXMLReader() {
 		myCellList = new ArrayList<Cell>();
+		myRows = 0;
+		myCols = 0;
+		myColors = new ArrayList<Color>();
 	}
 	
 	/**
@@ -70,28 +79,68 @@ public class CellXMLReader
 		// Do not run method if myDocument has not been populated
 		if(myDocument == null)
 			return;
-				
+		
 		// Initialize list variables for parsing elements
 		myNodeList = myDocument.getElementsByTagName("cell");
-
+		
+		// Find the application details tag and then configure model parameters with enclosed info
         NodeList applicationDetails = myDocument.getElementsByTagName("ApplicationDetails");
-        Element modelParameters = (Element) applicationDetails.item(0);
-		myModelType = modelParameters.getElementsByTagName("ModelType").item(0).getTextContent();
-		//ApplicationConstants.NUM_OF_ROWS = Integer.parseInt(modelParameters.getElementsByTagName("Rows").item(0).getTextContent());
-		//ApplicationConstants.NUM_OF_COLUMNS = Integer.parseInt(modelParameters.getElementsByTagName("Cols").item(0).getTextContent());
-		System.out.println("Model: " + myModelType + "\tRows: " + ApplicationConstants.NUM_OF_ROWS + "\tCols: " + ApplicationConstants.NUM_OF_COLUMNS);
-				
+        configureModelParameters((Element) applicationDetails.item(0));
+		
+		//System.out.println("Model: " + myModelType + "\tRows: " + ApplicationConstants.NUM_OF_ROWS + "\tCols: " + ApplicationConstants.NUM_OF_COLUMNS);
+		
 		// Loop through Node List to get nodes (cells)
 		for(int i=0; i<myNodeList.getLength();i++) {
 			Node node = myNodeList.item(i);
-			if(node.getNodeType() == Node.ELEMENT_NODE) { // better than testing if instanceof element
-				Cell cell = checkModelTypeAndInitializeCell();
-	    		loadAttributesIntoCell(cell, node);
-				myCellList.add(cell);
-				System.out.println(cell);
-			}
+			if(node.getNodeType() == Node.ELEMENT_NODE) // better than testing if instanceof element
+				loadAttributesIntoCell((Element) node);
 		}
 		printCellList(myCellList);
+	}
+	
+	/**
+	 * 
+	 * @param modelParameters
+	 */
+	public void configureModelParameters(Element modelParameters) {
+		// TODO: Error Checking
+		myModelType = modelParameters.getElementsByTagName("ModelType").item(0).getTextContent();
+		myGridEdgeType = modelParameters.getElementsByTagName("GridEdgeType").item(0).getTextContent();
+		myGridLocationShape = modelParameters.getElementsByTagName("GridLocationShape").item(0).getTextContent();
+        setColorScheme(modelParameters.getElementsByTagName("Colors").item(0).getTextContent().toLowerCase());
+		//ApplicationConstants.NUM_OF_ROWS = Integer.parseInt(modelParameters.getElementsByTagName("NumRows").item(0).getTextContent());
+		//ApplicationConstants.NUM_OF_COLUMNS = Integer.parseInt(modelParameters.getElementsByTagName("NumCols").item(0).getTextContent());
+	}
+	
+	/**
+	 * 
+	 * @param s
+	 */
+	public void setColorScheme(String s) {
+		for(char ch: s.toCharArray())
+			switch (ch) {
+			case 'w':
+				myColors.add(Color.WHITE);
+				break;
+			case 'k':
+				myColors.add(Color.BLACK);
+				break;
+			case 'b':
+				myColors.add(Color.BLUE);
+				break;
+			case 'r':
+				myColors.add(Color.RED);
+				break;
+			case 'g':
+				myColors.add(Color.GREEN);
+				break;
+			case 'o':
+				myColors.add(Color.ORANGE);
+				break;
+			case 'y':
+				myColors.add(Color.YELLOW);
+				break;
+			}
 	}
 	
 	/**
@@ -119,23 +168,29 @@ public class CellXMLReader
 		}
 		return cell;
 	}
-	
+		
 	/**
 	 * 
-	 * @param cell
-	 * @param node
+	 * @param element
 	 */
-	public void loadAttributesIntoCell(Cell cell, Node node) {
-		//System.out.println("New Cell:: ");
-		Element element = (Element) node;
-		cell.setXPos(Integer.parseInt(element.getElementsByTagName("xPos").item(0).getTextContent()));
-		//System.out.println("\txPos: " + cell.xPos);
-		cell.setYPos(Integer.parseInt(element.getElementsByTagName("yPos").item(0).getTextContent()));
-		//System.out.println("\tyPos: " + cell.yPos);
-		cell.setCurrentState(element.getElementsByTagName("state").item(0).getTextContent());
-		//System.out.println("\t\tstate: " + cell.currentState);
-		// Segregation threshold
-		cell.setThreshold(Double.parseDouble(element.getElementsByTagName("threshold").item(0).getTextContent()));
+	public void loadAttributesIntoCell(Element element) {
+		if(element.getElementsByTagName("Row").getLength()<=0)
+			return;
+		String statesToParse = element.getElementsByTagName("Row").item(0).getTextContent();
+		if(myCols<statesToParse.length())
+			myCols = statesToParse.length();
+		for(int i=0; i<statesToParse.length(); i++) {
+			Cell cell = checkModelTypeAndInitializeCell();
+			int colorIndex = Integer.parseInt(statesToParse.substring(i,i+1));
+			if(colorIndex > myColors.size())
+				colorIndex = 0;
+			cell.setCurrentState(myColors.get(colorIndex));
+			cell.setThreshold(myThreshold);
+			cell.setXPos(i);
+			cell.setYPos(myRows);
+			myCellList.add(cell);
+		}
+		myRows++;
 	}
 	
 	/**
@@ -146,10 +201,4 @@ public class CellXMLReader
 		for(Cell cell: cellList)
 			System.out.println(cell);
 	}
-	
-	//helper function to pull int from the XML file
-	public int getIntegerFromCellBasedOnTagName(String tagName, Element cell){
-		return Integer.parseInt(cell.getElementsByTagName(tagName).item(0).getTextContent());
-	}  
-
 }

@@ -35,9 +35,11 @@ public abstract class Cell {
 
 	/**
 	 * Each class should know how to set its current state
-	 * @param s
+	 * @param color
 	 */
-	abstract void setCurrentState(String s);
+	void setCurrentState(Color color) {
+		currentState = color;
+	}
 
 	/**
 	 * Setting X and Y start positions happens at generation

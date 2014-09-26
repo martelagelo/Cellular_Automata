@@ -49,7 +49,7 @@ public class ApplicationLoop {
 	private CellXMLReader cellXMLReader;
 	private Timeline animation;
 
-	XYChart.Series series;
+	ArrayList<XYChart.Series> series;
 	public boolean goToErrorPage = false;
 	private int currentFrameCount;
 
@@ -100,11 +100,12 @@ public class ApplicationLoop {
 		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
 		currentFrameCount++;
-		addPointsToLineChart(currentFrameCount, countNumberOfCertainColorSpaces(Color.GREEN));
+		for(int i=0; i<cellXMLReader.myColors.size(); i++)
+			addPointsToLineChart(i, currentFrameCount, countNumberOfCertainColorSpaces(cellXMLReader.myColors.get(i)));
 	}
 
 	/**
-	 * Creates what the initial GridPane and cellMatrix look like
+	 * Creates what the initial GridPane and cellMatrix look li)ke
 	 * @param root: The stack all the modules of the page go on
 	 * @return: The newly created GirdPane
 	 */
@@ -116,28 +117,39 @@ public class ApplicationLoop {
 		// Loop through entire Grid and randomly populate cells
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
-				Rectangle rect = generateCell(Color.WHITE);
-				//	Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
-				//	grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
-				grid.initializeAndPopulateMatrix(i, j, rect.getFill());
+				Rectangle rect = generateCell();
+				Cell cell = cellXMLReader.checkModelTypeAndInitializeCell();
+				grid.initializeAndPopulateMatrix(i, j, rect.getFill(), cell);
+				// grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
 		}
 
 		// Loop through entire list of cells read in from XML file and add to grid
 		// Uncomment segment below to incorporate XML Reader.
-		/* 
+		
 		for(Cell cell: cellXMLReader.getCellList()) {
 			Rectangle rect = generateCell(cell.currentState);
 			grid.initializeAndPopulateMatrix(cell);
 			gp.add(rect, cell.xPos, cell.yPos,1,1);
 		}	
-			*/
+		
 		
 		root.getChildren().add(gp);
 		return gp;
 	}
 
+	/**
+	 * Generates a cell in the object form of a rectangle
+	 * @return: The newly created rectangle for the grid pane
+	 */
+	private Rectangle generateCell(){
+		Rectangle rect = new Rectangle();
+		rect.setWidth(ApplicationConstants.CELL_WIDTH);
+		rect.setHeight(ApplicationConstants.CELL_WIDTH);
+		rect.setFill(generateRandomColor());
+		return rect;
+	}
 	/**
 	 * Generates a cell in the object form of a rectangle
 	 * @param color: The color of the cell
@@ -147,10 +159,25 @@ public class ApplicationLoop {
 		Rectangle rect = new Rectangle();
 		rect.setWidth(ApplicationConstants.CELL_WIDTH);
 		rect.setHeight(ApplicationConstants.CELL_WIDTH);
-		rect.setFill(generateRandomColor());
+		rect.setFill(color);
 		return rect;
 	}
 
+
+	private Paint generateRandomColor() {
+		int range = 100;
+		int numColors = cellXMLReader.myColors.size();
+		Random rand = new Random();
+		int i = rand.nextInt(range);
+		System.out.println("Color list: " + cellXMLReader.myColors + " i: " + i + " size: " + cellXMLReader.myColors.size());
+		for(int k=0; k<numColors; k++)
+			if (i > k*range/numColors && i < (k+1)*range/numColors) {
+				System.out.println(cellXMLReader.myColors.get(k));
+				return cellXMLReader.myColors.get(k);
+			}
+		return Color.WHITE;
+	}
+	
 	//	private Paint generateRandomColor() {
 	//		Random rand = new Random();
 	//		int i = rand.nextInt(100);
@@ -174,16 +201,16 @@ public class ApplicationLoop {
 //				return Color.WHITE;
 //			}
 //		}
-	
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-		if (i < 20) {
-			return Color.BLACK;
-		} else {
-			return Color.WHITE;
-		}
-	}
+
+//	private Paint generateRandomColor() {
+//		Random rand = new Random();
+//		int i = rand.nextInt(100);
+//		if (i < 20) {
+//			return Color.BLACK;
+//		} else {
+//			return Color.WHITE;
+//		}
+//	}
 
 //		private Paint generateRandomColor() {
 //			Random rand = new Random();
@@ -230,8 +257,11 @@ public class ApplicationLoop {
 	 * @param lineChart: The physical graph
 	 */
 	public void populateLineChart(LineChart lineChart){
-		series = new XYChart.Series();
-		lineChart.getData().add(series);
+		series = new ArrayList<XYChart.Series>();
+		for(int i=0; i<cellXMLReader.myColors.size(); i++) {
+			series.add(i, new XYChart.Series());
+			lineChart.getData().add(series.get(i));
+		}
 	}
 
 	/**
@@ -239,8 +269,8 @@ public class ApplicationLoop {
 	 * @param XValue: The current frame
 	 * @param YValue: The number of a certain type of blocks
 	 */
-	private void addPointsToLineChart(int XValue, int YValue) {
-		series.getData().add(new XYChart.Data(XValue, YValue));
+	private void addPointsToLineChart(int index, int XValue, int YValue) {
+		series.get(index).getData().add(new XYChart.Data(XValue, YValue));
 	}
 
 	/**

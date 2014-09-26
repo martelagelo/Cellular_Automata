@@ -43,9 +43,9 @@ public class Grid {
 	 * @param initialColor: The initial color of the cell
 	 */
 	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-		cellMatrix[i][j] = new GameOfLifeCell();
-		cellMatrix[i][j].xPos = i;
-		cellMatrix[i][j].yPos = j;
+		cellMatrix[i][j] = new GameOfLife();
+		cellMatrix[i][j].setXPos(i);
+		cellMatrix[i][j].setYPos(j);
 		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
 	}
 
@@ -67,7 +67,6 @@ public class Grid {
 	public void initializeAndPopulateMatrix(Cell cell){
 		cellMatrix[cell.xPos][cell.yPos] = cell;
 	}
-
 
 	/**
 	 * Updates the states of the cells in the cell matrix

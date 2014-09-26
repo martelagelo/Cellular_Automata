@@ -70,11 +70,4 @@ public class FireCell extends Cell {
 			super.updatedState = super.currentState;
 		}
 	}
-
-	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

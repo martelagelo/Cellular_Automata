@@ -191,11 +191,5 @@ public class WaTorCell extends Cell{
 //		return (i < ApplicationConstants.NUM_OF_COLUMNS && i >= 0 && j < ApplicationConstants.NUM_OF_ROWS && j >= 0);
 //	}
 
-	
-	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-
-	}
-	
+		
 }

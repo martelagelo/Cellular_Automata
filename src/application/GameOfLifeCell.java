@@ -50,14 +50,4 @@ public class GameOfLifeCell extends Cell {
 				updatedState = Color.WHITE;
 			}
 	}
-
-	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-
-
 }

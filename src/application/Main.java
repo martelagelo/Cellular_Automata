@@ -338,10 +338,10 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Start Button Pressed");
-				//if(cellXMLReader != null)
+				if(cellXMLReader != null)
 					playGame(stage);
-				//else
-				//	System.out.println("Please import an XML File first!");
+				else
+					System.out.println("Please import an XML File first!");
 			}
 		});
 	}
@@ -371,10 +371,11 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					cellXMLReader = new CellXMLReader();
-					cellXMLReader.loadAndParseXMLFile("src/application/xml/test.xml");
+					cellXMLReader.loadAndParseXMLFile("src/application/xml/TestXML.xml");
 					cellXMLReader.populateCellListFromDocument();
 				}
 				catch (Exception exc){
+					System.out.println(exc);
 					activateErrorPage();
 					if(animation !=null)
 						animation.stop();

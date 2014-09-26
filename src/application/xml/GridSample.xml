@@ -3,6 +3,7 @@
 		<Rows>10</Rows>
 		<Cols>10</Cols>
 		<ModelType>Segregation</ModelType>
+		<Colors>"WRB"</Colors>
 	</ApplicationDetails>
 	<Cell>
 		<xPos>0</xPos>
