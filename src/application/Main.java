@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 /**
  * Version 1
@@ -220,6 +221,7 @@ public class Main extends Application {
 		lineChart.setLayoutY(y_Coord);
 		lineChart.setLegendVisible(true);
 		System.out.println(lineChart.getLegendSide());
+		//System.out.println(lineChart.g)
 		root.getChildren().add(lineChart);
 		return lineChart;
 	}
@@ -347,10 +349,10 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Start Button Pressed");
-				//if(cellXMLReader != null)
+				if(cellXMLReader != null)
 					playGame(stage);
-				//else
-				//	System.out.println("Please import an XML File first!");
+				else
+					System.out.println("Please import an XML File first!");
 			}
 		});
 	}
@@ -380,10 +382,11 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					cellXMLReader = new CellXMLReader();
-					cellXMLReader.loadAndParseXMLFile("src/application/xml/test.xml");
+					cellXMLReader.loadAndParseXMLFile("src/application/xml/TestXML.xml");
 					cellXMLReader.populateCellListFromDocument();
 				}
 				catch (Exception exc){
+					System.out.println(exc);
 					activateErrorPage();
 					if(animation !=null)
 						animation.stop();

@@ -72,16 +72,7 @@ public class FireCell extends Cell {
 	}
 
 	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		// TODO Auto-generated method stub
-		
 	}
-
-
 }

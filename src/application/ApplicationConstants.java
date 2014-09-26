@@ -2,6 +2,15 @@ package application;
 
 import java.util.Random;
 
+/**
+ * Version 1
+ * Date: 9/14/2014
+ * 
+ * @author Michael Deng
+ * @author Pranava Raparla
+ * @author David Zhang
+ *
+ */
 public class ApplicationConstants {
 	
 	public static final Integer STAGE_WIDTH = 1520;

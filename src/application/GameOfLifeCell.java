@@ -25,35 +25,22 @@ public class GameOfLifeCell extends Cell {
 		yPos = j;
 		lifeUpdate(findWantedNeighbors(Color.BLACK).size());			
 	}
-
 	
 	/**
 	 * Updates the state of the cell
 	 * @param count: The number of alive neighbors
 	 */
 	private void lifeUpdate(int count){
-			if(count == 2){
-				updatedState = currentState;
-			} else if (count == 3) {
-				updatedState = Color.BLACK;
-			} else {
-				updatedState = Color.WHITE;
-			}
+		if(count == 2)
+			updatedState = currentState;
+		else if (count == 3)
+			updatedState = Color.BLACK;
+		else
+			updatedState = Color.WHITE;
 	}
-
-	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-	}
-
 
 	@Override
 	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		// TODO Auto-generated method stub
-		
 	}
-	
-	
-
-
 }

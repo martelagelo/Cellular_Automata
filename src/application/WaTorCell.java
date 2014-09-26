@@ -38,14 +38,14 @@ public class WaTorCell extends Cell{
 		xPos = i;
 		yPos = j;	
 		if(updatedState == null) {
-			update();
+			updateThisCell();
 		}
 	}
 	
 	/**
 	 * Selects the cell type and updates it
 	 */
-	private void update() {
+	private void updateThisCell() {
 		if (currentState == Color.ORANGE){
 			sharkUpdate();
 		} else if (currentState == Color.GREEN) {
@@ -193,16 +193,8 @@ public class WaTorCell extends Cell{
 	}
 	
 	@Override
-	void setCurrentState(String s) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	
 }

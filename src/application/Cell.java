@@ -32,7 +32,6 @@ public abstract class Cell {
 	Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
 	int cellID;
 
-
 	/**
 	 * Updates the current cell
 	 * @param i: The x position of the current cell
@@ -52,7 +51,9 @@ public abstract class Cell {
 	 * Sets the current state of the current cell
 	 * @param s: The string that decides the state
 	 */
-	abstract void setCurrentState(String s);
+	void setCurrentState(Color color) {
+		currentState = color;
+	}
 
 	/**
 	 * Setting X and Y start positions happens at generation

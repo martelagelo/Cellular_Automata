@@ -69,21 +69,6 @@ public class Segregation extends Cell {
 		Matrix[xPos][yPos].updatedState = Matrix[xPos][yPos].currentState;		
 	}
 
-	@Override
-	void setCurrentState(String s) {
-
-		switch(s.toUpperCase()) {
-		case "WHITE":
-			currentState = Color.WHITE;
-			break;
-		case "RED":
-			currentState = Color.RED;
-			break;
-		case "BLUE":
-			currentState = Color.BLUE;
-			break;
-		}
-	}
 
 	@Override
 	public void updateCell(int i, int j, Cell[][] cellMatrix) {
@@ -95,6 +80,11 @@ public class Segregation extends Cell {
 		System.out.println(xPos + "  " + yPos);
 		Double d = percentageCalc();
 		cellMover(d);
+	}
+
+	@Override
+	protected void updateCell(int i, int j) {
+		// TODO Auto-generated method stub
 	}
 }
 
