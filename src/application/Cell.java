@@ -39,13 +39,6 @@ public abstract class Cell {
 	 * @param cellMatrix: The cell matrix holding all the cells
 	 */
 	protected abstract void updateCell(int i, int j, Cell[][] cellMatrix);
-	
-	/**
-	 * Updates the current cell
-	 * @param i: The x position of the current cell
-	 * @param j: The y position of the current cell
-	 */
-	protected abstract void updateCell(int i, int j);
 
 	/**
 	 * Sets the current state of the current cell

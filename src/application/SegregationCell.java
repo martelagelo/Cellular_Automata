@@ -5,6 +5,7 @@ import javafx.scene.paint.Paint;
 
 /**
  * Version 1
+ * 
  * Date: 9/14/2014
  * 
  * @author Michael Deng
@@ -15,15 +16,6 @@ import javafx.scene.paint.Paint;
 public class SegregationCell extends Cell {
 
 	private double same = 0;
-	private double different = 0;
-
-	public SegregationCell(){
-		//same = 0;
-		//different = 0;
-		threshold = 0.5;
-		xPos = 0;
-		//currentState = Color.WHITE;
-	}
 	
 	/**
 	 * Finds the percentage of the same colored neighbors out of the total amount of neighbors
@@ -40,10 +32,9 @@ public class SegregationCell extends Cell {
 	 * @param percentage
 	 */
 	private void cellMover(double percentage){
-		if (currentState == Color.WHITE && updatedState == null) {
-			updatedState = currentState;
-		} else if (currentState == Color.WHITE && updatedState != null) {
-		} else if (percentage < threshold){
+		if (currentState == Color.WHITE && updatedState == null) updatedState = currentState;
+		else if (currentState == Color.WHITE && updatedState != null) {} 
+		else if (percentage < threshold){
 			Boolean positionFound = false;
 			outerloop:
 			for(int b = yPos; b < ApplicationConstants.NUM_OF_ROWS; b++){
@@ -58,25 +49,11 @@ public class SegregationCell extends Cell {
 					} 
 				}
 			}
-			if(!positionFound) {
-				updatedState = currentState;
-			}
-		} else {
-			updatedState = currentState;	
+			if(!positionFound) updatedState = currentState;
 		}
+		else updatedState = currentState;	
 	}
 
-	/**
-	 * Updates the cell state
-	 */
-	@Override
-	public void updateCell(int i, int j) {
-		same = 0;
-		different = 0;
-		super.xPos = i;
-		super.yPos = j;
-		cellMover(percentageCalc());
-	}
 	
 	/**
 	 * Updates the cell state
@@ -84,7 +61,7 @@ public class SegregationCell extends Cell {
 	@Override
 	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		same = 0;
-		different = 0;
+		threshold = 0.5;
 		super.Matrix = cellMatrix;
 		super.xPos = i;
 		super.yPos = j;

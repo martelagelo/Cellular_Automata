@@ -84,7 +84,7 @@ public class Grid {
 	private void updateCellMatrix(){
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].updateCell(i, j);
+				cellMatrix[i][j].updateCell(i, j, cellMatrix);
 			}
 		}
 	}
@@ -307,7 +307,7 @@ public class Grid {
 	public void populateMatrixNeighborMaps() {
 		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
 			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
-				cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
+				cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
 			}	
 		}
 	}

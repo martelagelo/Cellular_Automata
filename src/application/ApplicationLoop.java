@@ -50,8 +50,6 @@ public class ApplicationLoop {
 	private CellXMLReader cellXMLReader;
 	private Timeline animation;
 
-	//	XYChart.Series series2;
-
 	ArrayList<XYChart.Series> series;
 
 	public boolean goToErrorPage = false;
@@ -104,7 +102,6 @@ public class ApplicationLoop {
 	public void updateGameLoop() {
 		// GameType.updateGame(grid);
 		grid.updateGrid(gridpane);
-		//addPointsToLineChart(1, currentFrameCount, countNumberOfCertainColorSpaces(Color.GREEN));
 		for(int i=0; i<cellXMLReader.myColors.size(); i++)
 			addPointsToLineChart(i, currentFrameCount, countNumberOfCertainColorSpaces(cellXMLReader.myColors.get(i)));
 	}
@@ -227,73 +224,50 @@ public class ApplicationLoop {
 		return poly;
 	}
 
-	//		private Paint generateRandomColor() {
-	//			Random rand = new Random();
-	//			int i = rand.nextInt(100);
-	//			if (i < 45) {
-	//				return Color.RED;
-	//			} else if (i > 55) {
-	//				return Color.BLUE;
-	//			} else{
-	//				return Color.WHITE;
-	//			}
-	//		}
-
-	//		private Paint generateRandomColor() {
-	//			Random rand = new Random();
-	//			int i = rand.nextInt(100);
-	//			if (i < 45) {
-	//				return Color.RED;
-	//			} else if (i > 55) {
-	//				return Color.BLUE;
-	//			} else{
-	//				return Color.WHITE;
-	//			}
-	//		}
-
-	//	private Paint generateRandomColor() {
-	//		Random rand = new Random();
-	//		int i = rand.nextInt(100);
-	//		if (i < 20) {
-	//			return Color.BLACK;
-	//		} else {
-	//			return Color.WHITE;
-	//		}
-	//	}
-
-	private Paint generateRandomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(100);
-
-		if (i < 20) {
-			return Color.BLACK;
-		} else {
-			return Color.WHITE;
-		}
-	}
+//			private Paint generateRandomColor() {
+//				Random rand = new Random();
+//				int i = rand.nextInt(100);
+//				if (i < 35) {
+//					return Color.RED;
+//				} else if (i > 65) {
+//					return Color.BLUE;
+//				} else{
+//					return Color.WHITE;
+//				}
+//			}
 
 
-	//				private Paint generateRandomColor() {
-	//					Random rand = new Random();
-	//					int i = rand.nextInt(100);
-	//					if (i < 20) {
-	//						return Color.GREEN;
-	//					} else if (i > 92){
-	//						return Color.ORANGE;
-	//					} else {
-	//						return Color.WHITE;
-	//					}
-	//				}
+//		private Paint generateRandomColor() {
+//			Random rand = new Random();
+//			int i = rand.nextInt(100);
+//			if (i < 20) {
+//				return Color.BLACK;
+//			} else {
+//				return Color.WHITE;
+//			}
+//		}
 
-	//	private Paint generateRandomColor() {
-	//		Random rand = new Random();
-	//		int i = rand.nextInt(100);
-	//		if (i < 5) {
-	//			return Color.RED;
-	//		} else{
-	//			return Color.GREEN;
-	//		}
-	//	}
+					private Paint generateRandomColor() {
+						Random rand = new Random();
+						int i = rand.nextInt(100);
+						if (i < 20) {
+							return Color.GREEN;
+						} else if (i > 92){
+							return Color.ORANGE;
+						} else {
+							return Color.WHITE;
+						}
+					}
+
+//		private Paint generateRandomColor() {
+//			Random rand = new Random();
+//			int i = rand.nextInt(100);
+//			if (i < 5) {
+//				return Color.RED;
+//			} else{
+//				return Color.GREEN;
+//			}
+//		}
 
 
 	/**
@@ -309,9 +283,6 @@ public class ApplicationLoop {
 	 * @param lineChart: The physical graph
 	 */
 	public void populateLineChart(LineChart lineChart){
-		//series2 = new XYChart.Series();
-		//lineChart.getData().add(series2);
-
 		series = new ArrayList<XYChart.Series>();
 		for(int i=0; i<cellXMLReader.myColors.size(); i++) {
 			series.add(i, new XYChart.Series());
@@ -329,7 +300,6 @@ public class ApplicationLoop {
 	private void addPointsToLineChart(int index, int XValue, int YValue) {
 		series.get(index).getData().add(new XYChart.Data(XValue, YValue));
 		currentFrameCount++;
-		//series2.getData().add(new XYChart.Data(XValue, YValue));
 	}
 
 	/**

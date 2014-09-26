@@ -11,7 +11,7 @@ public class FloodCell extends Cell{
 	private List<WaTorCell> neighborsList = new ArrayList<WaTorCell>();
 	
 	@Override
-	protected void updateCell(int i, int j) {
+	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		OKToFlood = false;
 		xPos = i;
 		yPos = j;	
@@ -33,13 +33,6 @@ public class FloodCell extends Cell{
 		else {
 			updatedState = currentState;
 		}
-	}
-	
-
-	@Override
-	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

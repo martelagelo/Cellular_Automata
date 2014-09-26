@@ -23,6 +23,7 @@ import javafx.scene.shape.Line;
 
 /**
  * Version 1
+ * Complete
  * Date: 9/14/2014
  * 
  * @author Michael Deng
@@ -220,8 +221,6 @@ public class Main extends Application {
 		lineChart.setLayoutX(x_Coord);
 		lineChart.setLayoutY(y_Coord);
 		lineChart.setLegendVisible(true);
-		System.out.println(lineChart.getLegendSide());
-		//System.out.println(lineChart.g)
 		root.getChildren().add(lineChart);
 		return lineChart;
 	}

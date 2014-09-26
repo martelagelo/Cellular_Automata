@@ -29,12 +29,11 @@ public class WaTorCell extends Cell{
 	private List<WaTorCell> moveSharkList = new ArrayList<WaTorCell>();
 	private List<WaTorCell> breedList = new ArrayList<WaTorCell>();
 
-
 	/**
 	 * Updates the cell state
 	 */
 	@Override
-	public void updateCell(int i, int j) {
+	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
 		xPos = i;
 		yPos = j;	
 		if(updatedState == null) {
@@ -190,11 +189,6 @@ public class WaTorCell extends Cell{
 	 */
 	private int randomFinder(List<WaTorCell> moveFishList2){
 		return ApplicationConstants.rand.nextInt(moveFishList2.size());
-	}
-	
-	@Override
-	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
-		// TODO Auto-generated method stub
 	}
 
 }

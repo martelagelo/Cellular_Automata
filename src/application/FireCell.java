@@ -23,18 +23,6 @@ public class FireCell extends Cell {
 	private List<Cell> fireNeighbors = new ArrayList<Cell>();
 
 	/**
-	 * Updates this particular cell based off its surroundings
-	 */
-	public void updateCell(int column, int row) {
-		isNextToFire = false;
-		super.xPos = column;
-		super.yPos = row;
-		findFireNeighbors();
-		calculateBurnChance();
-		updateState();
-	}
-
-	/**
 	 * Find if any of the neighbors are on fire
 	 */
 	private void findFireNeighbors(){
@@ -73,6 +61,11 @@ public class FireCell extends Cell {
 
 	@Override
 	protected void updateCell(int i, int j, Cell[][] cellMatrix) {
-		// TODO Auto-generated method stub
+		isNextToFire = false;
+		super.xPos = i;
+		super.yPos = j;
+		findFireNeighbors();
+		calculateBurnChance();
+		updateState();
 	}
 }

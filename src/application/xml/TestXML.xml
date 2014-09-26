@@ -2,8 +2,8 @@
 	<ApplicationDetails>
 		<NumRows>20</NumRows>
 		<NumCols>20</NumCols>
-		<ModelType>gameoflife</ModelType>
-		<Colors>kw</Colors>
+		<ModelType>Wator</ModelType>
+		<Colors>wgo</Colors>
 		<GridEdgeType>Toroidal</GridEdgeType>
 		<GridLocationShape>Square</GridLocationShape>
 	</ApplicationDetails>
