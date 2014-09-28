@@ -10,8 +10,8 @@
 		</WaTorVariables>
 		<NumRows>50</NumRows>
 		<NumCols>50</NumCols>
-		<GridEdgeType>Finite</GridEdgeType>
-		<GridLocationShape>Square</GridLocationShape>
+		<GridEdgeType>Toroidal</GridEdgeType>
+		<GridLocationShape>hexagonal</GridLocationShape>
 		<GridNeighborType>Cardinal</GridNeighborType>
 	</ApplicationDetails>
 	<Cells>

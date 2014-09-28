@@ -85,7 +85,7 @@ public class ApplicationLoop {
 		grid = new Grid(cxr.myRows,cxr.myCols);
 		grid.setRoot(root);
 		gridpane = initializeGridPane(root);
-		grid.populateMatrixNeighborMaps(cellXMLReader);
+		grid.populateMatrixNeighborsMaps(cellXMLReader);
 		editGrid(gridpane.getChildren());
 		return myScene;
 	}
