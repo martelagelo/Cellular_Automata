@@ -23,6 +23,8 @@ import javafx.scene.shape.Rectangle;
  * @author Pranava Raparla
  * @author David Zhang
  *
+ * This entire file is part of my masterpiece
+ * Michael Deng
  */
 public class Grid {
 
@@ -51,14 +53,14 @@ public class Grid {
 //	 * @param j: The y position of the cell
 //	 * @param initialColor: The initial color of the cell
 //	 */
-//	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
-//		cellMatrix[i][j] = new WaTorCell();
-//		cellMatrix[i][j].setXPos(i);
-//		cellMatrix[i][j].setYPos(j);
-//		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
-//		cellMatrix[i][j].cellID = this.cellID;
-//		this.cellID++;
-//	}
+	public void initializeAndPopulateMatrix(int i, int j, Paint initialColor){
+		cellMatrix[i][j] = new WaTorCell();
+		cellMatrix[i][j].setXPos(i);
+		cellMatrix[i][j].setYPos(j);
+		cellMatrix[i][j].currentState = initialColor; //Some value that will be inputed from the XML file.
+		cellMatrix[i][j].cellID = this.cellID;
+		this.cellID++;
+	}
 
 	/**
 	 * Populates the values in the individual cells in the cellMatrix

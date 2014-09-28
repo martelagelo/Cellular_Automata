@@ -3,6 +3,14 @@ package application;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Date: 9/28/2014
+ * 
+ * @author Michael Deng
+ * 
+ * This entire file is part of my masterpiece
+ * Michael Deng
+ */
 public class NeighborFinder {
 	
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
@@ -57,50 +65,9 @@ public class NeighborFinder {
 	 */
 	private Map createToroidalCornerNeighborsMap(int i, int j) {
 		neighbors = createCornerNeighborsMap(i, j);
-		if (!checkBounds(i + 1,j + 1)) {
-			if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
-				neighbors.put(cellMatrix[0][0].cellID, cellMatrix[0][0]);
-			}
-			else if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j != ApplicationConstants.NUM_OF_ROWS - 1) {
-				neighbors.put(cellMatrix[0][j+1].cellID, cellMatrix[0][j+1]);
-			}
-			else if (i != ApplicationConstants.NUM_OF_COLUMNS - 1 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
-				neighbors.put(cellMatrix[i+1][0].cellID, cellMatrix[i+1][0]);
-			}
-		}
-		if (!checkBounds(i - 1,j + 1)) {
-			if (i == 0 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
-				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][0].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][0]);
-			}
-			else if (i != 0 && j == ApplicationConstants.NUM_OF_ROWS - 1) {
-				neighbors.put(cellMatrix[i-1][0].cellID, cellMatrix[i-1][0]);
-			}
-			else if (i == 0 && j != ApplicationConstants.NUM_OF_ROWS - 1) {
-				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j + 1].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j + 1]);
-			}
-		}
-		if (!checkBounds(i + 1,j - 1)) {
-			if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j == 0) {
-				neighbors.put(cellMatrix[0][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[0][ApplicationConstants.NUM_OF_ROWS - 1]);
-			}
-			else if (i != ApplicationConstants.NUM_OF_COLUMNS - 1 && j == 0) {
-				neighbors.put(cellMatrix[i + 1][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[i + 1][ApplicationConstants.NUM_OF_ROWS - 1]);
-			}
-			else if (i == ApplicationConstants.NUM_OF_COLUMNS - 1 && j != 0) {
-				neighbors.put(cellMatrix[0][j - 1].cellID, cellMatrix[0][j - 1]);
-			}
-		}
-		if (!checkBounds(i - 1,j - 1)) {
-			if(i == 0 && j == 0) {
-				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][ApplicationConstants.NUM_OF_ROWS - 1]);
-			}
-			else if (i != 0 && j == 0) {
-				neighbors.put(cellMatrix[i - 1][ApplicationConstants.NUM_OF_ROWS - 1].cellID, cellMatrix[i - 1][ApplicationConstants.NUM_OF_ROWS - 1]);
-			}
-			else if (i == 0 && j != 0) {
-				neighbors.put(cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j - 1].cellID, cellMatrix[ApplicationConstants.NUM_OF_COLUMNS - 1][j - 1]);
-			}
-		}
+		int[] x = new int[] {1, -1, 1, -1};
+		int[] y = new int[] {1, 1, -1, -1};
+		addCellsToMapToroidal(i, j, x, y, neighbors);
 		return neighbors;
 	}
 
@@ -117,22 +84,46 @@ public class NeighborFinder {
 		return neighbors;
 	}
 	
+	/**
+	 * Finds the X value of the referenced neighbor in a toroidal scenario
+	 * @param i: The x value of the current cell
+	 * @return: The x value of the neighbor after taking in account toroidal
+	 */
 	private int findXValue(int i) {
-		if (i == 0) {
-			return ApplicationConstants.NUM_OF_COLUMNS - 1;
-		}
-		else {
-			return 0;
-		}
+		if (i == 0) return ApplicationConstants.NUM_OF_COLUMNS - 1;
+		else return 0;
 	}
 	
+	/**
+	 * Finds the X value of the referenced neighbor in a toroidal scenario
+	 * @param i: The x value of the current cell
+	 * @param increment: The reference to neighbor
+	 * @return: The x value of the neighbor after taking in account toroidal
+	 */
+	private int findXValue(int i, int increment) {
+		if (i == 0 || i == ApplicationConstants.NUM_OF_COLUMNS - 1) return findXValue(i);
+		else return i + increment;
+	}
+	
+	/**
+	 * Finds the Y value of the referenced neighbor in a toroidal scenario
+	 * @param j: The y value of the current cell
+	 * @return: The y value of the neighbor after taking in account toroidal
+	 */
 	private int findYValue(int j) {
-		if (j == 0) {
-			return ApplicationConstants.NUM_OF_ROWS - 1;
-		}
-		else {
-			return 0;
-		}
+		if (j == 0) return ApplicationConstants.NUM_OF_ROWS - 1;
+		else return 0;
+	}
+	
+	/**
+	 * Finds the Y value of the referenced neighbor in a toroidal scenario
+	 * @param j: The y value of the current cell
+	 * @param increment: The reference to neighbor
+	 * @return: The y value of the neighbor after taking in account toroidal
+	 */
+	private int findYValue(int j, int increment) {
+		if (j == 0 || j == ApplicationConstants.NUM_OF_ROWS - 1) return findXValue(j);
+		else return j + increment;
 	}
 
 	/**
@@ -173,6 +164,22 @@ public class NeighborFinder {
 		for(int k = 0; k < x.length; k++) {
 			if (checkBounds(i + x[k], j + y[k])) {
 				map.put(cellMatrix[i + x[k]][j + y[k]].cellID, cellMatrix[i + x[k]][j + y[k]]);
+			}
+		}
+	}
+	
+	/**
+	 * Adds cells to a map if they need to wrap around the grid
+	 * @param i: The x position of the particular cell
+	 * @param j: The y position of the particular cell
+	 * @param x: An array of x positions 
+	 * @param y: An array of y positions
+	 * @param map: The map that needs to be added to
+	 */
+	private void addCellsToMapToroidal(int i, int j, int[] x, int[] y, Map map) {
+		for(int k = 0; k < x.length; k++) {
+			if (!checkBounds(i + x[k], j + y[k])) {
+				map.put(cellMatrix[findXValue(i, x[k])][findYValue(j, y[k])].cellID, cellMatrix[findXValue(i, x[k])][findYValue(j, y[k])]);
 			}
 		}
 	}

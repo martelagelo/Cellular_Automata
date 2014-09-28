@@ -113,10 +113,8 @@ public class ApplicationLoop {
 	 * @return: The newly created GirdPane
 	 */
 	private GridPane initializeGridPane(Group root){		
-		// Set up GridPane
 		GridPane gp = new GridPane();
 
-		// Loop through entire Grid and randomly populate cells
 		for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++)
 			for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++)
 			 {
@@ -126,17 +124,15 @@ public class ApplicationLoop {
 				//grid.initializeAndPopulateMatrix(i, j, rect.getFill());
 				gp.add(rect, i, j,1,1);
 			}
-		System.out.println("Colors: " + cellXMLReader.myColors);
-		System.out.println("Game Of Life: " + cellXMLReader.myModelType);
-		// Loop through entire list of cells read in from XML file and add to grid
+//		System.out.println("Colors: " + cellXMLReader.myColors);
+//		System.out.println("Game Of Life: " + cellXMLReader.myModelType);
+
 			for(Cell cell: cellXMLReader.getCellList()) {
 				Polygon rect = generateRect(cell.currentState);
 				if(cell.xPos < grid.cellMatrix[0].length && cell.yPos < grid.cellMatrix.length) {
 					grid.cellMatrix[cell.xPos][cell.yPos].currentState = cell.currentState;
-					//grid.cellMatrix[cell.xPos][cell.yPos].;
 				}
 			}
-		// Add the grid pane to the root and return for display
 		root.getChildren().add(gp);
 		return gp;
 	}

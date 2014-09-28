@@ -5,7 +5,7 @@
 		<ModelType>GameOfLife</ModelType>
 		<Colors>wk</Colors>
 		<GridEdgeType>Finite</GridEdgeType>
-		<GridLocationShape>Square</GridLocationShape>
+		<GridLocationShape>Cardinal</GridLocationShape>
 		<GridNeighborType>Square</GridNeighborType>
 	</ApplicationDetails>
 	<Cells>

@@ -11,8 +11,8 @@
 		<NumRows>50</NumRows>
 		<NumCols>50</NumCols>
 		<GridEdgeType>Toroidal</GridEdgeType>
-		<GridLocationShape>hexagonal</GridLocationShape>
-		<GridNeighborType>Cardinal</GridNeighborType>
+		<GridLocationShape>Cardinal</GridLocationShape>
+		<GridNeighborType>Square</GridNeighborType>
 	</ApplicationDetails>
 	<Cells>
 		<Row>01212020212111000011101111111011100210011012002210</Row>
