@@ -4,8 +4,8 @@
 		<NumCols>50</NumCols>
 		<ModelType>GameOfLife</ModelType>
 		<Colors>wk</Colors>
-		<GridEdgeType>Finite</GridEdgeType>
-		<GridLocationShape>Cardinal</GridLocationShape>
+		<GridEdgeType>Toroidal</GridEdgeType>
+		<GridLocationShape>Square</GridLocationShape>
 		<GridNeighborType>Square</GridNeighborType>
 	</ApplicationDetails>
 	<Cells>

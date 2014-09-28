@@ -139,7 +139,11 @@ public class Grid {
 		r.setFill(cellMatrix[i][j].currentState);
 	}
 	
-	public void populateMatrixNeighborsMaps(CellXMLReader cxr) {
+	/**
+	 * Populates a map of neighbors for each cell in the cell matrix
+	 * @param cxr: The XML reader input
+	 */
+	public void populateMatrixNeighborMaps(CellXMLReader cxr) {
 		neighborFinder.populateNeighborMaps(cxr, cellMatrix);
 	}
 	

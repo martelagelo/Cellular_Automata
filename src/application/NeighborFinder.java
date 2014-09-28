@@ -14,8 +14,6 @@ import java.util.Map;
 public class NeighborFinder {
 	
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
-	Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
-	
 
 	/**
 	 * Creates a map of corner neighbors for a particular cell
@@ -24,7 +22,7 @@ public class NeighborFinder {
 	 * @return: The map of corner neighbors
 	 */
 	private Map createCornerNeighborsMap(int i, int j) {
-		neighbors = new HashMap<Integer, Cell>();
+		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
 		int[] x = new int[]{-1, 1, -1, 1};
 		int[] y = new int[]{-1, -1, 1, 1};
 		addCellsToMap(i, j, x, y, neighbors);
@@ -38,7 +36,7 @@ public class NeighborFinder {
 	 * @return: The map of cardinal directional neighbors
 	 */
 	private Map createCardinalNeighborsMap(int i, int j) {
-		neighbors = new HashMap<Integer, Cell>();
+		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
 		int[] x = new int[]{0, 0, -1, 1};
 		int[] y = new int[]{-1, 1, 0, 0};
 		addCellsToMap(i, j, x, y, neighbors);
@@ -52,7 +50,7 @@ public class NeighborFinder {
 	 * @return: The map of square neighbors
 	 */
 	private Map createSquareNeighborsMap(int i, int j) {
-		neighbors = createCardinalNeighborsMap(i, j);
+		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
 		neighbors.putAll(createCornerNeighborsMap(i, j));
 		return neighbors;
 	}
@@ -64,7 +62,7 @@ public class NeighborFinder {
 	 * @return: The map of corner neighbors
 	 */
 	private Map createToroidalCornerNeighborsMap(int i, int j) {
-		neighbors = createCornerNeighborsMap(i, j);
+		Map<Integer, Cell> neighbors = createCornerNeighborsMap(i, j);
 		int[] x = new int[] {1, -1, 1, -1};
 		int[] y = new int[] {1, 1, -1, -1};
 		addCellsToMapToroidal(i, j, x, y, neighbors);
@@ -78,7 +76,7 @@ public class NeighborFinder {
 	 * @return: The map of cardinal directional neighbors
 	 */
 	private Map createToroidalCardinalNeighborsMap(int i, int j) {
-		neighbors = createCardinalNeighborsMap(i, j);
+		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
 		if (!checkBounds(i+1,j) || !checkBounds(i - 1,j)) neighbors.put(cellMatrix[findXValue(i)][j].cellID, cellMatrix[findXValue(i)][j]);
 		if (!checkBounds(i,j+1) || !checkBounds(i,j - 1)) neighbors.put(cellMatrix[i][findYValue(j)].cellID, cellMatrix[i][findYValue(j)]); 	
 		return neighbors;
@@ -133,7 +131,7 @@ public class NeighborFinder {
 	 * @return: The map of square neighbors
 	 */
 	private Map createToroidalSquareNeighborsMap(int i, int j) {
-		neighbors = createToroidalCardinalNeighborsMap(i, j);
+		Map<Integer, Cell> neighbors = createToroidalCardinalNeighborsMap(i, j);
 		neighbors.putAll(createToroidalCornerNeighborsMap(i, j));
 		return neighbors;
 	}
@@ -145,7 +143,7 @@ public class NeighborFinder {
 	 * @return: The map of hexagonal neighbors
 	 */
 	private Map createHexagonalNeighborsMap(int i, int j) {
-		neighbors = createCardinalNeighborsMap(i, j);
+		Map<Integer, Cell> neighbors = createCardinalNeighborsMap(i, j);
 		int[] x = new int[]{-1, 1};
 		int[] y = new int[]{1, -1};
 		addCellsToMap(i, j, x, y, neighbors);

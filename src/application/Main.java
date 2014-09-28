@@ -381,7 +381,7 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					cellXMLReader = new CellXMLReader();
-					cellXMLReader.loadAndParseXMLFile("src/application/xml/WaTorTest.xml");
+					cellXMLReader.loadAndParseXMLFile("src/application/xml/GameOfLifeTest.xml");
 					cellXMLReader.populateCellListFromDocument();
 				}
 				catch (Exception exc){
