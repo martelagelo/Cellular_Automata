@@ -147,4 +147,8 @@ public class Grid {
 		neighborFinder.populateNeighborMaps(cxr, cellMatrix);
 	}
 	
+	public void populateMatrixNeighborMaps(String str1, String str2) {
+		neighborFinder.populateNeighborMaps(str1,  str2, cellMatrix);
+	}
+	
 }

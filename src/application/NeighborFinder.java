@@ -12,7 +12,7 @@ import java.util.Map;
  * Michael Deng
  */
 public class NeighborFinder {
-	
+
 	Cell[][] cellMatrix = new Cell[ApplicationConstants.NUM_OF_COLUMNS][ApplicationConstants.NUM_OF_ROWS];
 
 	/**
@@ -35,7 +35,7 @@ public class NeighborFinder {
 	 * @param j: The y position of the particular cell
 	 * @return: The map of cardinal directional neighbors
 	 */
-	private Map createCardinalNeighborsMap(int i, int j) {
+	Map createCardinalNeighborsMap(int i, int j) {
 		Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
 		int[] x = new int[]{0, 0, -1, 1};
 		int[] y = new int[]{-1, 1, 0, 0};
@@ -81,7 +81,7 @@ public class NeighborFinder {
 		if (!checkBounds(i,j+1) || !checkBounds(i,j - 1)) neighbors.put(cellMatrix[i][findYValue(j)].cellID, cellMatrix[i][findYValue(j)]); 	
 		return neighbors;
 	}
-	
+
 	/**
 	 * Finds the X value of the referenced neighbor in a toroidal scenario
 	 * @param i: The x value of the current cell
@@ -91,7 +91,7 @@ public class NeighborFinder {
 		if (i == 0) return ApplicationConstants.NUM_OF_COLUMNS - 1;
 		else return 0;
 	}
-	
+
 	/**
 	 * Finds the X value of the referenced neighbor in a toroidal scenario
 	 * @param i: The x value of the current cell
@@ -102,24 +102,24 @@ public class NeighborFinder {
 		if (i == 0 || i == ApplicationConstants.NUM_OF_COLUMNS - 1) return findXValue(i);
 		else return i + increment;
 	}
-	
+
 	/**
 	 * Finds the Y value of the referenced neighbor in a toroidal scenario
 	 * @param j: The y value of the current cell
 	 * @return: The y value of the neighbor after taking in account toroidal
 	 */
-	private int findYValue(int j) {
+	int findYValue(int j) {
 		if (j == 0) return ApplicationConstants.NUM_OF_ROWS - 1;
 		else return 0;
 	}
-	
+
 	/**
 	 * Finds the Y value of the referenced neighbor in a toroidal scenario
 	 * @param j: The y value of the current cell
 	 * @param increment: The reference to neighbor
 	 * @return: The y value of the neighbor after taking in account toroidal
 	 */
-	private int findYValue(int j, int increment) {
+	int findYValue(int j, int increment) {
 		if (j == 0 || j == ApplicationConstants.NUM_OF_ROWS - 1) return findXValue(j);
 		else return j + increment;
 	}
@@ -165,7 +165,7 @@ public class NeighborFinder {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds cells to a map if they need to wrap around the grid
 	 * @param i: The x position of the particular cell
@@ -188,7 +188,7 @@ public class NeighborFinder {
 	 * @param j: The x position of the particular location
 	 * @return
 	 */
-	private boolean checkBounds(int i, int j) {
+	boolean checkBounds(int i, int j) {
 		return (i < ApplicationConstants.NUM_OF_COLUMNS && i >= 0 && j < ApplicationConstants.NUM_OF_ROWS && j >= 0);
 	}
 
@@ -216,6 +216,33 @@ public class NeighborFinder {
 				else
 					this.cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
 			}	
+		}
+	}
+
+	/**
+	 * Populates the neighbors of each of the cells in the cell matrix
+	 */
+	public void populateNeighborMaps(String str1, String str2, Cell[][] cellMatrix) {
+		this.cellMatrix = cellMatrix;
+		for(int j = 0; j < ApplicationConstants.NUM_OF_ROWS; j++) {
+			for(int i = 0; i < ApplicationConstants.NUM_OF_COLUMNS; i++) {
+				if(str1.equals("toroidal") && str2.equals("corner"))
+					this.cellMatrix[i][j].neighbors = createToroidalCornerNeighborsMap(i, j);
+				else if(str1.equals("toroidal") && str2.equals("cardinal"))
+					this.cellMatrix[i][j].neighbors = createToroidalCardinalNeighborsMap(i, j);
+				else if(str1.equals("toroidal") && str2.equals("square"))
+					this.cellMatrix[i][j].neighbors = createToroidalSquareNeighborsMap(i, j);
+				else if(str1.equals("finite") && str2.equals("corner"))
+					this.cellMatrix[i][j].neighbors = createCornerNeighborsMap(i, j);
+				else if(str1.equals("finite") && str2.equals("cardinal"))
+					this.cellMatrix[i][j].neighbors = createCardinalNeighborsMap(i, j);
+				else if(str1.equals("finite") && str2.equals("square"))
+					this.cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
+				else if(str1.equals("hexagonal"))
+					this.cellMatrix[i][j].neighbors = createHexagonalNeighborsMap(i, j);
+				else
+					this.cellMatrix[i][j].neighbors = createSquareNeighborsMap(i, j);
+			}
 		}
 	}
 }
