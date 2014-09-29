@@ -1,17 +1,14 @@
+// This entire file is part of my masterpiece
+// Pranava K. Raparla
+
 package application;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import java.util.*;
+import javafx.scene.paint.*;
 
 /**
- * Version 1
- * Date: 9/14/2014
+ * Version 2
+ * Date: 9/29/2014
  * 
  * @author Michael Deng
  * @author Pranava Raparla
@@ -21,43 +18,89 @@ import javafx.scene.paint.Paint;
 public abstract class Cell {
 
 	// variables that should be available to subclasses
-	int xPos;
-	int yPos;
-	Paint currentState;
-	Paint updatedState;
-	double threshold;
-	String gridEdgeType;
-	String gridLocationShape;
-	Cell[][] Matrix;
-	Map<Integer, Cell> neighbors = new HashMap<Integer, Cell>();
-	int cellID;
-
+	public int xPos;
+	public int yPos;
+	public int cellID;
+	protected Paint currentState;
+	protected Paint updatedState;
+	protected double threshold;
+	protected String gridEdgeType;
+	protected String gridLocationShape;
+	protected List<Color> cellColors;
+	public Map<Integer, Cell> neighbors;
+	
 	/**
-	 * Updates the current cell
-	 * @param i: The x position of the current cell
-	 * @param j: The y position of the current cell
-	 * @param cellMatrix: The cell matrix holding all the cells
+	 * Constructor for Cell class that should be the same for all subclasses.
+	 * @param x: The x position of the cell
+	 * @param y: The y position of the cell
+	 * @param current: The current state of the cell
+	 * @param updated: The updated state of the cell
+	 * @param thresh: The cell's threshold for neighbors
+	 * @param edge: The boundary type of the cell
+	 * @param shape: The shape of the individual cell
 	 */
-	protected abstract void updateCell(int i, int j, Cell[][] cellMatrix);
-
-	void update() {
+	public Cell(int x, int y, Paint current, Paint updated, double thresh, String edge, String shape, List<Color> colors) {
+		xPos = x;
+		yPos = y;
+		currentState = current;
+		updatedState = updated;
+		threshold = thresh;
+		gridEdgeType = edge;
+		gridLocationShape = shape;
+		cellColors = colors;
+		neighbors = new HashMap<Integer, Cell>();
+	}
+		
+	/**
+	 * Updates cell from currentState to updatedState.
+	 */
+	public void update() {
 		currentState = updatedState;
 		updatedState = null;
 	}
 	
 	/**
-	 * Sets the current state of the current cell
-	 * @param s: The string that decides the state
+	 * Queues the next state. Each subclass should know how to set its own updatedState.
 	 */
-	void setCurrentState(Color color) {
-		currentState = color;
+	protected abstract void setUpdatedState();
+	
+	/**
+	 * 
+	 * @return currentState
+	 */
+	public Color getCurrentState() {
+		return (Color) currentState;
+	}
+	
+	/**
+	 * 
+	 * @return updatedState
+	 */
+	public Color getUpdatedState() {
+		return (Color) updatedState;
 	}
 
 	/**
 	 * Setting X and Y start positions happens at generation
 	 * @param x: The x position of the current cell
 	 */
-	void setXPos(int x){
+	public int getXPos() {
+		return xPos;
+	}
+
+	/**
+	 * Getting X and Y start positions happens at generation
+	 * @param y: The y position of the current cell
+	 */
+	public int getYPos() {
+		return yPos;
+	}
+	
+	/**
+	 * Setting X and Y start positions happens at generation
+	 * @param x: The x position of the current cell
+	 */
+	public void setXPos(int x) {
 		xPos = x;
 	}
 
@@ -65,33 +108,26 @@ public abstract class Cell {
 	 * Setting X and Y start positions happens at generation
 	 * @param y: The y position of the current cell
 	 */
-	void setYPos(int y){
+	public void setYPos(int y) {
 		yPos = y;
 	}
+	
 	/**
-	 * Called upon creation in XML reader
-	 * @param num: The threshold value 
+	 * 
+	 * @return
 	 */
-	public void setThreshold(double num){
-		threshold = num;
+	public int getCellID() {
+		return cellID;
 	}
 	
 	/**
-	 * Sets the edge of grid
-	 * @param s: The string that sets the edge
+	 * Setting the ID for the cell from within the Grid class
+	 * @param id: The ID of the cell in the Grid
 	 */
-	void setGridEdgeType(String s) {
-		gridEdgeType = s;
+	public void setCellID(int id) {
+		cellID = id;
 	}
 	
-	/**
-	 * Sets the grid location shape
-	 * @param s: The string that sets the shape
-	 */
-	void setGridLocationShape(String s) {
-		gridLocationShape = s;
-	}
-
 	/**
 	 * Counts up the neighbors of the current cell with a certain color
 	 * @param color: The color we want to find
@@ -99,11 +135,9 @@ public abstract class Cell {
 	 */
 	protected List findWantedNeighbors(Color color) {
 		List<Cell> list = new ArrayList<Cell>();
-		for (Integer key : neighbors.keySet()) {
-			if (neighbors.get(key).currentState == color) {
+		for (Integer key : neighbors.keySet())
+			if (neighbors.get(key).currentState == color)
 				list.add(neighbors.get(key));
-			}
-		}
 		return list;
 	}
 	
@@ -115,11 +149,9 @@ public abstract class Cell {
 	 */
 	protected List findWantedNeighbors(Color currentColor, Color updatedColor) {
 		List<Cell> list = new ArrayList<Cell>();
-		for (Integer key : neighbors.keySet()) {
-			if ((neighbors.get(key).currentState == currentColor && neighbors.get(key).updatedState == null) || neighbors.get(key).updatedState == updatedColor) {
+		for (Integer key : neighbors.keySet())
+			if ((neighbors.get(key).getCurrentState() == currentColor && neighbors.get(key).getUpdatedState() == null) || neighbors.get(key).getUpdatedState() == updatedColor)
 				list.add(neighbors.get(key));
-			}
-		}
 		return list;
 	}
 	
@@ -132,16 +164,14 @@ public abstract class Cell {
 	 */
 	protected List findWantedNeighbors(Cell otherCell, Color currentColor, Color updatedColor) {
 		List<Cell> list = new ArrayList<Cell>();
-		for (Integer key : otherCell.neighbors.keySet()) {
-			if ((otherCell.neighbors.get(key).currentState == currentColor && otherCell.neighbors.get(key).updatedState == null) || otherCell.neighbors.get(key).updatedState == updatedColor) {
+		for (Integer key : otherCell.neighbors.keySet())
+			if ((otherCell.neighbors.get(key).getCurrentState() == currentColor && otherCell.neighbors.get(key).getUpdatedState() == null) || otherCell.neighbors.get(key).getUpdatedState() == updatedColor)
 				list.add(otherCell.neighbors.get(key));
-			}
-		}
 		return list;
 	}
 
 	/**
-	 * For printing purposes
+	 * Overrides toString() method to help with printing.
 	 */
 	@Override
 	public String toString() {

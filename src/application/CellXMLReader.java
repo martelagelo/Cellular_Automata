@@ -2,10 +2,13 @@ package application;
 import java.io.IOException;
 import java.io.File;
 import java.util.*;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import javafx.scene.paint.*;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -123,8 +126,6 @@ public class CellXMLReader
         NodeList applicationDetails = myDocument.getElementsByTagName("ApplicationDetails");
         configureModelParameters((Element) applicationDetails.item(0));
 		
-		//System.out.println("Model: " + myModelType + "\tRows: " + ApplicationConstants.NUM_OF_ROWS + "\tCols: " + ApplicationConstants.NUM_OF_COLUMNS);
-		
 		// Loop through Node List to get nodes (cells)
         NodeList cellDetails = myDocument.getElementsByTagName("Cells");
         System.out.println("Looping through cell data in XML file... ");
@@ -133,8 +134,6 @@ public class CellXMLReader
         System.out.println("Cell Details item 0 text: " + cellDetails.item(0).getTextContent());
 
         String[] rowOfStates = cellDetails.item(0).getTextContent().split("\n");
-//        for(int i=0; i<rowOfStates.length; i++)
-//        	System.out.println("Row " + i + " length " + rowOfStates[i].length() + " : " + rowOfStates[i]);
         for(String s: rowOfStates) {
         	System.out.println("Going for it...");
         	if(s.length() <= 0 || s.compareTo("\n") == 0 || s.compareTo(" ") == 0 || s.compareTo("\t") == 0)
@@ -156,11 +155,9 @@ public class CellXMLReader
 		myGridLocationShape = modelParameters.getElementsByTagName("GridLocationShape").item(0).getTextContent();
 		myGridNeighborType = modelParameters.getElementsByTagName("GridNeighborType").item(0).getTextContent();
         setColorScheme(modelParameters.getElementsByTagName("Colors").item(0).getTextContent().toLowerCase());
-        //setWaTorVariables(modelParameters.getElementsByTagName("WaTorVariables"));
+        setWaTorVariables(modelParameters.getElementsByTagName("WaTorVariables"));
         if(myModelType.equalsIgnoreCase("wator"))
         	setWaTorVariables(modelParameters);
-		//ApplicationConstants.NUM_OF_ROWS = Integer.parseInt(modelParameters.getElementsByTagName("NumRows").item(0).getTextContent());
-		//ApplicationConstants.NUM_OF_COLUMNS = Integer.parseInt(modelParameters.getElementsByTagName("NumCols").item(0).getTextContent());
 	}
 	
 	/**
@@ -206,25 +203,25 @@ public class CellXMLReader
 	 * 
 	 * @return
 	 */
-	public Cell checkModelTypeAndInitializeCell() {
-		Cell cell = new GameOfLifeCell();
+	public Cell checkModelTypeAndInitializeCell(int x, int y, Paint current, Paint updated, double thresh, String edge, String shape, List<Color> colors) {
+		Cell cell = new GameOfLifeCell(x, y, current, updated, thresh, edge, shape, colors);
 		switch (myModelType.toLowerCase()) {
 		case "gameoflife":
-			cell = new GameOfLifeCell();
+			cell = new GameOfLifeCell(x, y, current, updated, thresh, edge, shape, colors);
 			break;
 		case "segregation":
-			cell = new SegregationCell();
+			cell = new SegregationCell(x, y, current, updated, thresh, edge, shape, colors);
 			break;
 		case "fire":
-			cell = new FireCell();
+			cell = new FireCell(x, y, current, updated, thresh, edge, shape, colors);
 			break;
 		case "wator":
 			if(myWaTorVariables.size()<=0)
-				cell = new WaTorCell();
+				cell = new WaTorCell(x, y, current, updated, thresh, edge, shape, colors);
 			cell = new WaTorCell(myWaTorVariables.get(0),myWaTorVariables.get(1),myWaTorVariables.get(2));
 			break;
 		default:
-			cell = new GameOfLifeCell();
+			cell = new GameOfLifeCell(x, y, current, updated, thresh, edge, shape, colors);
 			break;
 		}
 		return cell;
@@ -240,15 +237,10 @@ public class CellXMLReader
 		if(myCols<statesToParse.length())
 			myCols = statesToParse.length();
 		for(int i=0; i<statesToParse.length(); i++) {
-			Cell cell = checkModelTypeAndInitializeCell();
-			System.out.println("\tSubstring check:i " + i + "," + statesToParse.substring(i,i+1));
 			int colorIndex = Integer.parseInt(statesToParse.substring(i,i+1));
 			if(colorIndex >= myColors.size())
 				colorIndex = 0;
-			cell.setCurrentState(myColors.get(colorIndex));
-			cell.setThreshold(myThreshold);
-			cell.setXPos(i);
-			cell.setYPos(myRows);
+			Cell cell = checkModelTypeAndInitializeCell(i, myRows, myColors.get(colorIndex), null, myThreshold, myGridEdgeType, myGridLocationShape, myColors);
 			myCellList.add(cell);
 		}
 		myRows++;
