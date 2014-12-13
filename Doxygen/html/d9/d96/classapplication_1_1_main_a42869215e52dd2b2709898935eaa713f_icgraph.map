@@ -1,0 +1,16 @@
+<map id="application.Main.setSliderEventListener" name="application.Main.setSliderEventListener">
+<area shape="rect" id="node2" href="$d9/d96/classapplication_1_1_main.html#a70093ccc8a1ea3876f646690a254eba6" title="application.Main.createSlider" alt="" coords="241,53,447,80"/>
+<area shape="rect" id="node3" href="$d9/d96/classapplication_1_1_main.html#a1f5094dad31bc45ef126f701738cbe46" title="application.Main.createSlider" alt="" coords="497,24,703,51"/>
+<area shape="rect" id="node4" href="$d9/d96/classapplication_1_1_main.html#a2ddf30fb8360296e1ad3459fe6f920fb" title="application.Main.populate\lGridPageModules" alt="" coords="507,75,693,117"/>
+<area shape="rect" id="node5" href="$d9/d96/classapplication_1_1_main.html#adc868cfca1990edad66af3dcb8cf4349" title="application.Main.playGame" alt="" coords="752,55,947,81"/>
+<area shape="rect" id="node6" href="$d9/d96/classapplication_1_1_main.html#ada0f47786d75e28e627d2621d75eaf5a" title="application.Main.activate\lStartButton" alt="" coords="995,43,1175,85"/>
+<area shape="rect" id="node7" href="$d9/d96/classapplication_1_1_main.html#a64e6451d894979853890a235efe37db8" title="application.Main.createStart\lGameButton" alt="" coords="1224,43,1427,85"/>
+<area shape="rect" id="node8" href="$d9/d96/classapplication_1_1_main.html#a5fee6c1b05965eca9205a99e3245a5fb" title="application.Main.populate\lStartPageModules" alt="" coords="1475,43,1661,85"/>
+<area shape="rect" id="node9" href="$d9/d96/classapplication_1_1_main.html#a4e5ad4e3de8bbd8654120180a94e870d" title="application.Main.start" alt="" coords="1710,51,1869,77"/>
+<area shape="rect" id="node10" href="$d9/d96/classapplication_1_1_main.html#ad652e3294ffb6519b18d784d5831c76a" title="application.Main.activate\lReturntoStart" alt="" coords="1918,43,2098,85"/>
+<area shape="rect" id="node11" href="$d9/d96/classapplication_1_1_main.html#a4c5877fafc53c4fae488f1f30faf294b" title="application.Main.createReturn\lToStartButton" alt="" coords="2147,43,2357,85"/>
+<area shape="rect" id="node12" href="$d9/d96/classapplication_1_1_main.html#abcabe1a32eb7b5054cf34ca0def07531" title="application.Main.populate\lErrorPageModules" alt="" coords="2406,43,2591,85"/>
+<area shape="rect" id="node13" href="$d9/d96/classapplication_1_1_main.html#a81e70f73d65beae34c459628791cc5d4" title="application.Main.activate\lErrorPage" alt="" coords="2641,43,2821,85"/>
+<area shape="rect" id="node14" href="$d9/d96/classapplication_1_1_main.html#aef0593911aa3cbc594ac75bbb8d6a2b0" title="application.Main.activate\lImportXMLButton" alt="" coords="2870,43,3050,85"/>
+<area shape="rect" id="node15" href="$d9/d96/classapplication_1_1_main.html#a18021492af2e457d39edcbd16dc0d3c8" title="application.Main.createImport\lXMLButton" alt="" coords="3099,14,3311,55"/>
+</map>

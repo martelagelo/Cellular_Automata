@@ -1,0 +1,14 @@
+<map id="application.Main.populateStage" name="application.Main.populateStage">
+<area shape="rect" id="node2" href="$d9/d96/classapplication_1_1_main.html#a81e70f73d65beae34c459628791cc5d4" title="application.Main.activate\lErrorPage" alt="" coords="241,63,421,105"/>
+<area shape="rect" id="node6" href="$d9/d96/classapplication_1_1_main.html#a4e5ad4e3de8bbd8654120180a94e870d" title="application.Main.start" alt="" coords="1195,129,1354,156"/>
+<area shape="rect" id="node11" href="$d9/d96/classapplication_1_1_main.html#adc868cfca1990edad66af3dcb8cf4349" title="application.Main.playGame" alt="" coords="2125,136,2320,163"/>
+<area shape="rect" id="node3" href="$d9/d96/classapplication_1_1_main.html#aef0593911aa3cbc594ac75bbb8d6a2b0" title="application.Main.activate\lImportXMLButton" alt="" coords="470,5,650,46"/>
+<area shape="rect" id="node4" href="$d9/d96/classapplication_1_1_main.html#a18021492af2e457d39edcbd16dc0d3c8" title="application.Main.createImport\lXMLButton" alt="" coords="699,5,911,46"/>
+<area shape="rect" id="node5" href="$d9/d96/classapplication_1_1_main.html#a5fee6c1b05965eca9205a99e3245a5fb" title="application.Main.populate\lStartPageModules" alt="" coords="961,5,1146,46"/>
+<area shape="rect" id="node7" href="$d9/d96/classapplication_1_1_main.html#ad652e3294ffb6519b18d784d5831c76a" title="application.Main.activate\lReturntoStart" alt="" coords="1403,122,1583,163"/>
+<area shape="rect" id="node8" href="$d9/d96/classapplication_1_1_main.html#a4c5877fafc53c4fae488f1f30faf294b" title="application.Main.createReturn\lToStartButton" alt="" coords="1632,122,1843,163"/>
+<area shape="rect" id="node9" href="$d9/d96/classapplication_1_1_main.html#abcabe1a32eb7b5054cf34ca0def07531" title="application.Main.populate\lErrorPageModules" alt="" coords="1891,63,2077,105"/>
+<area shape="rect" id="node10" href="$d9/d96/classapplication_1_1_main.html#a2ddf30fb8360296e1ad3459fe6f920fb" title="application.Main.populate\lGridPageModules" alt="" coords="1891,129,2077,170"/>
+<area shape="rect" id="node12" href="$d9/d96/classapplication_1_1_main.html#ada0f47786d75e28e627d2621d75eaf5a" title="application.Main.activate\lStartButton" alt="" coords="2369,95,2549,137"/>
+<area shape="rect" id="node13" href="$d9/d96/classapplication_1_1_main.html#a64e6451d894979853890a235efe37db8" title="application.Main.createStart\lGameButton" alt="" coords="2597,50,2800,91"/>
+</map>

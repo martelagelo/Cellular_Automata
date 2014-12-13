@@ -1,0 +1,7 @@
+<map id="application.WaTorCell2.killShark" name="application.WaTorCell2.killShark">
+<area shape="rect" id="node2" href="$d4/dd2/classapplication_1_1_wa_tor_cell2.html#a9154658e7aeed7ceef48a58994ea0f35" title="application.WaTorCell2.check\lTimeTillSharkEvents" alt="" coords="237,5,440,46"/>
+<area shape="rect" id="node3" href="$d4/dd2/classapplication_1_1_wa_tor_cell2.html#a9c34fc1d0caa39c1095ff90596b3e67b" title="application.WaTorCell2.move\lShark" alt="" coords="488,5,691,46"/>
+<area shape="rect" id="node4" href="$d4/dd2/classapplication_1_1_wa_tor_cell2.html#a4c116bc052edb10528b26b7905518cf6" title="application.WaTorCell2.update\lShark" alt="" coords="739,5,949,46"/>
+<area shape="rect" id="node5" href="$d4/dd2/classapplication_1_1_wa_tor_cell2.html#a5f759ecf2a2a0d5b46a8cd3180663d5f" title="application.WaTorCell2.update\lState" alt="" coords="997,5,1208,46"/>
+<area shape="rect" id="node6" href="$d4/dd2/classapplication_1_1_wa_tor_cell2.html#ad372db7cd5887c0f806d3125c33c094a" title="application.WaTorCell2.updateCell" alt="" coords="1256,12,1491,39"/>
+</map>

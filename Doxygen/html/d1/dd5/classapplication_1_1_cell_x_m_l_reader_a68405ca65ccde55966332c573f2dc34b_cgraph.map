@@ -1,0 +1,7 @@
+<map id="application.CellXMLReader.loadAttributesIntoCell" name="application.CellXMLReader.loadAttributesIntoCell">
+<area shape="rect" id="node2" href="$d1/dd5/classapplication_1_1_cell_x_m_l_reader.html#a624d0f1211126fed6ffcb82cf079aa0b" title="application.CellXMLReader.check\lModelTypeAndInitializeCell" alt="" coords="273,5,501,46"/>
+<area shape="rect" id="node3" href="$d7/dff/classapplication_1_1_cell.html#a5bff8514612c2a8631d927f4a18c7569" title="application.Cell.setCurrent\lState" alt="" coords="291,70,482,111"/>
+<area shape="rect" id="node4" href="$d7/dff/classapplication_1_1_cell.html#a34e60407d74251ba0b3c4baf82af9e2c" title="application.Cell.setThreshold" alt="" coords="285,136,489,163"/>
+<area shape="rect" id="node5" href="$d7/dff/classapplication_1_1_cell.html#a9b55760c359deba99fa09c169bbcb924" title="application.Cell.setXPos" alt="" coords="300,187,473,213"/>
+<area shape="rect" id="node6" href="$d7/dff/classapplication_1_1_cell.html#acc3b6f97d338de7648cefc50fe63b829" title="application.Cell.setYPos" alt="" coords="301,237,473,264"/>
+</map>

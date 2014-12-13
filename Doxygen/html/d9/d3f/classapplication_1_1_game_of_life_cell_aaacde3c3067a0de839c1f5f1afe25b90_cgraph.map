@@ -1,0 +1,4 @@
+<map id="application.GameOfLifeCell.updateCell" name="application.GameOfLifeCell.updateCell">
+<area shape="rect" id="node2" href="$d7/dff/classapplication_1_1_cell.html#adee02d15440cb198751d122a9d7a5f10" title="application.Cell.findWanted\lNeighbors" alt="" coords="332,5,524,46"/>
+<area shape="rect" id="node3" href="$d9/d3f/classapplication_1_1_game_of_life_cell.html#a1e69e3a583a586defdace8bcc1406684" title="application.GameOfLifeCell.life\lUpdate" alt="" coords="321,70,535,111"/>
+</map>

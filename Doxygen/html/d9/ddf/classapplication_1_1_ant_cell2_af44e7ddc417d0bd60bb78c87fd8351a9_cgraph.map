@@ -1,0 +1,5 @@
+<map id="application.AntCell2.antForage" name="application.AntCell2.antForage">
+<area shape="rect" id="node2" href="$d9/ddf/classapplication_1_1_ant_cell2.html#a50e68e98f7f9eae3a91d4bc8afb613ae" title="application.AntCell2.goHome" alt="" coords="227,12,434,39"/>
+<area shape="rect" id="node3" href="$d7/d2c/namespaceapplication.html#aeb5d97b2aef40bf433a297e7af2891b1" title="application.homeMoveTo" alt="" coords="483,12,661,39"/>
+<area shape="rect" id="node4" href="$d7/d2c/namespaceapplication.html#a1268c45d22827bf3daedac240d0e8c8a" title="application.dropHomePheromone" alt="" coords="709,12,947,39"/>
+</map>
