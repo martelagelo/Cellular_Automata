@@ -1,0 +1,2629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>WaTorCell.java</title>
+
+	<meta name="GENERATOR" content="CodePro Server"/>
+
+	<style type="text/css">
+	span.highSeverity {background-color: #FFAAAA; font: bold}
+span.mediumSeverity {background-color: #FFFF77; font: bold}
+span.lowSeverity {background-color: #AAAAFF; font: bold}
+table.code {border-spacing: 0; border-collapse: collapse; border-width: 1px 0 1px 1px; }
+table.code td {padding-left: 0.25em; padding-right: 0.25em; font-family: courier,monospace; font-size: 10pt; border-style: solid; border-color: black;}
+tr.first td.flags {border-width: 1px 1px 0 1px; text-align: right;}
+tr.first td.lineNumber {border-width: 1px 1px 0 1px; text-align: right;}
+tr.first td.sourceLine {border-width: 1px 1px 0 1px; background-color: #F0F0FF;}
+tr.middle td.flags {border-width: 0 1px 0 1px; text-align: right;}
+tr.middle td.lineNumber {border-width: 0 1px 0 1px; text-align: right;}
+tr.middle td.sourceLine {border-width: 0 1px 0 1px; background-color: #F0F0FF;}
+tr.last td.flags {border-width: 0 1px 1px 1px; text-align: right;}
+tr.last td.lineNumber {border-width: 0 1px 1px 1px; text-align: right;}
+tr.last td.sourceLine {border-width: 0 1px 1px 1px; background-color: #F0F0FF;}
+	</style>
+
+	<style type="text/css">
+	body {font: 70% verdana,arial,helvetica; color: #000000}
+p  {margin-top:  3px; line-height: 1.5em}
+h1 {margin-top:  0px; margin-bottom: 6px; font: bold 150% verdana,arial,helvetica}
+h2 {margin-top: 12px; margin-bottom: 6px; font: bold 125% verdana,arial,helvetica}
+h3 {margin-top: 12px; margin-bottom: 6px; font: bold 100% verdana,arial,helvetica}
+h4 {margin-top: 12px; margin-bottom: 6px; font: bold 100% verdana,arial,helvetica}
+.rounded_page{display:block}
+.rounded_page *{display:block; height:1px; overflow:hidden; font-size:.01em; background:#7799DD}
+.rounded_page1{ margin-left:3px; margin-right:3px; padding-left:1px; padding-right:1px; border-left:1px solid #c4d3ef; border-right:1px solid #c4d3ef; background:#99b2e5}
+.rounded_page2{ margin-left:1px; margin-right:1px; padding-right:1px; padding-left:1px; border-left:1px solid #f1f4fa; border-right:1px solid #f1f4fa; background:#90ace3}
+.rounded_page3{ margin-left:1px; margin-right:1px; border-left:1px solid #90ace3; border-right:1px solid #90ace3;}
+.rounded_page4{ border-left:1px solid #c4d3ef; border-right:1px solid #c4d3ef}
+.rounded_page5{ border-left:1px solid #99b2e5; border-right:1px solid #99b2e5}
+.rounded_pagefg{ background:#7799DD}
+.rounded_section{display:block}
+.rounded_section *{display:block; height:1px; overflow:hidden; font-size:.01em; background:#C3D9FF}
+.rounded_section1{ margin-left:3px; margin-right:3px; padding-left:1px; padding-right:1px; border-left:1px solid #e5eefe; border-right:1px solid #e5eefe; background:#d2e2fe}
+.rounded_section2{ margin-left:1px; margin-right:1px; padding-right:1px; padding-left:1px; border-left:1px solid #f9fbfe; border-right:1px solid #f9fbfe; background:#cee0fe}
+.rounded_section3{ margin-left:1px; margin-right:1px; border-left:1px solid #cee0fe; border-right:1px solid #cee0fe;}
+.rounded_section4{ border-left:1px solid #e5eefe; border-right:1px solid #e5eefe}
+.rounded_section5{ border-left:1px solid #d2e2fe; border-right:1px solid #d2e2fe}
+.rounded_sectionfg{ background:#C3D9FF}
+.page-title { color: #FFFFFE; font-weight: bold; font-size: large; margin: 0px 0px 0px 8px; }
+.page-title-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.page-footer { color: #FFFFFE; font-weight: bold; margin-left: 8px}
+.page-footer-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.majorsection-title { color: #FFFFFE; font-weight: bold; margin: 0px 0px 0px 8px; }
+.majorsection-title-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.majorsection-contents { margin: 0px 0px 15px 16px; }
+.section-title { color: #1F4F8F; font-weight: bold; margin: 0px 0px 0px 6px; }
+.section-title-details { font-weight: bold; margin-left: 6px; margin-right: 6px; }
+.section-contents { margin: 6px 0px 15px 14px; }
+.bodyTable { border: 0px solid #777777; width:100%; border-collapse: collapse; }
+.bodyTable th { border: 1px solid #777777; white-space:nowrap; background-color: #EEEEEE; padding-left: 3px; padding-right: 3px; }
+.bodyTable td { border: 1px solid #777777; vertical-align: top; padding-left: 3px; padding-right: 3px; }
+td[class=emptyborder] { border: 0px solid #777777; padding: 3px 0px 3px 0px; }
+
+	</style>
+
+</head>
+
+<body>
+
+<div>
+		<b class="rounded_page"><b class="rounded_page1"><b></b></b><b class="rounded_page2"><b></b></b><b class="rounded_page3"></b><b class="rounded_page4"></b><b class="rounded_page5"></b></b>
+		<div class="rounded_pagefg">
+			<h3 class="majorsection-title">/TempCodeProProject3/src1/src/application/WaTorCell.java</h3>
+		</div>
+		<b class="rounded_page"><b class="rounded_page5"></b><b class="rounded_page4"></b><b class="rounded_page3"></b><b class="rounded_page2"><b></b></b><b class="rounded_page1"><b></b></b></b>
+	</div>
+	<div class="section-contents">
+		<b>Violations: 7 high, 0 medium, 161 low</b>
+	</div>
+	&nbsp;
+	<div>
+		<b class="rounded_section"><b class="rounded_section1"><b></b></b><b class="rounded_section2"><b></b></b><b class="rounded_section3"></b><b class="rounded_section4"></b><b class="rounded_section5"></b></b>
+		<div class="rounded_sectionfg">
+			<h4 class="section-title">Violations</h4>
+		</div>
+		<b class="rounded_section"><b class="rounded_section5"></b><b class="rounded_section4"></b><b class="rounded_section3"></b><b class="rounded_section2"><b></b></b><b class="rounded_section1"><b></b></b></b>
+	</div>
+	<table>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line18">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line78">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line137">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line19">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line79">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line138">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line19">Invalid numeric literal: 3</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line80">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line139">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line20">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line81">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line140">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line20">Invalid numeric literal: 6</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line82">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line141">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line21">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line83">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line142">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line21">Invalid numeric literal: 6</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line84">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line143">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line23">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line86">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line144">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line24">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line89">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line145">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line25">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line90">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line146">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line27">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line91">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line147">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line28">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line92">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line149">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line29">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line93">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line153">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line30">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line96">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line154">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line32">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line97">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line155">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line35">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line97">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line155">Use of tab character outside a literal</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line36">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line98">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line156">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line36">Default constructor invocation found</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line99">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line157">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line37">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line100">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line158">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line38">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line100">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line159">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line39">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line101">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line160">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line40">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line102">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line162">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line41">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line102">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line166">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line42">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line103">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line167">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line43">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line104">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line168">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line44">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line106">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line169">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line45">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line109">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line170">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line46">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line109">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line172">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line47">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line110">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line176">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line48">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line111">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line177">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line51">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line112">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line178">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line52">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line112">Short name found: r</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line179">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line53">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line113">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line180">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line54">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line113">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line182">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line54">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line114">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line187">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line55">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line115">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line188">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line56">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line116">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line189">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line57">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line117">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line190">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line58">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line118">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line190">Short name found: r</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line59">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line119">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line190">Use of tab character outside a literal</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line60">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line120">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line191">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line63">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line121">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line192">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line64">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line122">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line193">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line65">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line123">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line194">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line66">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line124">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line195">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line67">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line125">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line195">Use of tab character outside a literal</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line68">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line126">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line196">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line69">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line127">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line197">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line70">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line129">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line197">Use of tab character outside a literal</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line71">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line132">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line198">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line72">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line133">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line199">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line73">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line134">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line200">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line76">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line135">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line201">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line76">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line135">Short name found: r</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line206">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line77">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line135">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line207">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line77">Use of tab character outside a literal</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line136">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line208">Use of tab character after start of line</a>
+	</td></tr>
+	</table>
+	&nbsp;
+	<div>
+		<b class="rounded_section"><b class="rounded_section1"><b></b></b><b class="rounded_section2"><b></b></b><b class="rounded_section3"></b><b class="rounded_section4"></b><b class="rounded_section5"></b></b>
+		<div class="rounded_sectionfg">
+			<h4 class="section-title">Source</h4>
+		</div>
+		<b class="rounded_section"><b class="rounded_section5"></b><b class="rounded_section4"></b><b class="rounded_section3"></b><b class="rounded_section2"><b></b></b><b class="rounded_section1"><b></b></b></b>
+	</div>
+	<div class="section-contents">
+		<table width="100%" class="code">
+		<tr class="first">
+		<td class="lineNumber">
+		<a name="line1">1</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		package&nbsp;application;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line2">2</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line3">3</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;java.util.ArrayList;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line4">4</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;java.util.List;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line5">5</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line6">6</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.paint.Color;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line7">7</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line8">8</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line9">9</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;Version&nbsp;1
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line10">10</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;Date:&nbsp;9/14/2014
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line11">11</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line12">12</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;@author&nbsp;Michael&nbsp;Deng
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line13">13</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;@author&nbsp;Pranava&nbsp;Raparla
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line14">14</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;@author&nbsp;David&nbsp;Zhang
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line15">15</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line16">16</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line17">17</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		public&nbsp;class&nbsp;WaTorCell&nbsp;extends&nbsp;Cell{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line18"><b>18</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line19"><b>19</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 3"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;fishTillBreed=<span class="highSeverity">3</span>;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line20"><b>20</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 6"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;sharkTillDeath=<span class="highSeverity">6</span>;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line21"><b>21</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 6"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;sharkTillBreed=<span class="highSeverity">6</span>;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line22">22</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line23"><b>23</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;fishBreed&nbsp;=&nbsp;fishTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line24"><b>24</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;sharkDeath&nbsp;=&nbsp;sharkTillDeath;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line25"><b>25</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;sharkBreed&nbsp;=&nbsp;sharkTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line26">26</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line27"><b>27</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;List&lt;WaTorCell&gt;&nbsp;moveFishList&nbsp;=&nbsp;new&nbsp;ArrayList&lt;WaTorCell&gt;();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line28"><b>28</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;List&lt;WaTorCell&gt;&nbsp;eatFishList&nbsp;=&nbsp;new&nbsp;ArrayList&lt;WaTorCell&gt;();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line29"><b>29</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;List&lt;WaTorCell&gt;&nbsp;moveSharkList&nbsp;=&nbsp;new&nbsp;ArrayList&lt;WaTorCell&gt;();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line30"><b>30</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;List&lt;WaTorCell&gt;&nbsp;breedList&nbsp;=&nbsp;new&nbsp;ArrayList&lt;WaTorCell&gt;();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line31">31</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line32"><b>32</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line33">33</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;Constructors
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line34">34</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line35"><b>35</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;public&nbsp;WaTorCell()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line36"><b>36</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Default constructor invocation found"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span class="highSeverity">super();</span>
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line37"><b>37</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;fishBreed&nbsp;=&nbsp;fishTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line38"><b>38</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkBreed&nbsp;=&nbsp;sharkTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line39"><b>39</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkDeath&nbsp;=&nbsp;sharkTillDeath;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line40"><b>40</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line41"><b>41</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line42"><b>42</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;public&nbsp;WaTorCell(int&nbsp;ftb,&nbsp;int&nbsp;stb,&nbsp;int&nbsp;std)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line43"><b>43</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;fishBreed&nbsp;=&nbsp;fishTillBreed&nbsp;=&nbsp;ftb;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line44"><b>44</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkBreed&nbsp;=&nbsp;sharkTillBreed&nbsp;=&nbsp;stb;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line45"><b>45</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkDeath&nbsp;=&nbsp;sharkTillDeath&nbsp;=&nbsp;std;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line46"><b>46</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line47"><b>47</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line48"><b>48</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line49">49</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Updates&nbsp;the&nbsp;cell&nbsp;state
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line50">50</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line51"><b>51</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line52"><b>52</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;updateCell(int&nbsp;i,&nbsp;int&nbsp;j,&nbsp;Cell[][]&nbsp;cellMatrix)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line53"><b>53</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;xPos&nbsp;=&nbsp;i;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line54"><b>54</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;yPos&nbsp;=&nbsp;j;&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line55"><b>55</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if(updatedState&nbsp;==&nbsp;null)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line56"><b>56</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;updateThisCell();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line57"><b>57</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line58"><b>58</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line59"><b>59</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line60"><b>60</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line61">61</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Selects&nbsp;the&nbsp;cell&nbsp;type&nbsp;and&nbsp;updates&nbsp;it
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line62">62</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line63"><b>63</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;updateThisCell()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line64"><b>64</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if&nbsp;(currentState&nbsp;==&nbsp;Color.ORANGE){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line65"><b>65</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkUpdate();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line66"><b>66</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(currentState&nbsp;==&nbsp;Color.GREEN)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line67"><b>67</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;fishUpdate();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line68"><b>68</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line69"><b>69</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;updatedState&nbsp;=&nbsp;currentState;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line70"><b>70</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line71"><b>71</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line72"><b>72</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line73"><b>73</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line74">74</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Have&nbsp;the&nbsp;shark&nbsp;eat&nbsp;the&nbsp;fish&nbsp;around&nbsp;it&nbsp;or&nbsp;move&nbsp;if&nbsp;there&nbsp;are&nbsp;not&nbsp;fish
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line75">75</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line76"><b>76</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;sharkUpdate(){&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line77"><b>77</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;eatFishList&nbsp;=&nbsp;findWantedNeighbors(Color.GREEN,&nbsp;Color.GREEN);&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line78"><b>78</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if(eatFishList.size()&nbsp;!=&nbsp;0){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line79"><b>79</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;eatFish();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line80"><b>80</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line81"><b>81</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;else&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line82"><b>82</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveShark();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line83"><b>83</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line84"><b>84</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line85">85</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line86"><b>86</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line87">87</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Moves&nbsp;the&nbsp;fish
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line88">88</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line89"><b>89</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;fishUpdate(){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line90"><b>90</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveFish();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line91"><b>91</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line92"><b>92</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line93"><b>93</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line94">94</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Find&nbsp;the&nbsp;fish&nbsp;neighbors&nbsp;and&nbsp;eat&nbsp;them
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line95">95</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line96"><b>96</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;eatFish(){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line97"><b>97</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;for(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;eatFishList.size();&nbsp;i++){<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line98"><b>98</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;eatFishList.get(i).updatedState&nbsp;=&nbsp;Color.WHITE;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line99"><b>99</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line100"><b>100</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;updatedState&nbsp;=&nbsp;currentState;<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line101"><b>101</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkDeath&nbsp;=&nbsp;sharkTillDeath;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line102"><b>102</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkBreed--;<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line103"><b>103</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkCheck(this);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line104"><b>104</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line105">105</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line106"><b>106</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line107">107</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Moves&nbsp;the&nbsp;shark&nbsp;to&nbsp;a&nbsp;free&nbsp;location&nbsp;and&nbsp;then&nbsp;checks&nbsp;its&nbsp;breed&nbsp;and&nbsp;death&nbsp;statuses
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line108">108</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line109"><b>109</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;moveShark(){&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line110"><b>110</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveSharkList&nbsp;=&nbsp;findWantedNeighbors(Color.WHITE,&nbsp;Color.WHITE);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line111"><b>111</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if&nbsp;(moveSharkList.size()&nbsp;!=&nbsp;0)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line112"><b>112</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Short name found: r"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;int&nbsp;<span class="highSeverity">r</span>&nbsp;=&nbsp;randomFinder(moveSharkList);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line113"><b>113</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;this.updatedState&nbsp;=&nbsp;Color.WHITE;&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line114"><b>114</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkDeath&nbsp;--;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line115"><b>115</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkBreed&nbsp;--;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line116"><b>116</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveSharkList.get(r).updatedState&nbsp;=&nbsp;Color.ORANGE;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line117"><b>117</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveSharkList.get(r).sharkDeath&nbsp;=&nbsp;sharkDeath;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line118"><b>118</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveSharkList.get(r).sharkBreed&nbsp;=&nbsp;sharkBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line119"><b>119</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkCheck(moveSharkList.get(r));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line120"><b>120</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line121"><b>121</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;else&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line122"><b>122</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;updatedState&nbsp;=&nbsp;Color.ORANGE;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line123"><b>123</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkDeath--;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line124"><b>124</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkBreed--;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line125"><b>125</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sharkCheck(this);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line126"><b>126</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line127"><b>127</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line128">128</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line129"><b>129</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line130">130</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Moves&nbsp;the&nbsp;fish&nbsp;to&nbsp;a&nbsp;free&nbsp;location&nbsp;and&nbsp;then&nbsp;checks&nbsp;it&nbsp;breed&nbsp;status
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line131">131</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line132"><b>132</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;moveFish(){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line133"><b>133</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveFishList&nbsp;=&nbsp;findWantedNeighbors(Color.WHITE,&nbsp;Color.WHITE);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line134"><b>134</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if(moveFishList.size()&nbsp;!=&nbsp;0)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line135"><b>135</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Short name found: r"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;int&nbsp;<span class="highSeverity">r</span>&nbsp;=&nbsp;randomFinder(moveFishList);&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line136"><b>136</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;this.updatedState&nbsp;=&nbsp;Color.WHITE;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line137"><b>137</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;fishBreed--;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line138"><b>138</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveFishList.get(r).updatedState&nbsp;=&nbsp;Color.GREEN;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line139"><b>139</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;moveFishList.get(r).fishBreed&nbsp;=&nbsp;fishBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line140"><b>140</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;fishCheck(moveFishList.get(r));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line141"><b>141</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line142"><b>142</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;else&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line143"><b>143</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;updatedState&nbsp;=&nbsp;Color.GREEN;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line144"><b>144</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;fishBreed--;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line145"><b>145</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;fishCheck(this);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line146"><b>146</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line147"><b>147</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line148">148</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line149"><b>149</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line150">150</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Checks&nbsp;if&nbsp;the&nbsp;shark&nbsp;should&nbsp;die&nbsp;or&nbsp;breed&nbsp;or&nbsp;do&nbsp;nothing
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line151">151</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;waTorCell:&nbsp;The&nbsp;cell&nbsp;the&nbsp;shark&nbsp;has&nbsp;moved&nbsp;to&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line152">152</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line153"><b>153</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;sharkCheck(WaTorCell&nbsp;waTorCell){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line154"><b>154</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if(sharkDeath&nbsp;==&nbsp;0){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line155"><b>155</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;killShark(waTorCell);&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line156"><b>156</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line157"><b>157</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;else&nbsp;if(sharkBreed&nbsp;==&nbsp;0){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line158"><b>158</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;breed(waTorCell,&nbsp;Color.ORANGE);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line159"><b>159</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line160"><b>160</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line161">161</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line162"><b>162</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line163">163</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Checks&nbsp;if&nbsp;the&nbsp;fish&nbsp;should&nbsp;breed&nbsp;or&nbsp;do&nbsp;nothing
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line164">164</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;waTorCell:&nbsp;The&nbsp;cell&nbsp;the&nbsp;fish&nbsp;has&nbsp;moved&nbsp;to
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line165">165</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line166"><b>166</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;fishCheck(WaTorCell&nbsp;waTorCell){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line167"><b>167</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if(fishBreed&nbsp;==&nbsp;0){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line168"><b>168</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;breed(waTorCell,&nbsp;Color.GREEN);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line169"><b>169</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line170"><b>170</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line171">171</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line172"><b>172</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line173">173</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Kills&nbsp;the&nbsp;shark&nbsp;if&nbsp;its&nbsp;time&nbsp;for&nbsp;him&nbsp;to&nbsp;die
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line174">174</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;waTorCell:&nbsp;The&nbsp;cell&nbsp;the&nbsp;shark&nbsp;moved&nbsp;to&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line175">175</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line176"><b>176</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;killShark(WaTorCell&nbsp;waTorCell){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line177"><b>177</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;waTorCell.updatedState&nbsp;=&nbsp;Color.WHITE;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line178"><b>178</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;waTorCell.sharkDeath&nbsp;=&nbsp;sharkTillDeath;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line179"><b>179</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;waTorCell.sharkBreed&nbsp;=&nbsp;sharkTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line180"><b>180</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line181">181</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line182"><b>182</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line183">183</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Breed&nbsp;either&nbsp;the&nbsp;shark&nbsp;or&nbsp;the&nbsp;fish
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line184">184</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;waTorCell:&nbsp;The&nbsp;cell&nbsp;the&nbsp;shark&nbsp;or&nbsp;fish&nbsp;moved&nbsp;to
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line185">185</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;color:&nbsp;The&nbsp;identification&nbsp;of&nbsp;either&nbsp;a&nbsp;shark&nbsp;or&nbsp;a&nbsp;fish
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line186">186</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line187"><b>187</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;breed(WaTorCell&nbsp;waTorCell,&nbsp;Color&nbsp;color){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line188"><b>188</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;breedList&nbsp;=&nbsp;findWantedNeighbors(waTorCell,&nbsp;Color.WHITE,&nbsp;Color.WHITE);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line189"><b>189</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;if(breedList.size()&nbsp;!=&nbsp;0){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line190"><b>190</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Short name found: r"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;int&nbsp;<span class="highSeverity">r</span>&nbsp;=&nbsp;randomFinder(breedList);<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line191"><b>191</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;breedList.get(r).updatedState&nbsp;=&nbsp;color;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line192"><b>192</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;breedList.get(r).sharkDeath&nbsp;=&nbsp;sharkTillDeath;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line193"><b>193</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;breedList.get(r).sharkBreed&nbsp;=&nbsp;sharkTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line194"><b>194</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;breedList.get(r).fishBreed&nbsp;=&nbsp;fishTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line195"><b>195</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line196"><b>196</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;waTorCell.updatedState&nbsp;=&nbsp;color;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line197"><b>197</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Use of tab character outside a literal"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;waTorCell.sharkBreed&nbsp;=&nbsp;sharkTillBreed;&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line198"><b>198</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;waTorCell.fishBreed&nbsp;=&nbsp;fishTillBreed;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line199"><b>199</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line200"><b>200</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line201"><b>201</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line202">202</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Creates&nbsp;a&nbsp;random&nbsp;integer&nbsp;that&nbsp;selects&nbsp;an&nbsp;index&nbsp;in&nbsp;the&nbsp;inputted&nbsp;array
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line203">203</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;moveFishList2:&nbsp;The&nbsp;list&nbsp;that&nbsp;is&nbsp;being&nbsp;referenced
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line204">204</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return:&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;array&nbsp;selected
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line205">205</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line206"><b>206</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;randomFinder(List&lt;WaTorCell&gt;&nbsp;moveFishList2){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line207"><b>207</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;return&nbsp;ApplicationConstants.rand.nextInt(moveFishList2.size());
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line208"><b>208</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line209">209</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="last">
+		<td class="lineNumber">
+		<a name="line210">210</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		}
+		</td>
+		</tr>
+		</table>
+	</div>
+	<div>
+		<b class="rounded_page"><b class="rounded_page1"><b></b></b><b class="rounded_page2"><b></b></b><b class="rounded_page3"></b><b class="rounded_page4"></b><b class="rounded_page5"></b></b>
+		<div class="rounded_pagefg">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" ><tr><td valign="middle">
+			<span class="page-footer"></span>
+			</td><td align="right" valign="middle">
+			<span class="page-footer-details">Powered by <span title="0.0.0, UNKNOWN">CodePro Server</span></span></td></tr></table>
+		</div>
+		<b class="rounded_page"><b class="rounded_page5"></b><b class="rounded_page4"></b><b class="rounded_page3"></b><b class="rounded_page2"><b></b></b><b class="rounded_page1"><b></b></b></b>
+	</div>
+
+</body>
+
+</html>

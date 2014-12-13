@@ -1,0 +1,4 @@
+<map id="application.GameOfLife.updateCell" name="application.GameOfLife.updateCell">
+<area shape="rect" id="node2" href="$d7/d03/classapplication_1_1_game_of_life.html#a9c2ef578cf074ec42cdc753bb8b684e2" title="application.GameOfLife.alive\lCalculator" alt="" coords="296,5,499,46"/>
+<area shape="rect" id="node3" href="$d7/d03/classapplication_1_1_game_of_life.html#a7e7cf181c4fe3033576d94f4c37a9f88" title="application.GameOfLife.life\lUpdate" alt="" coords="301,70,493,111"/>
+</map>
